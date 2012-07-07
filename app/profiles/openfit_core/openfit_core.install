@@ -1,0 +1,344 @@
+<?php
+
+function openfit_core_install() {
+  // Perform the standard Drupal install first
+  include_once DRUPAL_ROOT . '/profiles/standard/standard.install';
+  standard_install();
+  
+  // Enable some core modules
+  //module_enable('php');
+  module_enable('locale'); // Allows a website to be multi-lingual
+  
+  // Set some variables
+  variable_set('clean_url', 1); // Turn on clean URLs
+  variable_set('user_email_verification', 0); // Turn off email verification
+  variable_set('date_first_day', '1'); // Day of week starts on Monday
+  variable_set('node_admin_theme', FALSE); // Use the normal theme for content creation & editing.
+  variable_set('user_picture_style', 'medium'); // Use medium instead of thumbnail
+  variable_set('site_slogan', 'Collaborate &bull; Innovate &bull; Accelerate');
+  
+  // Create service
+  openfit_core_install_create_services();
+  
+  require_once DRUPAL_ROOT.'/includes/language.inc';
+  
+  // Turn on user & browser language negotiation
+  $weighted_provider_list = array(
+    2 => LOCALE_LANGUAGE_NEGOTIATION_USER,
+    4 => LOCALE_LANGUAGE_NEGOTIATION_BROWSER,
+    10 => LANGUAGE_NEGOTIATION_DEFAULT,
+  );
+  $all_negotiation_providers = language_negotiation_info();
+  $negotiation = array();
+  foreach ($weighted_provider_list as $weight => $id) {
+    $negotation[$id] = $all_negotiation_providers[$id];
+    $negotation[$id]['weight'] = $weight;
+  }
+  language_negotiation_set(LANGUAGE_TYPE_INTERFACE, $negotation);
+  
+  // Set the admin theme
+  //$admin_theme = 'openfit_admin';
+  //theme_enable(array('admin_theme' => $admin_theme));
+  //variable_set('admin_theme', $admin_theme);
+
+  // Set the default theme
+  $default_theme = 'openfit_base';
+  theme_enable(array('theme_default' => $default_theme));
+  variable_set('theme_default', $default_theme);
+  
+  theme_disable(array('bartik'));
+  
+  //Fix for mediaQuery not changing size
+  $form_state = array('values' => array(), 'build_info' => array('args' => array('openfit_base')));
+  drupal_form_submit('system_theme_settings', $form_state);
+  
+  // Disable all the blocks by default
+  db_update('block')
+      ->fields(array ('status' => 0, 'region' => '-1'))
+      ->condition('theme', $default_theme)
+      ->execute();
+      
+   // Enable blocks
+   db_update('block')
+      ->fields(array ('status' => 1, 'weight' => 0, 'region' => 'content'))
+      ->condition('module', 'system')->condition('delta', 'main')->condition('theme', $default_theme)
+      ->execute();
+        
+  db_insert('block')
+    ->fields(
+      array(
+        'module' => 'system',
+        'delta' => 'main-menu',
+        'theme' => $default_theme,
+        'status' => 1,
+        'weight' => -3,
+        'region' => 'menu_bar',
+        'pages' => '',
+        'cache' => -1,
+      ))
+    ->execute();
+  db_insert('block')
+    ->fields(
+      array(
+        'module' => 'openfit_user',
+        'delta' => 'login-logout',
+        'theme' => $default_theme,
+        'status' => 1,
+        'weight' => 10,
+        'region' => 'menu_bar',
+        'pages' => '',
+        'cache' => -1,
+      ))
+    ->execute();
+
+  // Only show the main menu when authenticated
+  db_insert('block_role')
+    ->fields(
+      array(
+        'module' => 'system',
+        'delta' => 'main-menu',
+        'rid' => DRUPAL_AUTHENTICATED_RID
+      ))
+    ->execute();
+    
+  // Remove the homepage menu link
+  menu_link_delete(null, '<front>');
+  menu_rebuild();
+  
+  // Create some nodes
+  openfit_core_process_config('profiles/openfit_core/config.xml', $default_theme);
+}
+
+function openfit_core_install_tasks($install_state) {
+  $tasks = array(
+    'openfit_core_install_configure' => array(
+      'display' => FALSE,
+    ),
+  );
+  return $tasks;
+}
+
+function openfit_core_install_configure($install_state)
+{
+  // Enable default languages
+  $default_languages = array(
+    'ca', // Catalan
+    'cs', // Czech
+    'da', // Danish
+    'de', // German
+    'el', // Greek
+    'en', // English
+    'es', // Spanish
+    'fi', // Finnish
+    'fr', // French
+    'he', // Hebrew
+    'it', // Italian
+    'ja', // Japanese
+    'ko', // Korean
+    'nl', // Dutch
+    'nb', // Norwegian
+    'pl', // Polish
+    'pt-pt', // Portuguese, Portugual
+    'pt-br', // Portuguese, Brazil
+    'ru', // Russian
+    'sk', // Slovak
+    'sl', // Slovenian
+    'sv', // Swedish
+    'zh-hans', // Chinese, Simplified
+    'zh-hant', // Chinese, Traditional
+  );
+  $num_languages = count($default_languages);
+  $installed_languages = language_list('language');
+  for($i = 0; $i < $num_languages; $i++) {
+    if (!isset($installed_languages[$default_languages[$i]])) {
+      locale_add_language($default_languages[$i]);
+    }
+  }
+  
+  if (variable_get('site_default_country', 'US') == 'US') {  
+    variable_set('openfit_measurement_system', OpenFitMeasurement::SYSTEM_US);
+  } else {
+    variable_set('openfit_measurement_system', OpenFitMeasurement::SYSTEM_METRIC);
+  }  
+  return NULL;
+}
+
+function openfit_core_process_config($config_filename, $default_theme) {
+    $config = file_get_contents($config_filename);
+    $xml = simplexml_load_string($config);
+    
+    if (isset($xml)) {
+        if (isset($xml->node_insert)) {
+          foreach ($xml->node_insert->children() as $node) openfit_core_insert_node($node);
+        }
+        if (isset($xml->block_insert)) {
+          $bid = db_query('SELECT COUNT(*) AS bid FROM {block} WHERE module=\'block\'')->fetchField();
+          if (empty($bid)) $bid = 0;
+          foreach ($xml->block_insert->children() as $block) {
+            $bid ++;
+            openfit_core_insert_block($block, $bid, $default_theme);
+          }
+        }
+    }
+}
+
+function openfit_core_insert_block($block, $bid, $default_theme) {
+  $module = 'block';
+  $theme = (string)$block->theme;
+  if (strlen($theme) == 0) $theme = $default_theme;
+  $region = (string)$block->region;
+  if (strlen($region) == 0) $region = '-1';
+  $weight = (string)$block->weight;
+  if (strlen($weight) == 0) {
+    $weight = 0;
+  } else {
+    $weight = intval($weight);
+  }
+  $status = (string)$block->status;
+  if (strlen($status) == 0) {
+    $status = 1;
+  } else {
+    $status = intval($status);
+  }
+  $title = (string)$block->title;
+  db_insert('block')
+    ->fields(
+      array(
+        'module' => $module,
+        'delta' => $bid,
+        'theme' => $theme,
+        'status' => $status,
+        'weight' => $weight,
+        'region' => $region,
+        'pages' => '',
+        'title' => $title,
+        'cache' => -1,
+      ))
+    ->execute();
+    
+  $body = '';
+  $body_file = (string)$block->body_file;
+  if (strlen($body_file) > 0) {
+      $body = file_get_contents($body_file);
+  } else {
+      $body = (string)$block->body;
+  }
+  $description = (string)$block->description;
+  $format = (string)$block->format;
+  if (strlen($format) == 0) $format = 'plain_text';
+  db_insert('block_custom')
+    ->fields(
+      array(
+        'bid' => intval($bid),
+        'body' => $body,
+        'info' => $description,
+        'format' => $format,
+      ))
+    ->execute();
+}
+
+function openfit_core_insert_node($page) {
+    $language = (string)$page->language;
+    if (strlen($language) == 0) $language = LANGUAGE_NONE;
+    $path = (string)$page->path;
+    $body = '';
+    $body_file = (string)$page->body_file;
+    if (strlen($body_file) > 0) {
+        $body = file_get_contents($body_file);
+    } else {
+        $body = (string)$page->body;
+    }
+    $body_summary = (string)$page->summary;
+    if (strlen($body_summary) == 0) $body_summary = text_summary($body);
+    $body_format = (string)$page->format;
+    if (strlen($body_format) == 0) $body_format = 'plain_text';
+    $variable = (string)$page->variable;
+    
+    $node = new stdClass();
+    $node->type = $page->getName();
+    node_object_prepare($node);
+
+    $node->language = $language;
+    $node->title = (string)$page->title;
+    if (strlen($path) > 0) $node->path = array('alias' => $path);
+    
+    $node->body[$node->language][0]['value'] = $body;
+    $node->body[$node->language][0]['summary'] = $body_summary;
+    $node->body[$node->language][0]['format']  = $body_format;
+    
+    $node = node_submit($node); 
+    node_save($node);
+    
+    if (strlen($variable) > 0 && strlen($path) > 0) variable_set($variable,$path);
+    if ($page->home == 'true') {
+      variable_set('site_frontpage', 'node/' . $node->nid);
+    }
+}
+
+function openfit_core_install_create_services() {
+  $endpoint = new stdClass;
+  $endpoint->disabled = FALSE; /* Edit this to true to make a default endpoint disabled initially */
+  $endpoint->api_version = 3;
+  $endpoint->name = 'openfitapi_rest';
+  $endpoint->server = 'rest_server';
+  $endpoint->path = 'openfitapi/api';
+  $endpoint->authentication = array(
+    'services' => 'services',
+  );
+  $endpoint->server_settings = array(
+    'rest_server' => array(
+      'formatters' => array(
+        'json' => TRUE,
+        'xml' => TRUE,
+        'yaml' => FALSE,
+        'bencode' => FALSE,
+        'jsonp' => FALSE,
+        'php' => FALSE,
+        'rss' => FALSE,
+      ),
+      'parsers' => array(
+        'application/json' => TRUE,
+        'application/x-www-form-urlencoded' => TRUE,
+        'application/x-yaml' => TRUE,
+        'multipart/form-data' => TRUE,
+        'application/vnd.php.serialized' => FALSE,
+      ),
+    ),
+  );
+  $endpoint->resources = array(
+    'activity' => array(
+      'alias' => 'fitnessActivities',
+      'operations' => array(
+        'index' => array(
+          'enabled' => 1,
+        ),
+        'retrieve' => array(
+          'enabled' => 1,
+        ),
+        'create' => array(
+          'enabled' => 1,
+        ),
+      ),
+    ),
+    'system' => array(
+      'actions' => array(
+        'connect' => array(
+          'enabled' => 1,
+        ),
+      ),
+    ),
+    'user' => array(
+      'actions' => array(
+        'login' => array(
+          'enabled' => 1,
+        ),
+        'logout' => array(
+          'enabled' => 1,
+        ),
+      ),
+    ),
+  );
+  $endpoint->debug = 0;
+  
+  services_endpoint_save($endpoint);
+}

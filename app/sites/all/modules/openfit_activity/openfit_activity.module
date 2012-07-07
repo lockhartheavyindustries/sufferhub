@@ -1,0 +1,306 @@
+<?php
+
+define('OPENFIT_DASHBOARD_URL','dashboard');
+define('OPENFIT_ACTIVITIES_URL','activities');
+
+/**
+ * Redirect the homepage to the dashboard when the user is logged in.
+ */
+function openfit_activity_init() {
+  if (user_is_logged_in() && drupal_is_front_page()) drupal_goto(OPENFIT_DASHBOARD_URL);
+}
+/**
+ * Define the activity content type.
+ */
+function openfit_activity_node_info() {
+  $nodes = array(
+    OpenFitActivity::NODE_TYPE_ACTIVITY => array(
+      'name' => t('Activity'),
+      'base' => 'openfit_activity',
+      'module' => 'openfit_activity',
+      'description' => t('A workout activity'),
+      'title_label' => 'Name',
+      'has_title' => TRUE,
+      'has_body' => FALSE,
+    ),
+  );
+  return $nodes;
+}
+
+/**
+ * Delete associated records in the openfit_node_activity table when a content node (Activity) is deleted.
+ */
+function openfit_activity_delete($node) {
+  if ($node->type != OpenFitActivity::NODE_TYPE_ACTIVITY) return;
+  db_delete('openfit_node_activity')
+    ->condition('nid', $node->nid)
+    ->execute();
+}
+
+/**
+ * Define a menu for the dashboard and workout pages.
+ */
+function openfit_activity_menu() {
+  $items = array(
+    'activity/import' => array(
+      'title' => 'Import Workout',
+      'access callback' => TRUE, // TODO: Authenticated users with create activity node permission only
+      'file' => 'openfit_activity.activity.inc',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('openfit_activity_import_activity_page'),
+    ),
+    'node/%node/laps' => array( 
+      'title' => 'Laps', 
+      'access callback' => 'node_access', // TODO: And node is activity type
+      'access arguments' => array('view', 1),
+      'page callback' => 'openfit_activity_view_activity_page', 
+      'page arguments' => array(1, 'laps'),
+      'weight' => 10,
+    ),
+    'node/%node/map' => array( 
+      'title' => 'Map', 
+      'access callback' => 'node_access', // TODO: And node is activity type
+      'access arguments' => array('view', 1),
+      'page callback' => 'openfit_activity_view_activity_page', 
+      'page arguments' => array(1, 'map'),
+      'weight' => 20,
+    ),
+    'node/%node/comments' => array( 
+      'title' => 'Comments', 
+      'access callback' => 'node_access', // TODO: And node is activity type
+      'access arguments' => array('view', 1),
+      'page callback' => 'openfit_activity_view_activity_page', 
+      'page arguments' => array(1, 'comments'),
+      'weight' => 30,
+    ),
+    'node/%node/delete-activity' => array( 
+      'title' => 'Delete', 
+      'access callback' => 'node_access', // TODO: And node is activity type
+      'access arguments' => array('delete', 1),
+      'page callback' => 'openfit_activity_delete_activity', 
+      'page arguments' => array(1),
+      'weight' => 40,
+    ),
+    'node/%node/export' => array( 
+      'title' => 'Export', 
+      'access callback' => 'node_access', // TODO: And node is activity type
+      'access arguments' => array('view', 1),
+      'page callback' => 'openfit_activity_export', 
+      'page arguments' => array(1),
+      'weight' => 50,
+    ),
+    'openfit/activityticker' => array(
+      'title' => '',
+      'type' => MENU_CALLBACK,
+      'access callback' => TRUE,
+      'file' => 'openfit_activity.activity.inc',
+      'page callback' => 'openfit_activity_ticker_form',
+    ),
+  );
+
+  $items += array(
+    OPENFIT_DASHBOARD_URL => array(
+      'title' => 'Dashboard',
+      'menu_name' => 'main-menu',
+      'access callback' => 'user_is_logged_in',
+      'file' => 'openfit_activity.dashboard.inc',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('openfit_activity_dashboard_form'),
+      'weight' => 0,
+    ),
+  );
+  $items += array(
+    OPENFIT_ACTIVITIES_URL => array(
+      'title' => 'Activities',
+      'menu_name' => 'main-menu',
+      'access callback' => 'user_is_logged_in',
+      'file' => 'openfit_activity.activities.inc',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('openfit_activity_activities_form'),
+      'weight' => 10,
+    ),
+  );  
+  return $items;
+}
+
+/**
+ * Alter the existing comment menus.
+ */
+function openfit_activity_menu_alter(&$items) {
+  // Comments
+  $items['comment/%/delete']['access callback'] = 'openfit_activity_comment_delete_access';
+  $items['comment/%/delete']['access arguments'] = array(1);
+  $items['comment/%/delete']['page callback'] = 'openfit_activity_comment_delete_page';
+}
+
+/**
+ * Override comment delete handler to allow users to delete their own comments on activities. 
+ */
+function openfit_activity_comment_delete_access($cid) {
+  if (user_access('administer comments')) return TRUE; // Allow admin to delete any comments
+  global $user;
+  $comment = comment_load($cid);
+  if (!$comment) return FALSE; // Disallow delete if comment doesn't exist
+  if ($comment->uid != $user->uid) return FALSE; // Disallow if user is not comment author
+  // Check if comment mode for this node type is flat
+  $node = node_load($comment->nid);
+  if (!$node || $node->type != 'activity') return FALSE; // Disallow delete if node doesn't exist or is not an activity node
+  $comment_mode = variable_get('comment_default_mode_' . $node->type, COMMENT_MODE_THREADED);
+  if ($comment_mode == COMMENT_MODE_FLAT) return TRUE;
+  return FALSE;
+}
+
+function openfit_activity_comment_delete_page($cid) {
+  $comment = comment_load($cid);
+  if (!$comment) return MENU_NOT_FOUND;
+  $node = node_load($comment->nid);
+  //if (!$node || $node->type != 'activity') return comment_confirm_delete_page($cid);
+  
+  comment_delete($cid);
+  drupal_set_message(t('The comment has been deleted.'));
+  watchdog('content', 'Deleted comment @cid and its replies.', array('@cid' => $cid));
+  // Clear the cache so an anonymous user sees that his comment was deleted.
+  cache_clear_all();
+  $url = drupal_get_path_alias('node/' . $node->nid) . '/comments';
+  drupal_goto($url);
+}
+
+/**
+ * Page callback for view menus. Use standard node view code.
+ *
+ * @param $node
+ *   The node to view.
+ * @param $view_mode
+ *   The mode to view the activity by. May be one of the standard modes or an OpenFit mode.
+ *   - full: A view of the activity summary information.
+ *   - teaser: A short version used in lists of activities.
+ *   - laps: A view of the activity laps.
+ *   - map: A view of the activity map.
+ *   - comments: A view of the activity comments.
+ */
+function openfit_activity_view_activity_page($node, $view_mode)
+{
+  drupal_page_is_cacheable(FALSE);
+  return node_view_multiple(array($node), $view_mode);
+}
+
+/**
+ * Retrieve the node data based on the view mode.
+ *
+ * @param $node
+ *   The node to view.
+ * @param $view_mode
+ *   The mode to view the activity by. May be one of the standard modes or an OpenFit mode.
+ *   - full: A view of the activity summary information.
+ *   - teaser: A short version used in lists of activities.
+ *   - laps: A view of the activity laps.
+ *   - map: A view of the activity map.
+ *   - comments: A view of the activity comments.
+ * @param $language
+ *   The language.
+ */
+function openfit_activity_view($node, $view_mode, $language) {
+  module_load_include('inc', 'openfit_activity', 'openfit_activity.activity');
+  $function = 'openfit_activity_view_' . $view_mode;
+  if (function_exists($function)) $node = call_user_func($function, $node, $view_mode, $language);
+  return $node;
+}
+
+/**
+ * Build $node->content renderable array based on view mode.
+ *
+ * @param $node
+ *   The node to view.
+ * @param $type
+ *   The the entity type.
+ * @param $view_mode
+ *   The mode to view the activity by. May be one of the standard modes or an OpenFit mode.
+ *   - full: A view of the activity summary information.
+ *   - teaser: A short version used in lists of activities.
+ *   - laps: A view of the activity laps.
+ *   - map: A view of the activity map.
+ *   - comments: A view of the activity comments.
+ * @param $language
+ *   The language. 
+ */
+function openfit_activity_entity_view($node, $type, $view_mode, $language) {
+  if ($type != 'node' || $node->type != OpenFitActivity::NODE_TYPE_ACTIVITY) return;
+  module_load_include('inc', 'openfit_activity', 'openfit_activity.activity');
+  $function = 'openfit_activity_entity_view_' . $view_mode;
+  if (function_exists($function)) call_user_func($function, $node, $view_mode, $language);
+}
+
+/**
+ * Prepare a node for add or edit by reading activity information or setting defaults.
+ */
+function openfit_activity_prepare($node) {
+  if ($node->type != OpenFitActivity::NODE_TYPE_ACTIVITY) return array();
+  $node->openfit_info = array();
+  if (isset($node->nid)) {
+    $activities = OpenFitActivity::getActivities(null, $node->nid);
+    if (isset($activities[$node->nid])) $node->openfit_info['activity'] = $activities[$node->nid];
+  } else {
+    $node->openfit_info['activity'] = OpenFitActivity::getNewActivity();
+  }
+}
+
+/**
+ * Return the form used to add or edit an activity node type.
+ *
+ * @param $node
+ *   The node to edit.
+ * @param $form_state
+ *   The form state.
+ */
+function openfit_activity_form($node, &$form_state) {
+  if ($node->type != OpenFitActivity::NODE_TYPE_ACTIVITY) return array();
+  module_load_include('inc', 'openfit_activity', 'openfit_activity.activity');
+  if (isset($node->nid)) {
+    return openfit_activity_activity_update_form($node, $form_state);
+  } else {
+    return openfit_activity_activity_insert_form($node, $form_state);
+  }
+}
+
+/**
+ * Process the add/edit form submission by stuffing values into the node activity.
+ *
+ * @param $form
+ *   The form.
+ * @param $form_state
+ *   The form state.
+ */
+function activity_node_form_submit($form, &$form_state) {
+  module_load_include('inc', 'openfit_activity', 'openfit_activity.activity');
+  if (isset($form['#node']->nid)) {
+    openfit_activity_activity_update_submit($form, $form_state);
+  } else {
+    openfit_activity_activity_insert_submit($form, $form_state);
+  }
+}
+
+/**
+ * Delete the specified activity without confirmation and redirect back to the activities page.
+ */
+function openfit_activity_delete_activity($node) {
+  OpenFitActivity::deleteActivities(array($node->nid));
+  drupal_goto(OPENFIT_ACTIVITIES_URL);
+}
+
+/**
+ * Export the contents of the specified node to a file.
+ *
+ * Implemented with a redirect to the public API methods.
+ *
+ * @param $node
+ *   The node.
+ */
+function openfit_activity_export($node) {
+  // If the URL parameter "noauth" is set, we were redirected back here after a failed access check.
+  if (isset($_GET['noauth'])) return drupal_access_denied();
+
+  $type = 'gpx';
+  if (isset($_GET['type'])) $type = $_GET['type'];
+  global $base_url;
+  header('Location: ' . $base_url . '/openfit/api/?op=export&nid=' . $node->nid . '&type=' . $type);
+}

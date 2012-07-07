@@ -1,0 +1,218 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  openfit_user.module: n/a
+#  openfit_user.info: n/a
+#  user-profile.js: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openfit_user\n"
+"POT-Creation-Date: 2012-03-17 07:56+1300\n"
+"PO-Revision-Date: 2012-03-16 15:27-0500\n"
+"Last-Translator: Aaron <aaron@openfitapi.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Spanish\n"
+
+#: openfit_user.module:68
+msgid "Full name"
+msgstr ""
+
+#: openfit_user.module:70
+msgid "Sign up"
+msgstr ""
+
+#: openfit_user.module:81
+msgid "Password"
+msgstr ""
+
+#: openfit_user.module:91
+msgid "terms of use"
+msgstr "las condiciones de uso "
+
+#: openfit_user.module:92
+msgid "By signing up you accept the !termslink of this site."
+msgstr ""
+
+#: openfit_user.module:160;187
+msgid "E-mail address"
+msgstr ""
+
+#: openfit_user.module:165
+msgid "Forgot password"
+msgstr "¿Olvidó su contraseña"
+
+#: openfit_user.module:268;284
+msgid "- Select -"
+msgstr ""
+
+#: openfit_user.module:279
+msgid "Male"
+msgstr "Hombre"
+
+#: openfit_user.module:280
+msgid "Female"
+msgstr "Mujer"
+
+#: openfit_user.module:291;445
+msgid "- None -"
+msgstr ""
+
+#: openfit_user.module:303
+msgid "Sunday"
+msgstr "domingo"
+
+#: openfit_user.module:303
+msgid "Monday"
+msgstr "lunes"
+
+#: openfit_user.module:303
+msgid "Tuesday"
+msgstr "martes"
+
+#: openfit_user.module:303
+msgid "Wednesday"
+msgstr "miércoles"
+
+#: openfit_user.module:303
+msgid "Thursday"
+msgstr "jueves"
+
+#: openfit_user.module:303
+msgid "Friday"
+msgstr "viernes"
+
+#: openfit_user.module:303
+msgid "Saturday"
+msgstr "sábado"
+
+#: openfit_user.module:322
+msgid "Click to change"
+msgstr "Haga clic para cambiar "
+
+#: openfit_user.module:335
+msgid "Name"
+msgstr "Nombre"
+
+#: openfit_user.module:336
+msgid "Enter your full name."
+msgstr ""
+
+#: openfit_user.module:346
+msgid "Location"
+msgstr "Lugar"
+
+#: openfit_user.module:355
+msgid "Enter your city, state or province"
+msgstr ""
+
+#: openfit_user.module:366
+msgid "Birthday"
+msgstr ""
+
+#: openfit_user.module:380
+msgid "Sex"
+msgstr "Sexo"
+
+#: openfit_user.module:391
+msgid "Preferences"
+msgstr "Preferencias"
+
+#: openfit_user.module:395
+msgid "Timezone"
+msgstr "Zona horaria"
+
+#: openfit_user.module:402
+msgid "Units"
+msgstr "Unidades"
+
+#: openfit_user.module:409
+msgid "First day of week"
+msgstr "Primer día de la semana"
+
+#: openfit_user.module:422
+msgid "Privacy"
+msgstr ""
+
+#: openfit_user.module:426
+msgid "Default sharing"
+msgstr ""
+
+#: openfit_user.module:428
+msgid "Private"
+msgstr "Privado"
+
+#: openfit_user.module:428
+msgid "Public"
+msgstr "Público"
+
+#: openfit_user.module:449
+msgid "Language"
+msgstr "Lengua"
+
+#: openfit_user.module:517
+msgid "Select profile photo"
+msgstr "Seleccione foto de perfil"
+
+#: openfit_user.module:610
+msgid "@user's picture"
+msgstr ""
+
+#: openfit_user.module:638
+msgid "Login/Logout menu"
+msgstr ""
+
+#: openfit_user.module:654
+msgid "My account"
+msgstr ""
+
+#: openfit_user.module:655
+msgid "Log out"
+msgstr ""
+
+#: openfit_user.module:659
+msgid "Log in"
+msgstr ""
+
+#: openfit_user.module:660
+msgid "Register"
+msgstr "Regístrate"
+
+#: openfit_user.module:10;57
+msgid "Profile"
+msgstr ""
+
+#: openfit_user.module:17;59
+msgid "Account"
+msgstr ""
+
+#: openfit_user.module:24
+msgid "Edit Picture"
+msgstr ""
+
+#: openfit_user.info:0
+msgid "OpenFit User Preferences"
+msgstr ""
+
+#: openfit_user.info:0
+msgid "Provides user preferences."
+msgstr "Proporciona las preferencias del usuario."
+
+#: openfit_user.info:0
+msgid "OpenFit"
+msgstr ""
+
+#: user-profile.js:0
+msgid "Ok"
+msgstr "Ok"
+
+#: user-profile.js:0
+msgid "Cancel"
+msgstr "Cancelar"
+

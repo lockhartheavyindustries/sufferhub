@@ -1,0 +1,14 @@
+<?php 
+
+function openfit_user_install() {
+    // Create aliases
+  db_insert('url_alias')
+    ->fields(array('source','alias','language'))
+    ->values(array('user/register','signup',LANGUAGE_NONE))
+    ->values(array('user/password','reset-password',LANGUAGE_NONE))
+    ->values(array('user/logout','logout',LANGUAGE_NONE))
+    ->values(array('user/login','login',LANGUAGE_NONE))
+    ->execute();
+    
+  variable_set('user_picture_default', 'sites/all/modules/openfit_user/select-photo.png');
+}

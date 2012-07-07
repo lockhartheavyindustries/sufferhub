@@ -1,0 +1,225 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  openfit_activity.activities.inc: n/a
+#  openfit_activity.activity.inc: n/a
+#  openfit_activity.module: n/a
+#  openfit_activity.dashboard.inc: n/a
+#  openfit_activity.info: n/a
+#  js/view.activities.js: n/a
+#  js/view.activity.js: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openfit_activity\n"
+"POT-Creation-Date: 2012-03-17 07:54+1300\n"
+"PO-Revision-Date: 2012-03-16 15:56-0500\n"
+"Last-Translator: Aaron <aaron@openfitapi.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Spanish\n"
+
+#: openfit_activity.activities.inc:44;63
+#: openfit_activity.activity.inc:152
+msgid "Edit"
+msgstr "Editar"
+
+#: openfit_activity.activities.inc:44;81
+#: openfit_activity.activity.inc:159
+#: openfit_activity.module:77
+msgid "Delete"
+msgstr "Borrar"
+
+#: openfit_activity.activities.inc:44
+msgid "View"
+msgstr ""
+
+#: openfit_activity.activities.inc:54
+#: openfit_activity.dashboard.inc:103
+msgid "Add"
+msgstr "Agregar"
+
+#: openfit_activity.activities.inc:124
+msgid "No activities"
+msgstr ""
+
+#: openfit_activity.activities.inc:129
+msgid "Are you sure you want to delete the selected items?"
+msgstr ""
+
+#: openfit_activity.activities.inc:132
+#: openfit_activity.activity.inc:107;682
+msgid "Confirm delete"
+msgstr ""
+
+#: openfit_activity.activity.inc:67
+msgid "!time !category for !distance"
+msgstr ""
+
+#: openfit_activity.activity.inc:104;679
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+#: openfit_activity.activity.inc:118
+msgid "Summary"
+msgstr "Resumen"
+
+#: openfit_activity.activity.inc:119
+#: openfit_activity.module:53
+msgid "Laps"
+msgstr ""
+
+#: openfit_activity.activity.inc:120
+#: openfit_activity.module:61
+msgid "Map"
+msgstr "Mapa"
+
+#: openfit_activity.activity.inc:165
+msgid "GPX"
+msgstr "GPX"
+
+#: openfit_activity.activity.inc:166
+msgid "TCX"
+msgstr "TCX"
+
+#: openfit_activity.activity.inc:175
+#: openfit_activity.module:85
+msgid "Export"
+msgstr "Exportar"
+
+#: openfit_activity.activity.inc:184
+msgid "Private"
+msgstr ""
+
+#: openfit_activity.activity.inc:185
+msgid "Public"
+msgstr ""
+
+#: openfit_activity.activity.inc:208
+msgid "Sharing"
+msgstr ""
+
+#: openfit_activity.activity.inc:231
+msgid "Activity not found"
+msgstr ""
+
+#: openfit_activity.activity.inc:419
+msgid "No laps"
+msgstr ""
+
+#: openfit_activity.activity.inc:544
+msgid "Import file"
+msgstr ""
+
+#: openfit_activity.activity.inc:548
+msgid "Select a file to import."
+msgstr ""
+
+#: openfit_activity.activity.inc:552;663
+#: openfit_activity.dashboard.inc:110
+msgid "Import"
+msgstr "Importar"
+
+#: openfit_activity.activity.inc:572
+msgid "Could not import file. An unknown error occurred."
+msgstr ""
+
+#: openfit_activity.activity.inc:656
+msgid "New Workout"
+msgstr ""
+
+#: openfit_activity.activity.inc:695
+msgid "Sport"
+msgstr ""
+
+#: openfit_activity.activity.inc:701
+msgid "Name"
+msgstr "Nombre"
+
+#: openfit_activity.activity.inc:707
+msgid "Start"
+msgstr "Comienzo"
+
+#: openfit_activity.activity.inc:715
+msgid "Start time"
+msgstr "Hora de inicio"
+
+#: openfit_activity.activity.inc:721
+msgid "Time"
+msgstr "Tiempo"
+
+#: openfit_activity.activity.inc:727
+msgid "Distance"
+msgstr "Distancia"
+
+#: openfit_activity.activity.inc:791
+msgid "Other"
+msgstr ""
+
+#: openfit_activity.dashboard.inc:62
+msgid "You haven't recorded an activity yet."
+msgstr ""
+
+#: openfit_activity.dashboard.inc:74
+msgid "This Week"
+msgstr ""
+
+#: openfit_activity.dashboard.inc:77
+msgid "This Month"
+msgstr ""
+
+#: openfit_activity.dashboard.inc:127
+msgid "Recent activities"
+msgstr ""
+
+#: openfit_activity.module:18
+msgid "Activity"
+msgstr "Actividad"
+
+#: openfit_activity.module:21
+msgid "A workout activity"
+msgstr ""
+
+#: openfit_activity.module:46
+msgid "Import Workout"
+msgstr ""
+
+#: openfit_activity.module:69
+msgid "Comments"
+msgstr ""
+
+#: openfit_activity.module:103
+msgid "Dashboard"
+msgstr ""
+
+#: openfit_activity.module:114
+msgid "Activities"
+msgstr "Actividades"
+
+#: openfit_activity.info:0
+msgid "OpenFit Activity"
+msgstr ""
+
+#: openfit_activity.info:0
+msgid "Provides activity tracking features."
+msgstr ""
+
+#: openfit_activity.info:0
+msgid "OpenFit"
+msgstr "OpenFit"
+
+#: js/view.activities.js:0
+#: js/view.activity.js:0
+msgid "Yes"
+msgstr "Si"
+
+#: js/view.activities.js:0
+#: js/view.activity.js:0
+msgid "No"
+msgstr "No"
+

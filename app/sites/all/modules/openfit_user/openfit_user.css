@@ -1,0 +1,283 @@
+/* Hide required asterisk and description text for user login & register pages */
+#user-register-form .form-required,
+#user-login .form-required,
+#user-pass .form-required,
+#user-profile-form .form-required {
+  display: none;
+}
+
+#user-register-form .description,
+#user-login .description,
+#user-pass .description,
+#user-profile-form .description,
+#openfit-user-profile-form .description {
+  display: none;
+}
+
+#user-profile-form .form-item-current-pass .description {
+  display: block;
+}
+
+/* Hide the AJAX form progress elements */
+#openfit-user-profile-form .ajax-progress {
+  display: none;
+}
+#openfit-user-profile-form .progress-disabled {
+  float: none;
+}
+
+/* Change user login & register pages to two-column layout */
+#user-register-form .form-item label,
+#user-login .form-item label,
+#user-pass .form-item label,
+#user-profile-form .form-item label,
+#openfit-user-profile-form .form-item label,
+.page-user-profile .form-item label {
+  float: left;
+  font-size: 1.1em;
+  margin-top: 0.4em;
+  width: 180px;
+}
+
+#user-register-form #edit-actions,
+#user-register-form #register-terms,
+#user-login #edit-actions,
+#user-profile-form #edit-actions,
+#user-profile-form .form-item-current-pass .description,
+#user-profile-form .password-suggestions,
+#user-profile-form .form-radios,
+#user-profile-form .form-checkboxes,
+.not-logged-in #user-pass #edit-actions,
+#openfit-user-profile-form .description {
+  margin-left: 180px;
+}
+
+#user-profile-form .form-type-checkbox label,
+#user-profile-form .form-type-radio label {
+  float: none;
+}
+
+/* Password alignment issues */
+#user-profile-form .password-suggestions {
+  max-width: 380px;
+}
+#user-profile-form .password-suggestions ul {
+  line-height: 140%;
+  margin-left: 1.0em;
+  margin-top: 0.5em;
+}
+
+.confirm-parent, .password-parent {
+  width: auto;
+}
+
+/* Hide breadcrumbs & title on user profile pages */
+.page-user #breadcrumb-wrapper,
+.page-user .breadcrumb,
+.page-user-account #page-title,
+.page-user-profile #page-title {
+  display: none;
+}
+
+/* Hide timezone on user profile page */
+#user-profile-form #edit-timezone {
+  display: none;
+}
+#user-profile-form .form-item-pass-pass2 {
+  clear: both;
+}
+#user-profile-form .password-strength, 
+#user-profile-form div.password-confirm {
+  margin-top: 0;
+}
+
+/* User profile page styles */
+#openfit-user-profile-form #photo {
+  float: left;
+  height: 140px;
+  margin-right: 10px;
+}
+#openfit-user-profile-form .photo-missing {
+  height: 100px;
+  width: 100px;
+}
+
+#openfit-user-profile-form .user-photo {
+  border: 3px solid #F0F0F0;
+  cursor: pointer;
+  display: table-cell;
+  height: 130px;
+  vertical-align: middle;
+  width: 130px;
+}
+
+#openfit-user-profile-form .user-photo img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 130px;
+  max-height: 130px;
+}
+
+#openfit-user-profile-form #avatar-link-hover {
+  background-color: rgba(0, 0, 0, 0.35);
+  color: #fff;
+  cursor: pointer;
+  font-size: 80%; 
+  margin: 3px; 
+  padding-bottom: 4px; 
+  padding-top: 6px; 
+  position: relative; 
+  text-align: center; 
+  top: -50px; 
+  width: 130px; 
+}
+
+#openfit-user-profile-form h2 {
+  border-bottom: 1px solid #E0E0E0;
+  clear: both;
+  color: #404040;
+  font-size: 1.5em;
+  line-height: 1.6;
+}
+
+#openfit-user-profile-form #general-settings {
+  margin-left: 120px;
+}
+#openfit-user-profile-form .form-type-date-popup {
+  border-width: 0;
+}
+#openfit-user-profile-form .date-padding {
+  padding: 0;
+}
+
+#openfit-user-profile-form .form-item-country select {
+  width: 150px;
+}
+#openfit-user-profile-form .form-item-country,
+#openfit-user-profile-form .form-item-location {
+  display: inline;
+}
+#openfit-user-profile-form .form-item-location input {
+  width: 246px;
+}
+#openfit-user-profile-form .container-inline-date .form-item {
+  display: block;
+}
+#openfit-user-profile-form .form-item-dateofbirth-date {
+  margin-right: 20px;
+  width: 150px;
+}
+#openfit-user-profile-form .form-item-dateofbirth-date .description {
+  margin-left: 0;
+}
+#openfit-user-profile-form .container-inline-date {
+  clear: none;
+}
+#openfit-user-profile-form .form-item-sex label {
+  width: 110px;
+}
+#openfit-user-profile-form .form-item-sex select {
+  width: 120px;
+}
+
+#openfit-user-profile-form .form-item-timezone select,
+#openfit-user-profile-form .form-item-language select,
+#openfit-user-profile-form .form-item-week-start select,
+#openfit-user-profile-form .form-item-units select {
+  width: 20em;
+}
+
+#openfit-user-profile-form .form-item-default-sharing .form-type-radio {
+  clear: right;
+  line-height: 17px;
+}
+
+#openfit-user-profile-form .form-item-default-sharing .form-type-radio label {
+  margin: 0;
+  vertical-align: middle;
+}
+
+#openfit-user-profile-form .form-item-default-sharing .form-radio {
+  line-height: 17px;
+}
+
+.page-user .content {
+  max-width: 960px;
+}
+.page-user .user-topsection {
+  overflow: hidden;
+  height: 150px;
+}
+.page-user .user-picture img {
+  border: 2px solid #EEE;
+  float: left;
+  padding: 2px;
+  margin: 6px 6px 0 0;
+  width: 116px;
+}
+.page-user .user-info {
+  float: left;
+  height: 100%;
+  width: 264px;
+  margin-right: 6px;
+}
+.page-user .user-name {
+  font-size: 2em;
+}
+.page-user .user-location {
+  font-size: 1.4em;
+}
+.page-user .user-country {
+  color: #999;
+  font-size: 0.9em;
+}
+.page-user .user-since {
+  margin-top: 4px;
+}
+.page-user .activity-totals {
+  background-color: #F8F8F8;
+  border-bottom: 1px solid #F0F0F0;
+  border-right: 1px solid #F0F0F0;
+  border-radius: 10px 10px 10px 10px; 
+  height: 60px;
+  margin-top: 10px;
+  overflow: hidden;
+  padding: 2px 14px 10px 14px;
+}
+.page-user .activity-totals .field {
+  float: left;
+  padding: 0 24px 0 0;
+}
+.page-user .activity-totals #count,
+.page-user .activity-totals #distance,
+.page-user .activity-totals #duration {
+  float: left;
+}
+.page-user .activity-totals #calories {
+  padding-right: 0;
+  float: left;
+}
+.page-user .activity-totals .field-item {
+  font-size: 30px;
+}
+.page-user .activity-totals .field-label {
+  color: #6699DD;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+.page-user .summary-chart {
+  clear: both;
+}
+.page-user .summary-chart .mini-chart {
+  height: 160px;
+}
+.page-user .summary-chart .mini-chart-label {
+  color: #B0B0B0;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+.page-user .recent-activities h2 {
+  border-bottom: 1px solid #F0F0F0;
+}

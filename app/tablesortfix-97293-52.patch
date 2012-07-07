@@ -1,0 +1,89 @@
+diff --git a/includes/entity.inc b/includes/entity.inc
+index 07ee061..5e1d003 100644
+--- a/includes/entity.inc
++++ b/includes/entity.inc
+@@ -997,10 +997,10 @@ class EntityFieldQuery {
+       }
+     }
+ 
+-    $order = tablesort_get_order($headers);
++    $ts = tablesort_get_order($headers);
+     $direction = tablesort_get_sort($headers);
+     foreach ($headers as $header) {
+-      if (is_array($header) && ($header['data'] == $order['name'])) {
++      if (is_array($header) && ($header['field'] == $ts['field'])) {
+         if ($header['type'] == 'field') {
+           $this->fieldOrderBy($header['specifier']['field'], $header['specifier']['column'], $direction);
+         }
+diff --git a/includes/tablesort.inc b/includes/tablesort.inc
+index 121a1b9..3ea8e6d 100644
+--- a/includes/tablesort.inc
++++ b/includes/tablesort.inc
+@@ -42,9 +42,9 @@ class TableSort extends SelectQueryExtender {
+   public function orderByHeader(Array $header) {
+     $this->header = $header;
+     $ts = $this->init();
+-    if (!empty($ts['sql'])) {
++    if (!empty($ts['field'])) {
+       // Based on code from db_escape_table(), but this can also contain a dot.
+-      $field = preg_replace('/[^A-Za-z0-9_.]+/', '', $ts['sql']);
++      $field = preg_replace('/[^A-Za-z0-9_.]+/', '', $ts['field']);
+ 
+       // Sort order can only be ASC or DESC.
+       $sort = drupal_strtoupper($ts['sort']);
+@@ -133,7 +133,7 @@ function tablesort_header($cell, $header, $ts) {
+   // Special formatting for the currently sorted column header.
+   if (is_array($cell) && isset($cell['field'])) {
+     $title = t('sort by @s', array('@s' => $cell['data']));
+-    if ($cell['data'] == $ts['name']) {
++    if ($cell['field'] == $ts['field']) {
+       $ts['sort'] = (($ts['sort'] == 'asc') ? 'desc' : 'asc');
+       $cell['class'][] = 'active';
+       $image = theme('tablesort_indicator', array('style' => $ts['sort']));
+@@ -143,7 +143,7 @@ function tablesort_header($cell, $header, $ts) {
+       $ts['sort'] = 'asc';
+       $image = '';
+     }
+-    $cell['data'] = l($cell['data'] . $image, $_GET['q'], array('attributes' => array('title' => $title), 'query' => array_merge($ts['query'], array('sort' => $ts['sort'], 'order' => $cell['data'])), 'html' => TRUE));
++    $cell['data'] = l($cell['data'] . $image, $_GET['q'], array('attributes' => array('title' => $title), 'query' => array_merge($ts['query'], array('sort' => $ts['sort'], 'order' => $cell['field'])), 'html' => TRUE));
+ 
+     unset($cell['field'], $cell['sort']);
+   }
+@@ -167,7 +167,7 @@ function tablesort_header($cell, $header, $ts) {
+  *   A properly formatted cell, ready for _theme_table_cell().
+  */
+ function tablesort_cell($cell, $header, $ts, $i) {
+-  if (isset($header[$i]['data']) && $header[$i]['data'] == $ts['name'] && !empty($header[$i]['field'])) {
++  if (isset($header[$i]['field']) && $header[$i]['field'] == $ts['field']) {
+     if (is_array($cell)) {
+       $cell['class'][] = 'active';
+     }
+@@ -203,7 +203,7 @@ function tablesort_get_order($headers) {
+   $order = isset($_GET['order']) ? $_GET['order'] : '';
+   foreach ($headers as $header) {
+     if (is_array($header)) {
+-      if (isset($header['data']) && $order == $header['data']) {
++      if (isset($header['field']) && $order == $header['field']) {
+         $default = $header;
+         break;
+       }
+@@ -221,8 +221,8 @@ function tablesort_get_order($headers) {
+     }
+   }
+ 
+-  $default += array('data' => NULL, 'field' => NULL);
+-  return array('name' => $default['data'], 'sql' => $default['field']);
++  $default += array('field' => NULL);
++  return array('field' => $default['field']);
+ }
+ 
+ /**
+@@ -243,7 +243,7 @@ function tablesort_get_sort($headers) {
+     // Find out which header is currently being sorted.
+     $ts = tablesort_get_order($headers);
+     foreach ($headers as $header) {
+-      if (is_array($header) && isset($header['data']) && $header['data'] == $ts['name'] && isset($header['sort'])) {
++      if (is_array($header) && isset($header['field']) && $header['field'] == $ts['field'] && isset($header['sort'])) {
+         return $header['sort'];
+       }
+     }

@@ -1,0 +1,397 @@
+<?php
+
+/**
+ * Implements hook_url_inbound_alter().
+ *
+ * Code adapted from subpathauto module.
+ */
+function openfit_api_url_inbound_alter(&$path, $original_path, $language) {
+  if ($source = openfit_api_lookup_subpath('source', $path, $original_path, $language)) {
+    $path = $source;
+  }
+}
+
+/**
+ * Implements hook_url_outbound_alter().
+ *
+ * Code adapted from subpathauto module.
+ */
+function openfit_api_url_outbound_alter(&$path, &$options, $original_path) {
+  //if (!empty($options['external'])) {
+  //  return;
+  //}
+
+  $language = !empty($options['language']->language) ? $options['language']->language : NULL;
+  if ($alias = openfit_api_lookup_subpath('alias', $path, $original_path, $language)) {
+    $path = $alias;
+  }
+}
+
+/**
+ * Given an alias, return its Drupal system URL if one exists. Given a Drupal
+ * system URL return one of its aliases if such a one exists. Otherwise,
+ * return FALSE.
+ *
+ * Code adapted from subpathauto, $max_depth = 1 and ignore_admin = true.
+ *
+ * @param $action
+ *   One of the following values:
+ *   - wipe: delete the alias cache.
+ *   - alias: return an alias for a given Drupal system path (if one exists).
+ *   - source: return the Drupal system URL for a path alias (if one exists).
+ * @param $path
+ *   The path to investigate for corresponding aliases or system URLs.
+ * @param $path_language
+ *   Optional language code to search the path with. Defaults to the page
+ *   language. If there's no path defined for that language it will search\
+ *   paths without language.
+ *
+ * @return
+ *   Either a Drupal system path, an aliased path, or FALSE if no path was
+ *   found.
+ */
+function openfit_api_lookup_subpath($action, $path = '', $original_path, $path_language = NULL) {
+  global $language_url;
+
+  if ($path == '' || $path != $original_path || strpos($path, '/') === FALSE) {
+    return FALSE;
+  }
+  if (drupal_match_path($path, "<front>\njs/*")) {
+    return FALSE;
+  }
+
+  $max_depth = 1;
+
+  // If no language is explicitly specified we default to the current URL
+  // language. If we used a language different from the one conveyed by the
+  // requested URL, we might end up being unable to check if there is a path
+  // alias matching the URL path.
+  $path_language = $path_language ? $path_language : $language_url->language;
+
+  $base_path_parts = explode('/', $path);
+  $depth = min($max_depth, count($base_path_parts) - 1);
+
+  // Perform a search for each base path with the right-most segment removed.
+  $path_suffix = array();
+  for ($i = 1; $i <= $depth; $i++) {
+    array_unshift($path_suffix, array_pop($base_path_parts));
+    $base_path = implode('/', $base_path_parts);
+
+    if ($action == 'alias' && $aliased_base_path = drupal_lookup_path('alias', $base_path, $path_language)) {
+      if ($aliased_base_path != $base_path) {
+        return $aliased_base_path . '/' . implode('/', $path_suffix);
+      }
+    }
+    elseif ($action == 'source' && $sourced_base_path = drupal_lookup_path('source', $base_path, $path_language)) {
+      if ($sourced_base_path != $base_path) {
+        return $sourced_base_path . '/' . implode('/', $path_suffix);
+      }
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Define the common theme hooks used in OpenFit.
+ */
+function openfit_api_theme() {
+  return array(
+    'small_pager' => array(
+      'variables' => array('attributes' => array(), 'element' => 0,  'options' => array('hide_empty' => TRUE), ),
+      'file' => 'openfit_api.theme.inc',
+    ),
+    'commandbar' => array(
+      'variables' => array(),
+      'file' => 'openfit_api.theme.inc',
+    ),
+    'openfit_timeofday' => array(
+      'render element' => 'element',
+      'file' => 'openfit_api.theme.inc',
+    ),
+    'openfit_duration' => array(
+      'render element' => 'element',
+      'file' => 'openfit_api.theme.inc',
+    ),
+    'openfit_measurement' => array(
+      'render element' => 'element',
+      'file' => 'openfit_api.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Defined the common elements used in OpenFit.
+ */
+function openfit_api_element_info() {
+  $elements = array();
+  $elements['small_pager'] = array(
+    '#input' => FALSE,
+    '#theme' => 'small_pager',
+  );
+  $elements['openfit_timeofday'] = array(
+    '#element_validate' => array('openfit_api_timeofday_validate'),
+    '#input' => TRUE,
+    '#theme' => 'openfit_timeofday',
+    '#theme_wrappers' => array('form_element'),  
+    '#value_callback' => 'openfit_api_timeofday_value_callback',
+  );
+  $elements['openfit_duration'] = array(
+    '#element_validate' => array('openfit_api_duration_validate'),
+    '#input' => TRUE,
+    '#theme' => 'openfit_duration',
+    '#theme_wrappers' => array('form_element'),  
+    '#value_callback' => 'openfit_api_duration_value_callback',
+  );
+  $elements['openfit_measurement'] = array(
+    '#default_units' => null,
+    '#element_validate' => array('openfit_api_measurement_validate'),
+    '#input' => TRUE,
+    '#theme' => 'openfit_measurement',
+    '#theme_wrappers' => array('form_element'),  
+    '#value_callback' => 'openfit_api_measurement_value_callback',
+    '#value_format' => OpenFitMeasurement::FORMAT_TYPE_SYMBOL,
+    '#value_units' => null,
+  );
+  return $elements;
+}
+
+function openfit_api_check_valid_input_set_form_error($is_input_valid, $element) {
+  if ($is_input_valid != TRUE) {
+    form_error($element, 
+      t('The value input for field !field is invalid:<br>The value @value does not match the expected format.', array(
+        '!field' => '<em class="placeholder">' . $element['#title'] . '</em>',
+        '@value' => $element['#value']
+      ))
+    );
+    return FALSE;
+  }
+  return TRUE;
+}
+
+function openfit_api_timeofday_value_callback($element, $input = FALSE, &$form_state) {
+  if ($input === FALSE) {
+    $date = isset($element['#default_value']) ? $element['#default_value'] : new DateTime();
+  } else {
+    $input = trim($input);
+    if (strlen($input) == 0) return '';
+    $value = OpenFitMeasurementDateTime::parseTimeOfDay($input);    
+    if (!$value['valid']) return $input;
+    $date = isset($element['#default_value']) ? $element['#default_value'] : new DateTime();
+    $date->setTime($value['hour'], $value['minute'], $value['second']);
+  }
+  return OpenFitMeasurementDateTime::formatTimeOfDay($date);
+}
+
+function openfit_api_timeofday_validate($element, &$form_state) {
+  $value = OpenFitMeasurementDateTime::parseTimeOfDay($element['#value']);
+  if (!openfit_api_check_valid_input_set_form_error($value['valid'], $element)) return;
+  $date = $element['#default_value']->setTime($value['hour'], $value['minute'], $value['second']);
+  form_set_value($element, $date, $form_state);
+}
+
+function openfit_api_duration_value_callback($element, $input = FALSE, &$form_state) {
+  if ($input === FALSE) {
+    $value = $element['#default_value'];
+  } else {
+    $input = trim($input);
+    if (strlen($input) == 0) return '';
+    $value = OpenFitMeasurementDateTime::parseTimespan($input);
+    if (!$value['valid']) return $input;
+    $value = $value['value'];
+  }
+  return OpenFitMeasurementDateTime::formatTimespan($value, 1, 2, 2);
+}
+
+function openfit_api_duration_validate($element, &$form_state) {
+  $value = OpenFitMeasurementDateTime::parseTimespan($element['#value']);
+  if (!openfit_api_check_valid_input_set_form_error($value['valid'], $element)) return;
+  form_set_value($element, $value['value'], $form_state);
+}
+
+function openfit_api_measurement_value_callback($element, $input = FALSE, &$form_state) {
+  if ($input === FALSE) {
+    $value = $element['#default_value'];
+  } else {
+    $input = trim($input);
+    if (strlen($input) == 0) return '';
+    $units = $element['#default_units'];
+    $value = OpenFitMeasurement::parse($input, $element['#value_units'], $units);
+    if (!$value['valid']) return $input;
+    $value = $value['value'];
+  }
+  return OpenFitMeasurement::convert(
+    $value, $element['#value_units'], $element['#default_units'], $element['#value_format']);
+}
+
+function openfit_api_measurement_validate($element, &$form_state) {
+  $units = $element['#default_units'];
+  $value = OpenFitMeasurement::parse($element['#value'], $element['#value_units'], $units);
+  if (!openfit_api_check_valid_input_set_form_error($value['valid'], $element)) return;
+  form_set_value($element, $value['value'], $form_state);
+}
+
+
+/**
+ * Implements hook_menu().
+ */
+function openfit_api_menu() { 
+  $items = array();
+  $items['admin/config/openfit'] = array(
+    'title' => 'OpenFit',
+    'description' => 'Configure OpenFit settings.',
+    'position' => 'left',
+    'weight' => -20,
+    'access arguments' => array('access administration pages'),
+  );
+  
+  $items['admin/config/openfit/general'] = array(
+    'title' => 'General Settings',
+    'description' => 'Non-specific settings.',
+    'position' => 'left',
+    'weight' => 0,
+    'access arguments' => array('access administration pages'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('openfit_api_general_admin_form'),
+    'file' => 'openfit_api.admin.inc',
+  );
+  
+  return $items;
+}
+
+/**
+ * Hook to return the openfit resources to the service module.
+ */
+function openfit_api_services_resources() {
+  return array(
+    'activity' => array(      
+      'index' => array(
+        'help' => 'Retrieve a listing of activities.',
+        'file' => array('file' => 'inc', 'module' => 'openfit_api', 'name' => 'openfit_api.activity_service_resource'),
+        'callback' => 'openfit_api_resource_activity_index',
+        'access callback' => 'user_access',
+        'access arguments' => array('access content'),
+        'access arguments append' => FALSE,
+        'args' => array(
+          array(
+            'name' => 'page',
+            'type' => 'int',
+            'description' => 'Page number of results to return',
+            'source' => array(
+              'param' => 'page',
+            ),
+            'optional' => TRUE,
+            'default value' => 0,
+          ),
+          array(
+            'name' => 'page_size',
+            'type' => 'int',
+            'description' => 'Maximum number of activities to return per query',
+            'source' => array(
+              'param' => 'pageSize',
+            ),
+            'optional' => TRUE,
+            'default value' => 25,
+          ),
+          array(
+            'name' => 'no_earlier_than',
+            'type' => 'string',
+            'description' => 'Limit returned activities to those on or after date',
+            'source' => array(
+              'param' => 'noEarlierThan',
+            ),
+            'optional' => TRUE,
+            'default value' => null,
+          ),
+          array(
+            'name' => 'no_later_than',
+            'type' => 'string',
+            'description' => 'Limit returned activities to those on or before date',
+            'source' => array(
+              'param' => 'noLaterThan',
+            ),
+            'optional' => TRUE,
+            'default value' => null,
+          ),
+        ),
+      ),
+      'retrieve' => array(
+        'help' => 'Retrieve an activity.',
+        'file' => array('file' => 'inc', 'module' => 'openfit_api', 'name' => 'openfit_api.activity_service_resource'),
+        'callback' => 'openfit_api_resource_activity_retrieve',
+        'access callback' => 'openfit_api_resource_activity_retrieve_access',
+        'access arguments' => array('view'),
+        'access arguments append' => TRUE,
+        'args' => array(
+          array(
+            'name' => 'nid',
+            'type' => 'int',
+            'description' => 'The id of the activity to get',
+            'source' => array('path' => '0'),
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+      'create' => array(
+        'help' => 'Create an activity.',
+        'file' => array('file' => 'inc', 'module' => 'openfit_api', 'name' => 'openfit_api.activity_service_resource'),
+        'callback' => 'openfit_api_resource_activity_create',
+        'access callback' => 'openfit_api_resource_activity_create_access',
+        'access arguments' => array(),
+        'access arguments append' => FALSE,
+        'args' => array(
+          array(
+            'name' => 'data',
+            'type' => 'struct',
+            'description' => 'The activity object',
+            'source' => 'data',
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+      /*
+      'update' => array(
+        'help' => 'Updates a note',
+        'file' => array('file' => 'inc', 'module' => 'noteresource'),
+        'callback' => '_noteresource_update',
+        'access callback' => '_noteresource_access',
+        'access arguments' => array('update'),
+        'access arguments append' => TRUE,
+        'args' => array(
+          array(
+            'name' => 'id',
+            'type' => 'int',
+            'description' => 'The id of the node to update',
+            'source' => array('path' => '0'),
+            'optional' => FALSE,
+          ),
+          array(
+            'name' => 'data',
+            'type' => 'struct',
+            'description' => 'The note data object',
+            'source' => 'data',
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+      'delete' => array(
+        'help' => 'Deletes a note',
+        'file' => array('file' => 'inc', 'module' => 'noteresource'),
+        'callback' => '_noteresource_delete',
+        'access callback' => '_noteresource_access',
+        'access arguments' => array('delete'),
+        'access arguments append' => TRUE,
+        'args' => array(
+          array(
+            'name' => 'nid',
+            'type' => 'int',
+            'description' => 'The id of the note to delete',
+            'source' => array('path' => '0'),
+            'optional' => FALSE,
+          ),
+        ),
+      ),
+      */
+    ),  
+  );    
+}

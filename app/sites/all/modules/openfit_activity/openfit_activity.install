@@ -1,0 +1,51 @@
+<?php 
+
+function openfit_activity_install() {
+  // Set defaults for activity content type
+  variable_set('node_preview_activity', DRUPAL_DISABLED); // Preview before submitting: disabled
+  variable_set('node_options_activity', array()); // Publishing options: unpublished, not promoted
+  variable_set('comment_activity', COMMENT_NODE_OPEN); // Allow activity comments
+  variable_set('comment_default_mode_activity', COMMENT_MODE_FLAT); // Show activity comments non-threaded
+  variable_set('comment_form_location_activity', COMMENT_FORM_BELOW); // Show activity comments below activity
+  variable_set('comment_preview_activity', DRUPAL_DISABLED); // Disable comment preview
+  variable_set('comment_subject_field_activity', 0); // Disable comment subject field
+  variable_set('menu_options_activity', array()); // Available menus: none
+  variable_set('pathauto_node_activity_pattern', 'activity/[node:nid]'); // Set URL for activity nodes
+  
+  // Alias the activity node pages
+  db_insert('url_alias')
+    ->fields(array(
+      'source' => 'node/add/activity',
+      'alias' => 'activity/add',
+      'language' => 'und',
+    ))
+    ->execute();
+  
+  // Set access permissions to a more reasonable default
+  openfit_activity_install_permissions('authenticated user', array(
+    array('permission' => 'view own unpublished content', 'module' => 'node'),
+    array('permission' => 'create activity content', 'module' => 'node'),
+    array('permission' => 'edit own activity content', 'module' => 'node'),
+    array('permission' => 'delete own activity content', 'module' => 'node'),
+    array('permission' => 'access user profiles', 'module' => 'user'),
+  ));
+  openfit_activity_install_permissions('anonymous user', array(
+    array('permission' => 'access user profiles', 'module' => 'user'),
+  ));
+}
+
+function openfit_activity_install_permissions($role, $permissions) {
+  $result = db_select('role', 'r')
+    ->fields('r', array('rid'))
+    ->condition('r.name', $role)
+    ->execute();
+  if ($result) {
+    $result = $result->fetchAssoc();
+    $rid = $result['rid'];
+    $query = db_insert('role_permission')->fields(array('rid', 'permission', 'module'));
+    foreach ($permissions as $permission) {
+      $query = $query->values(array($rid, $permission['permission'], $permission['module']));
+    }
+    $query->execute();
+  }
+}

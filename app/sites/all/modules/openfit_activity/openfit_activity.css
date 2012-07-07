@@ -1,0 +1,252 @@
+/* Activity node */
+/* Hide the system config options */
+#activity-node-form div.vertical-tabs {
+  display: none;
+}
+
+/* Standard detail chart styling */
+.chart .top-bar {
+  overflow: hidden;
+}
+.chart .top-bar .left-actions {
+  float: left;
+}
+.chart .top-bar .right-actions {
+  float: right;
+  margin-top: 3px;
+}
+.chart .top-bar .right-actions ul.buttonbar li {
+  margin: 0;
+}
+.chart .top-bar .right-actions ul.buttonbar li div.btn a {
+  padding: 2px 5px 2px 5px;
+}
+.chart .top-bar .right-actions ul.buttonbar li.disabled div.btn {
+  padding: 0;
+}
+
+.chart ul.buttonbar li {
+  margin: 0;
+}
+.chart ul.buttonbar li .name {
+  display: inline-block;
+}
+.chart ul.buttonbar .metric-name {
+  font-size: 1.6em;
+  font-weight: bold;
+  font-family: arial;
+}
+.chart ul.buttonbar .metric-units {
+  font-size: 0.7em;
+}
+.chart ul.buttonbar .metric-color {
+  display: inline-block;
+  height: 2.0em;
+  overflow: hidden;
+  position: relative;
+  vertical-align: bottom;
+  width: 0.9em;
+}
+.chart ul.buttonbar.metrics .metric-color span {
+  display: inline-block;
+  font-size:2.0em;
+  position: absolute;
+  top: -0.5em;
+}
+.chart ul.buttonbar.metrics .name .metric-color span {
+  padding: 0 6px 0 0;
+}
+.chart ul.buttonbar.xaxis li div.btn {
+  padding-left: 8px;
+}
+.chart ul.buttonbar.xaxis li div.btn span {
+  display: inline-block;
+}
+.chart ul.buttonbar.xaxis li div .xaxis-name {
+  font-size: 1.2em;
+  padding-top: 4px
+}
+.chart ul.buttonbar.xaxis li div .xaxis-units {
+  font-size: 0.8em;
+  padding-left: 6px
+}
+
+.chart ul.buttonbar .menu ul {
+  padding: 0;
+}
+.chart ul.buttonbar .menu li {
+  padding: 3px 0;
+}
+.chart ul.buttonbar.metrics .name span,
+.chart ul.buttonbar.metrics .name div {
+  padding: 0 3px;
+}
+.chart ul.buttonbar .menu .metric-name {
+  font-size: 1.2em;
+  padding: 0 3px;
+}
+.chart ul.buttonbar .menu .metric-color {
+  font-size: 0.9em;
+  padding-right: 2px;
+}
+.chart ul.buttonbar .menu .metric-color span {
+  top: -0.3em;
+}
+
+.chart .chart-canvas-container {
+  height: 300px;
+  margin: 5px 0 0 0;
+}
+
+.chart .bottom-bar {
+  margin:0;
+  padding:0;
+  position:relative;
+}
+.chart .bottom-bar .center-outer {
+	float:left;
+	position:relative;
+	left:50%;
+}
+.chart .bottom-bar .center-inner {
+	float:left;
+	position:relative;
+	left:-50%;
+}
+
+/* Dashboard page */
+.page-dashboard #page-title {
+  display: none;
+}
+.page-dashboard #page-title {
+  display: none;
+}
+.page-dashboard .page-activity-teaser {
+  clear: none;
+}
+.page-dashboard .info-sidebar {
+  float: right;
+  width: 300px;
+}
+.page-dashboard .info-sidebar h2 {
+  clear: both;
+  margin: 0;
+}
+.page-dashboard .info-sidebar .field-block {
+  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+  margin-bottom: 6px;
+  padding: 6px 0;
+  overflow: hidden;
+}
+.page-dashboard .info-sidebar .field-label {
+  color: #555;
+  clear: both;
+  float: left;
+  margin-top: 2px;
+  width: 200px;
+}
+.page-dashboard .info-sidebar .field-items {
+  color: #0A83AF;
+  float: left;
+  margin-top: 2px;
+}
+.page-dashboard .mini-chart {
+  height: 120px;
+}
+.page-dashboard .mini-chart-label {
+  color: #B0B0B0;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.page-dashboard #edit-header {
+  overflow: hidden;
+}
+.page-dashboard #action-bar {
+  float: right;
+  margin-right: 20px;
+}
+
+.page-dashboard #edit-items {
+  padding-right: 310px;
+}
+
+/* Activities page */
+.page-activities #page-title {
+  display: none;
+}
+.page-activities #edit-left-action-container {
+  float: left;
+}
+.page-activities #edit-right-action-container {
+  float: right;
+}
+.page-activities #edit-pager,
+.page-activities #edit-right-actions {
+  float: left;
+}
+
+a.view-activity {
+  font-weight: bold;
+}
+a.view-activity:hover {
+  text-decoration: underline;
+}
+
+.page-activities .activity-table tr td:first-child, 
+.page-activities .activity-table tr th:first-child {
+  display: none;
+}
+.page-activities .activity-table tr td.empty.message {
+  display: table-cell;
+}
+
+#add-button .img,
+#edit-button .img,
+#delete-button .img,
+#settings-button .img,
+#sharing-button .img,
+#sharing-button .img.right,
+#import-button .img,
+#export-button .img,
+#zoom-out-button .img {
+  background-image: url(../openfit_api/images/buttons.png);
+}
+
+#add-button .img { background-position: 0 0; }
+#add-button:hover .img, #add-button.menu-open .img { background-position: -16px 0; }
+#add-button.disabled .img { background-position: -32px 0; }
+
+#edit-button .img { background-position: 0 -16px; }
+#edit-button:hover .img, #edit-button.menu-open .img { background-position: -16px -16px; }
+#edit-button.disabled .img { background-position: -32px -16px; }
+
+#delete-button .img { background-position: 0 -32px; }
+#delete-button:hover .img, #delete-button.menu-open .img { background-position: -16px -32px; }
+#delete-button.disabled .img { background-position: -32px -32px; }
+
+#settings-button .img { background-position: 0 -48px; }
+#settings-button:hover .img, #settings-button.menu-open .img { background-position: -16px -48px; }
+#settings-button.disabled .img { background-position: -32px -48px; }
+
+#sharing-button .img { background-position: 0 -64px; }
+#sharing-button:hover .img, #sharing-button.menu-open .img { background-position: -16px -64px; }
+#sharing-button.disabled .img { background-position: -32px -64px; }
+
+#sharing-button .img.right { background-position: 0 -144px; }
+#sharing-button:hover .img.right, #sharing-button.menu-open .img.right { background-position: -16px -144px; }
+#sharing-button.disabled .img.right { background-position: -32px -144px; }
+
+#import-button .img { background-position: 0 -80px; }
+#import-button:hover .img, #import-button.menu-open .img { background-position: -16px -80px; }
+#import-button.disabled .img { background-position: -32px -80px; }
+
+#export-button .img { background-position: 0 -96px; }
+#export-button:hover .img, #export-button.menu-open .img { background-position: -16px -96px; }
+#export-button.disabled .img { background-position: -32px -96px; }
+
+#zoom-out-button .img { background-position: 0 -160px; }
+#zoom-out-button:hover .img, #zoom-out-button.menu-open .img { background-position: -16px -160px; }
+#zoom-out-button.disabled .img { background-position: -32px -160px; }

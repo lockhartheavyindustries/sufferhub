@@ -1,0 +1,10 @@
+name = OpenFit User Preferences
+description = "Provides user preferences."
+core = 7.x
+
+package = "OpenFit"
+dependencies[] = openfit_api
+dependencies[] = openfit_ui
+files[] = openfit_user.module
+
+version = "7.x-1.1"

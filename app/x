@@ -1,0 +1,89 @@
+[1mdiff --git a/includes/entity.inc b/includes/entity.inc[m
+[1mindex 07ee061..5e1d003 100644[m
+[1m--- a/includes/entity.inc[m
+[1m+++ b/includes/entity.inc[m
+[36m@@ -997,10 +997,10 @@[m [mclass EntityFieldQuery {[m
+       }[m
+     }[m
+ [m
+[31m-    $order = tablesort_get_order($headers);[m
+[32m+[m[32m    $ts = tablesort_get_order($headers);[m
+     $direction = tablesort_get_sort($headers);[m
+     foreach ($headers as $header) {[m
+[31m-      if (is_array($header) && ($header['data'] == $order['name'])) {[m
+[32m+[m[32m      if (is_array($header) && ($header['field'] == $ts['field'])) {[m
+         if ($header['type'] == 'field') {[m
+           $this->fieldOrderBy($header['specifier']['field'], $header['specifier']['column'], $direction);[m
+         }[m
+[1mdiff --git a/includes/tablesort.inc b/includes/tablesort.inc[m
+[1mindex 121a1b9..3ea8e6d 100644[m
+[1m--- a/includes/tablesort.inc[m
+[1m+++ b/includes/tablesort.inc[m
+[36m@@ -42,9 +42,9 @@[m [mclass TableSort extends SelectQueryExtender {[m
+   public function orderByHeader(Array $header) {[m
+     $this->header = $header;[m
+     $ts = $this->init();[m
+[31m-    if (!empty($ts['sql'])) {[m
+[32m+[m[32m    if (!empty($ts['field'])) {[m
+       // Based on code from db_escape_table(), but this can also contain a dot.[m
+[31m-      $field = preg_replace('/[^A-Za-z0-9_.]+/', '', $ts['sql']);[m
+[32m+[m[32m      $field = preg_replace('/[^A-Za-z0-9_.]+/', '', $ts['field']);[m
+ [m
+       // Sort order can only be ASC or DESC.[m
+       $sort = drupal_strtoupper($ts['sort']);[m
+[36m@@ -133,7 +133,7 @@[m [mfunction tablesort_header($cell, $header, $ts) {[m
+   // Special formatting for the currently sorted column header.[m
+   if (is_array($cell) && isset($cell['field'])) {[m
+     $title = t('sort by @s', array('@s' => $cell['data']));[m
+[31m-    if ($cell['data'] == $ts['name']) {[m
+[32m+[m[32m    if ($cell['field'] == $ts['field']) {[m
+       $ts['sort'] = (($ts['sort'] == 'asc') ? 'desc' : 'asc');[m
+       $cell['class'][] = 'active';[m
+       $image = theme('tablesort_indicator', array('style' => $ts['sort']));[m
+[36m@@ -143,7 +143,7 @@[m [mfunction tablesort_header($cell, $header, $ts) {[m
+       $ts['sort'] = 'asc';[m
+       $image = '';[m
+     }[m
+[31m-    $cell['data'] = l($cell['data'] . $image, $_GET['q'], array('attributes' => array('title' => $title), 'query' => array_merge($ts['query'], array('sort' => $ts['sort'], 'order' => $cell['data'])), 'html' => TRUE));[m
+[32m+[m[32m    $cell['data'] = l($cell['data'] . $image, $_GET['q'], array('attributes' => array('title' => $title), 'query' => array_merge($ts['query'], array('sort' => $ts['sort'], 'order' => $cell['field'])), 'html' => TRUE));[m
+ [m
+     unset($cell['field'], $cell['sort']);[m
+   }[m
+[36m@@ -167,7 +167,7 @@[m [mfunction tablesort_header($cell, $header, $ts) {[m
+  *   A properly formatted cell, ready for _theme_table_cell().[m
+  */[m
+ function tablesort_cell($cell, $header, $ts, $i) {[m
+[31m-  if (isset($header[$i]['data']) && $header[$i]['data'] == $ts['name'] && !empty($header[$i]['field'])) {[m
+[32m+[m[32m  if (isset($header[$i]['field']) && $header[$i]['field'] == $ts['field']) {[m
+     if (is_array($cell)) {[m
+       $cell['class'][] = 'active';[m
+     }[m
+[36m@@ -203,7 +203,7 @@[m [mfunction tablesort_get_order($headers) {[m
+   $order = isset($_GET['order']) ? $_GET['order'] : '';[m
+   foreach ($headers as $header) {[m
+     if (is_array($header)) {[m
+[31m-      if (isset($header['data']) && $order == $header['data']) {[m
+[32m+[m[32m      if (isset($header['field']) && $order == $header['field']) {[m
+         $default = $header;[m
+         break;[m
+       }[m
+[36m@@ -221,8 +221,8 @@[m [mfunction tablesort_get_order($headers) {[m
+     }[m
+   }[m
+ [m
+[31m-  $default += array('data' => NULL, 'field' => NULL);[m
+[31m-  return array('name' => $default['data'], 'sql' => $default['field']);[m
+[32m+[m[32m  $default += array('field' => NULL);[m
+[32m+[m[32m  return array('field' => $default['field']);[m
+ }[m
+ [m
+ /**[m
+[36m@@ -243,7 +243,7 @@[m [mfunction tablesort_get_sort($headers) {[m
+     // Find out which header is currently being sorted.[m
+     $ts = tablesort_get_order($headers);[m
+     foreach ($headers as $header) {[m
+[31m-      if (is_array($header) && isset($header['data']) && $header['data'] == $ts['name'] && isset($header['sort'])) {[m
+[32m+[m[32m      if (is_array($header) && isset($header['field']) && $header['field'] == $ts['field'] && isset($header['sort'])) {[m
+         return $header['sort'];[m
+       }[m
+     }[m

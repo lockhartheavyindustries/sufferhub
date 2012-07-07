@@ -1,0 +1,875 @@
+<?php
+
+/**
+ * Define a few new URLs for user profile management.
+ */
+function openfit_user_menu() {
+  $items = array();
+  $items['user/profile'] = array( 
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'title' => 'Profile', 
+    'access callback' => 'openfit_user_account_access',
+    'page callback' => 'openfit_get_user_profile_form',
+    'weight' => 1,
+  );
+  $items['user/account'] = array( 
+    'type' => MENU_LOCAL_TASK,
+    'title' => 'Account', 
+    'access callback' => 'openfit_user_account_access', 
+    'page callback' => 'openfit_user_account_form',
+    'weight' => 2,
+  );
+  $items['user/edit-picture'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => 'Edit Picture',
+    'access callback' => 'openfit_user_account_access',
+    'page callback' => 'drupal_get_form', 
+    'page arguments' => array('openfit_user_edit_picture_form'),
+  );
+  
+  $items['user/set-avatar/%/%'] = array(
+    'type' => MENU_CALLBACK,
+    'title' => '',
+    'access callback' => 'openfit_user_account_access',
+    'page callback' => 'openfit_user_set_avatar_action',
+    'page arguments' => array(2, 3),
+  );
+  
+  return $items;
+}
+
+/**
+ * Alter the existing user profile management menus.
+ */
+function openfit_user_menu_alter(&$items) {
+  // Customize some standard core user URLs
+  $items['user/register']['type'] = MENU_CALLBACK;
+  $items['user/password']['type'] = MENU_CALLBACK;  
+ 
+  // User profile items
+  $items['user']['page callback'] = 'openfit_user_user_page';
+  $items['user/%user/shortcuts']['type'] = MENU_CALLBACK;
+  
+  $items['user/%user']['title callback'] = 'openfit_user_user_summary_title';
+  $items['user/%user']['page callback'] = 'openfit_user_user_summary_page';
+  
+  $items['user/%user/view']['title'] = 'Profile';
+  
+  $items['user/%user/edit']['title'] = 'Account';  
+}
+
+/**
+ * Set theme preprocess functions.
+ */
+function hook_theme_registry_alter(&$theme_registry) {
+  // Kill the next/previous forum topic navigation links.
+  $theme_registry['user_picture']['preprocess functions'][] = 'openfit_user_preprocess_user_picture';
+}
+
+/**
+ * Customize the user picture theme function. This is a duplicate of the theme
+ * preprocess method in user module except the alt text is cleared so the
+ * link title attribute will be displayed on mouseover. A lot of work for a
+ * simple override, but there isn't an easier option I can see.
+ */
+function openfit_user_preprocess_user_picture(&$variables) {
+  $variables['user_picture'] = '';
+  if (variable_get('user_pictures', 0)) {
+    $account = $variables['account'];
+    if (!empty($account->picture)) {
+      // @TODO: Ideally this function would only be passed file objects, but
+      // since there's a lot of legacy code that JOINs the {users} table to
+      // {node} or {comments} and passes the results into this function if we
+      // a numeric value in the picture field we'll assume it's a file id
+      // and load it for them. Once we've got user_load_multiple() and
+      // comment_load_multiple() functions the user module will be able to load
+      // the picture files in mass during the object's load process.
+      if (is_numeric($account->picture)) {
+        $account->picture = file_load($account->picture);
+      }
+      if (!empty($account->picture->uri)) {
+        $filepath = $account->picture->uri;
+      }
+    }
+    elseif (variable_get('user_picture_default', '')) {
+      $filepath = variable_get('user_picture_default', '');
+    }
+    if (isset($filepath)) {
+      $alt = null;
+      // If the image does not have a valid Drupal scheme (for eg. HTTP),
+      // don't load image styles.
+      if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+        $variables['user_picture'] = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      else {
+        $variables['user_picture'] = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+      }
+      if (!empty($account->uid) && user_access('access user profiles')) {
+        $attributes = array('attributes' => array('title' => t('View user profile.')), 'html' => TRUE);
+        $variables['user_picture'] = l($variables['user_picture'], "user/$account->uid", $attributes);
+      }
+    }
+  }
+}
+
+/**
+ * Customize the user registration form.
+ */
+function openfit_user_form_user_register_form_alter(&$form, &$form_state) {
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css'; 
+  $form['account']['mail']['#weight'] = 0;
+  $form['account']['name']['#title'] = t('Full name');
+  $form['account']['name']['#weight'] = 1;
+  $form['actions']['submit']['#value'] = t('Sign up');
+  $form['account']['fullname'] = array(
+    '#type' => 'hidden',
+    '#value' => '',
+  );
+  
+  // Simplify the password prompt if visitor registration is turned on
+  if (isset($form['account']['pass'])) {
+    unset($form['account']['pass']); 
+    $form['account']['pass'] = array(
+      '#type' => 'password', 
+      '#title' => t('Password'), 
+      '#maxlength' => 64, 
+      '#weight' => 2,
+      '#required' => 1,
+    );
+  }
+  
+  $form['actions']['#weight'] = 3;
+  $terms_url = variable_get('openfit_core_page_terms', null);
+  if (isset($terms_url)) {
+    $text = l(t('terms of use'), $terms_url);
+    $text = t('By signing up you accept the !termslink of this site.', array('!termslink' => $text));
+    $form['terms'] = array(
+      '#markup' => '<div id=\'register-terms\'>' . $text . '</div>',
+      '#weight' => 4,
+    );
+  }
+  if (!is_array($form['#validate'])) $form['#validate'] = array();
+  array_unshift($form['#validate'], 'openfit_user_register_validate');
+}
+
+/**
+ * Validate the user registration form by generating a unique username.
+ */
+function openfit_user_register_validate($form, &$form_state) {
+  form_set_value($form['account']['fullname'], $form_state['values']['name'], $form_state);
+  form_set_value($form['account']['name'], openfit_user_generate_username($form_state['values']['name']), $form_state);
+}
+
+/**
+ * Generate a unique user name from the full name.
+ */
+function openfit_user_generate_username($eng_name) {
+  $name = strtolower(str_replace(array('-',' '), '', $eng_name));
+  
+  $name_counter = db_query('SELECT COUNT(name) FROM {users} WHERE name = :name OR name LIKE :namelike ',
+    array(':name' => $name, ':namelike' => db_like($name . '-').'%')
+  )->fetchField();
+  
+  if ($name_counter) {
+    do {
+      $test_name = $name.'-'.$name_counter;
+      $name_counter++;
+    }  while (db_query('SELECT COUNT(name) FROM {users} WHERE name LIKE :test_name', array(':test_name' => $test_name))->fetchField() != 0);
+    
+    $name = $test_name;
+  }
+  return $name;
+}
+
+/**
+ * Redirect the user to the homepage after login.
+ */
+function openfit_user_user_login(&$edit, $account) {
+  // Redirect after user login to the homepage.
+  // Only do this if installation has completed first. Use $conf instead of variable_get
+  // because this will be called during install bootstrapping.
+  global $conf;
+  if (isset($conf['install_time'])) $edit['redirect'] = '<front>';
+}
+
+/**
+ * Save the user's full name to the settings table.
+ */
+function openfit_user_user_insert(&$edit, $account, $category) {
+  if (isset($account->uid) && $account->uid > 0) {
+    if (!isset($edit['fullname'])) $edit['fullname'] = $account->name;
+    OpenFitUserSetting::set($account->uid, OpenFitUserSetting::TYPE_FULLNAME, $edit['fullname']);
+    unset($edit['fullname']);
+  }
+}
+
+/**
+ * Customize the user login form.
+ * - Prompt for user email instead of username.
+ * - Add a "forgot password" link.
+ */
+function openfit_user_form_user_login_alter(&$form, &$form_state) {  
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css';
+  $form['name']['#title'] = t('E-mail address');
+  if (!is_array($form['#validate'])) $form['#validate'] = array();
+  array_unshift($form['#validate'], 'openfit_user_login_validate');
+  $form['actions']['forgot'] = array(
+    '#type' => 'link',
+    '#title' => t('Forgot password'),
+    '#href' => 'reset-password',
+  );
+}
+
+/*
+ * Validate the user login by using email to login.
+ */
+function openfit_user_login_validate($form, &$form_state) {
+  if (isset($form_state['values']['name']) && $form_state['values']['name']) {
+    if ($name = db_query('SELECT name FROM {users} WHERE LOWER(mail) = LOWER(:name)', 
+                          array(':name' => $form_state['values']['name']))->fetchField()) {
+      form_set_value($form['name'], $name, $form_state);
+    }
+  }
+}
+ 
+/**
+ * Customize the password reset form.
+ */
+function openfit_user_form_user_pass_alter(&$form, &$form_state) {
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css'; 
+  $form['name']['#title'] = t('E-mail address');
+}
+
+/**
+ * Customize the user profile edit form.
+ */
+function openfit_user_form_user_profile_form_alter(&$form, &$form_state) {
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css'; 
+  unset($form['picture']);
+  unset($form['account']['name']);
+}
+
+/**
+ * Redirect the /user page to user profile.
+ */
+function openfit_user_user_page() {
+  global $user;
+  if ($user->uid) {
+    menu_set_active_item('user/profile');
+    return menu_execute_active_handler(NULL, FALSE);
+  } else {
+    return drupal_get_form('user_login');
+  }
+}
+
+/**
+ * Allow access to user profile and account pages when logged in or administrator.
+ */
+function openfit_user_account_access() {
+  global $user;
+  return user_edit_access($user);
+}
+
+/**
+ * User account page shows standard profile form.
+ */
+function openfit_user_account_form() {
+  module_load_include('inc', 'user', 'user.pages');
+  global $user;
+  $user_edit = user_load($user->uid, TRUE);
+  return drupal_get_form('user_profile_form', $user_edit);
+}
+
+/**
+ * A customized user profile form.
+ */
+function openfit_get_user_profile_form() {
+  $wrap = array(
+    '#type' => 'container',
+  );
+  
+  $wrap['profile-form'] = drupal_get_form('openfit_user_profile_form');
+  $wrap['edit-photo'] = drupal_get_form('openfit_user_edit_picture_form');
+  $wrap['edit-photo']['#attributes']['style'] = "display: none";
+  
+  return $wrap;
+}
+
+function openfit_user_profile_form($form, $form_state) {
+  global $user;
+  $preferences = OpenFitUserSetting::get($user->uid);
+  $fullname_value = $preferences[OpenFitUserSetting::TYPE_FULLNAME];
+  $country_value = $preferences[OpenFitUserSetting::TYPE_COUNTRY];
+  $location_value = $preferences[OpenFitUserSetting::TYPE_LOCATION];
+  $birthday_value = $preferences[OpenFitUserSetting::TYPE_DATE_OF_BIRTH];
+  $sex_value = $preferences[OpenFitUserSetting::TYPE_SEX];
+  $timezone_value = $preferences[OpenFitUserSetting::TYPE_TIMEZONE];
+  $units_value = $preferences[OpenFitUserSetting::TYPE_UNITS];
+  $week_start_value = $preferences[OpenFitUserSetting::TYPE_WEEK_START];
+  $language_value = $preferences[OpenFitUserSetting::TYPE_LANGUAGE]; 
+  $locale = $language_value . '-' . $country_value;
+  // $default_sharing = $preferences[OpenFitUserSetting::TYPE_DEFAULT_SHARING];
+  
+  // Country list
+  $all_countries = country_get_list();
+  // Remove some REALLY LONG countries
+  unset($all_countries['GS']);
+  unset($all_countries['HM']);
+  unset($all_countries['UM']);
+  $country_options = array();
+  if (!isset($all_countries[$country_value])) {
+    $country_options[''] = t('- Select -');
+    $country_value = '';
+  }
+  $country_options = array_merge($country_options, $all_countries);
+  
+  // Date popup formatter options
+  $date_formatter = new IntlDateFormatter($locale, IntlDateFormatter::SHORT, IntlDateFormatter::NONE);
+  $date_pattern = OpenFitMeasurementDateTime::convertPattern($date_formatter->getPattern());
+  
+  // Sex list
+  $all_sex = array(
+    OpenFitUserSetting::SEX_MALE => t('Male'),
+    OpenFitUserSetting::SEX_FEMALE => t('Female'),
+  );
+  $sex_options = array();
+  if (!isset($all_sex[$sex_value])) {
+    $sex_options[''] = t('- Select -');
+    $sex_value = '';
+  }
+  $sex_options = array_merge($sex_options, $all_sex);
+
+  // Timezone list
+  $timezone_options = array();
+  if ($timezone_value == '') $timezone_options[''] = t('- None -');
+  $timezone_options = array_merge($timezone_options, date_timezone_names(TRUE));
+
+  // Units list
+  $measurement_systems = OpenFitMeasurement::getMeasurementSystems();
+  $units_options = array();
+  foreach ($measurement_systems as $id => $system) {
+    $units_options[$id] = t($system->title);
+  }
+  
+  // Week start list
+  $week_start_options = array(
+    0 => t('Sunday'), 1 => t('Monday'), 2 => t('Tuesday'), 3 => t('Wednesday'), 4 => t('Thursday'), 5 => t('Friday'), 6 => t('Saturday')
+  );
+  
+  $ajax_settings = array(
+    'callback' => 'openfit_user_save_settings',
+    'progress' => array('type' => 'none',),
+    'keypress' => TRUE,
+  );
+  
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css';
+
+  if (variable_get('user_pictures', 0)) {
+    $form['photo'] = array(
+      '#type' => 'container',
+      '#id' => 'photo',
+      'image' => array(
+        '#markup' => theme('userpicture', array('uid' => $user->uid)),
+      ),
+      'avatar-link-hover' => array(
+        '#markup' => '<div id="avatar-link-hover" style="display:none">' . t('Click to change') . '</div>',
+      ),
+    );
+    drupal_add_library('system', 'ui.dialog');
+    drupal_add_js(drupal_get_path('module', 'openfit_user').'/user-profile.js');
+  }
+   
+  $form['general-settings'] = array(
+    '#type' => 'container',
+    '#id' => 'general-settings',
+  
+    OpenFitUserSetting::TYPE_FULLNAME => array(
+      '#type' => 'textfield',
+      '#title' => t('Name'),
+      '#description' => t('Enter your full name.'),
+      //'#required' => TRUE, // TODO: Can't clear error after submitting with AJAX
+      '#default_value' => $fullname_value,
+      '#size' => 60,
+      '#ajax' => $ajax_settings,
+    ),
+    'location-container' => array(
+      '#type' => 'container',
+      OpenFitUserSetting::TYPE_COUNTRY => array(
+        '#type' => 'select',
+        '#title' => t('Location'),
+        '#default_value' => $country_value,
+        '#options' => $country_options,
+        //'#ajax' => $ajax_settings,
+        // TODO: We submit the entire form to set the date popup format, but this could also be done with an AJAX save and some javascript to update the popup "dateFormat" setting property
+        '#attributes' => array('onChange' => 'document.getElementById(\'openfit-user-profile-form\').submit();'),
+      ),
+      OpenFitUserSetting::TYPE_LOCATION => array(
+        '#type' => 'textfield',
+        '#description' => t('Enter your city, state or province'),
+        '#default_value' => $location_value,
+        '#size' => 80,
+        '#ajax' => $ajax_settings,
+      ),
+    ),
+    'dateofbirth-container' => array(
+      '#id' => 'dateofbirth-container',
+      '#type' => 'container',
+      OpenFitUserSetting::TYPE_DATE_OF_BIRTH => array(
+        '#type' => 'date_popup',
+        '#title' => t('Birthday'),
+        '#default_value' => $birthday_value,
+        '#date_format' => $date_pattern,
+        '#date_label_position' => 'inline',
+        '#ajax' => array(
+          'callback' => 'openfit_user_save_date_of_birth',
+          'progress' => array('type' => 'none',),
+          'wrapper' => 'dateofbirth-container',
+          'keypress' => TRUE,
+        ),
+      ),
+    ),
+    OpenFitUserSetting::TYPE_SEX => array(
+      '#type' => 'select',
+      '#title' => t('Sex'),
+      '#default_value' => $sex_value,
+      '#options' => $sex_options,
+      '#ajax' => $ajax_settings,
+    ),
+  );
+  
+  $form['preferences'] = array(
+    '#type' => 'container',
+    '#id' => 'preferences',
+    'header' => array(
+      '#markup' => '<h2>' . t('Preferences') . '</h2>',
+    ),
+    OpenFitUserSetting::TYPE_TIMEZONE => array(
+      '#type' => 'select',
+      '#title' => t('Timezone'),
+      '#default_value' => $timezone_value,
+      '#options' => $timezone_options,
+      '#ajax' => $ajax_settings,
+    ),
+    OpenFitUserSetting::TYPE_UNITS => array(
+      '#type' => 'select',
+      '#title' => t('Units'),
+      '#default_value' => $units_value,
+      '#options' => $units_options,
+      '#ajax' => $ajax_settings,
+    ),
+    OpenFitUserSetting::TYPE_WEEK_START => array(
+      '#type' => 'select',
+      '#title' => t('First day of week'),
+      '#default_value' => $week_start_value,
+      '#options' => $week_start_options,
+      //'#ajax' => $ajax_settings,
+      // TODO: We submit the entire form to set the date popup week start, but this could also be done with an AJAX save and some javascript to update the popup "firstDay" setting property
+      '#attributes' => array('onChange' => 'document.getElementById(\'openfit-user-profile-form\').submit();'),
+    ),
+  );
+
+//  $form['privacy'] = array(
+//    '#type' => 'container',
+//    '#id' => 'privacy',
+//    'header' => array(
+//      '#markup' => '<h2>' . t('Privacy') . '</h2>',
+//    ),
+//    OpenFitUserSetting::TYPE_DEFAULT_SHARING => array(
+//     '#type' => 'radios',
+//      '#title' => t('Default sharing'),
+//      '#default_value' => $default_sharing,
+//      '#options' => array(t('Private'), t('Public')),
+//      '#ajax' => $ajax_settings,
+//      '#attributes' => array('class' => array('clearfix')),
+//    ),
+//  );
+  
+  if (module_exists('locale')) {
+    $languages =  locale_language_list('name', TRUE);
+    if (count($languages) > 1) {
+      $native_languages = locale_language_list('native', TRUE);
+      foreach ($native_languages as $id => $text) {
+        if ($id != $language_value) {
+          $language = $languages[$id];
+          if (isset($language)) $languages[$id] = $language . ' (' . $text . ')';
+        }
+      }
+      $language_options = array();
+      if ($language_value == '') $language_options[''] = t('- None -');
+      $language_options = array_merge($language_options, $languages);
+      $form['preferences'][OpenFitUserSetting::TYPE_LANGUAGE] = array(
+        '#type' => 'select',
+        '#title' => t('Language'),
+        '#default_value' => $language_value,
+        '#options' => $language_options,
+        '#attributes' => array('onChange' => 'document.getElementById(\'openfit-user-profile-form\').submit();'),
+      );
+    }
+  }
+
+  // We need a hidden submit button for the language selector  
+  $form['submit'] = array('#type' => 'submit', '#attributes' => array('style' => 'display: none;'));
+
+  // Set the date popup to use the correct week start
+  $js = 'jQuery.extend(true,Drupal.settings,{"datePopup":{"edit-dateofbirth-datepicker-popup-0":{"settings":{"firstDay":' . $week_start_value . '}}}});';
+  drupal_add_js($js, array('type' => 'inline', 'scope' => 'footer'));
+  if ($language_value != '' && $language_value != 'en') drupal_add_js('misc/ui/jquery.ui.datepicker-' . $language_value . '.js');
+  
+  return $form;
+}
+
+/**
+ * Ajax method to save date of birth.
+ */
+function openfit_user_save_date_of_birth($form, $form_state) {
+  global $user;
+
+  $name = $form_state['triggering_element']['#name']; 
+  $value = $form_state['values'][$name];
+  $valid = is_string($value);
+  if (!$valid) {
+    $value = '';
+  }
+  OpenFitUserSetting::set($user->uid, $name, $value);
+  return drupal_render($form['general-settings']['dateofbirth-container']);
+}
+
+/**
+ * Generic ajax save method.
+ */
+function openfit_user_save_settings($form, $form_state) {
+  global $user;
+  
+  $name = $form_state['triggering_element']['#name']; 
+  $value = $form_state['values'][$name];
+  
+  // Validation
+  $valid = true;
+  if ($valid) OpenFitUserSetting::set($user->uid, $name, $value);
+
+  if (isset($form_state['triggering_element']['#return_id'])) {
+    $form = drupal_render($form[$form_state['triggering_element']['#return_id']]);
+    return $form;
+  }
+}
+
+/**
+ * Form submit. Only location, language or start of week are set, everything else is handled by ajax.
+ */
+function openfit_user_profile_form_submit($form, &$form_state) {
+  global $user;
+  OpenFitUserSetting::set($user->uid, OpenFitUserSetting::TYPE_COUNTRY, $form_state['values'][OpenFitUserSetting::TYPE_COUNTRY]);
+  OpenFitUserSetting::set($user->uid, OpenFitUserSetting::TYPE_LANGUAGE, $form_state['values'][OpenFitUserSetting::TYPE_LANGUAGE]);
+  OpenFitUserSetting::set($user->uid, OpenFitUserSetting::TYPE_WEEK_START, $form_state['values'][OpenFitUserSetting::TYPE_WEEK_START]);
+}
+
+function openfit_user_edit_picture_form($form, $form_state) {
+  global $user;
+
+  return array(
+    '#attributes' => array('title' => t('Select profile photo')),
+    'preview' => array(
+      '#type' => 'container',
+      '#id' => 'preview',
+      'image' => array(
+        '#markup' => theme('userpicture', array('uid' => $user->uid)),
+      ),
+    ),
+    'profile-uid' => array(
+      '#type' => 'hidden',
+      '#attributes' => array('id' => 'profile-uid'),
+      '#value' => $user->uid
+    ),
+    'upload-file' => array(
+      '#type' => 'file',
+      '#attributes' => array('id' => 'upload-file'),
+    ),
+  );
+}
+
+function openfit_user_set_avatar_action($uid, $action) {
+  switch ($action) {
+    case 'preview':
+      openfit_user_set_avatar_preview($uid);
+      break;
+    case 'submit':
+      openfit_user_set_avatar_submit($uid);
+      break;
+  }
+}
+
+function openfit_user_set_avatar_preview($uid) {
+  $preview_folder = 'public://openfit/images/temporary';
+  file_prepare_directory($preview_folder, FILE_CREATE_DIRECTORY);
+  
+  $file = file_save_upload('file', array('file_validate_extensions' => array('jpg jpeg gif png')), $preview_folder);
+  $file_location = ($file == null) ? null : $file->uri;
+  
+  $response = theme('userpicture', array('uid' => $uid, 'filepath' => $file_location));
+  die($response);
+}
+
+function openfit_user_set_avatar_submit($uid) {
+  global $user;
+  $set_user = $user;
+  if ($set_user->uid != $uid) $set_user = user_load($uid);
+  
+  $file = file_save_upload('file', array('file_validate_extensions' => array('jpg jpeg gif png')));
+  user_save($set_user, array('picture' => $file));
+          
+  $response = theme('userpicture', array('uid' => $uid));
+  die($response);
+}
+
+/**
+ * Add a theme hook for userpicture
+ */
+function openfit_user_theme() {
+  return array(
+    'userpicture' => array(
+      'variables' => array('uid' => 0, 'filepath' => null),
+    ),
+  );
+}
+
+/**
+ * Default theme method for userpicture
+ */
+function theme_userpicture($variables) {
+  $uid = $variables['uid'];
+  if ($uid == 0) return;
+  $filepath = $variables['filepath'];
+  
+  $user = user_load($uid);
+  if (!$user) return;
+  
+  if (!isset($filepath)) {
+    if (!empty($user->picture)) {
+      if (is_numeric($user->picture)) $user->picture = file_load($user->picture);
+      if (!empty($user->picture->uri)) $filepath = $user->picture->uri;
+    } else {
+      $default = variable_get('user_picture_default','');
+      if ($default) {
+        $filepath = $default;
+      } else {
+        $filepath = 'sites/all/modules/openfit_user/select-photo.png';
+      }
+    }
+  }
+  
+  $markup = '';
+  
+  if (isset($filepath)) {
+    $alt = t('@user\'s picture', array('@user' => format_username($user)));
+    // If the image does not have a valid Drupal scheme (for eg. HTTP), don't load image styles.
+    if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+      $markup = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+    }
+    else {
+      $markup = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+    }
+  } else {
+    $markup = '<div class="photo-missing"></div>';
+  }
+  if (!empty($user->uid) && user_access('access user profiles')) {
+    $attributes = array(
+      'attributes' => array(),
+      'html' => TRUE,
+    );
+  }
+  
+  $markup = '<div class="user-photo">' . $markup . '</div>';
+    
+  return $markup;
+}
+
+/**
+ * Define the guest login/register/user profile/logout block.
+ */
+function openfit_user_block_info() {
+  $blocks['login-logout'] = array(
+      'info' => t('Login/Logout menu'),
+  );
+  return $blocks;
+}
+
+/**
+ * Render method for blocks.
+ */
+function openfit_user_block_view($delta = '') {
+  $block = array();
+  switch($delta) {
+    case 'login-logout':
+      global $user;
+      $output = '';
+      if ($user->uid) {
+        $output = '<ul class="menu clearfix">';
+        $output .= '<li>' . l(t('My account'), 'user') . '</li>';
+        $output .= '<li>' . l(t('Log out'), 'logout') . '</li>';
+        $output .= '</ul>';
+      } else {
+        $output = '<ul class="menu clearfix">';
+        $output .= '<li>' . l(t('Log in'), 'login') . '</li>';
+        $output .= '<li>' . l(t('Register'), 'signup') . '</li>';
+        $output .= '</ul>';
+      }
+      $block['content'] = $output;
+      break;
+  }
+  return $block;
+}
+
+function openfit_user_user_summary_title($account) {
+  if (!is_object($account)) return '';
+  return OpenFitUserSetting::get($account->uid, OpenFitUserSetting::TYPE_FULLNAME, format_username($account));
+}
+
+function openfit_user_user_summary_page($account) {
+  drupal_page_is_cacheable(FALSE);
+  if (!is_object($account)) return MENU_NOT_FOUND;
+  global $user;
+  
+  $preferences = OpenFitUserSetting::get($account->uid);
+  $name = $preferences[OpenFitUserSetting::TYPE_FULLNAME];
+  if (strlen($name) == 0) $name = format_username($account);
+  $location = $preferences[OpenFitUserSetting::TYPE_LOCATION];
+  $country = $preferences[OpenFitUserSetting::TYPE_COUNTRY];
+  $all_countries = country_get_list();
+  if (isset($all_countries[$country])) $country = $all_countries[$country];
+  $member_for = format_interval(REQUEST_TIME - $account->created);
+  $chart_label = t('Distance');
+  $no_nodes_text = $user->uid == $account->uid ? 'You haven\'t recorded an activity yet.' : 'This user has not shared any activities yet.';
+  
+  $activities = OpenFitActivity::getActivities($account->uid, null, null, 10);  
+  $nodes = array();
+  if (count($activities) > 0) {
+    foreach ($activities as $activity) {
+      $node = node_load($activity->nid);
+      node_build_content($node, 'teaser');
+      $teaser = $node->content;
+      $nodes[] = array(
+        'item' => $teaser,
+      );
+    }
+  } else {
+    $nodes[] = array(
+      '#markup' => t($no_nodes_text),
+    );
+  }
+  
+  $form['user-topsection'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('user-topsection')),
+    'user-picture' => array(
+      '#markup' => theme('user_picture', array('account' => $account)),
+    ),
+    'user-info' => array(
+      '#type' => 'container',
+      '#attributes' => array('class' => array('user-info')),
+      'user-name' => array('#markup' => '<h1 class="user-name">' . $name . '</h1>',),
+      'user-location' => array('#markup' => '<div class="user-location">' . $location . '</div>',),
+      'user-country' => array('#markup' => '<div class="user-country">' . $country . '</div>',),
+      'user-since' => array(
+        '#markup' => '<div class="user-since"><span class="label">' . t('Member for') . '</span> ' .
+          '<span class="value">' . $member_for . '</span></div>',
+      ),
+    ),
+    'activity-totals' => array(
+      '#type' => 'container',
+      '#attributes' => array('class' => array('activity-totals')),
+      'summary' => array(
+        '#type' => 'container', 
+        '#attributes' => array('class' => array('field-block')),
+        openfit_user_user_summary_totals($account),
+      ),
+    ),
+  );
+  $form['summary-chart'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('summary-chart')),
+    'chart' => array('#markup' => '<div id="summary-chart" class="mini-chart"></div>'),
+    'label' => array('#markup' => '<div class="mini-chart-label">' . $chart_label . '</div>'),
+  );
+  $form['recent-activities'] = array(
+    '#type' => 'container',
+    '#attributes' => array('class' => array('recent-activities')),
+    'title' => array(
+      '#markup' => '<h2>' . t('Recent activities') . '</h2>',
+    ),
+    'item' => $nodes,
+  );
+
+  drupal_add_js(array('summaryChartData' => openfit_user_user_summary_get_summary_chart_data($account)), 'setting');
+  $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css'; 
+  $form['#attached']['js'][] = drupal_get_path('module', 'openfit_user') . '/view.usersummary.js';  
+  $form['#attached']['js'][] = drupal_get_path('module', 'openfit_ui') . '/mini-bar-chart.js';
+  return $form;
+}
+
+function openfit_user_user_summary_totals($account) {
+  global $user;
+  $preferences = OpenFitUserSetting::get($user->uid);
+  $distance_units = $preferences[OpenFitUserSetting::TYPE_DISTANCE_UNITS];
+  $user_summary_data = OpenFitActivity::getSummaryInfo($account->uid, null, null);
+  $form_fields = array('count', 'distance', 'duration', 'calories');
+  $field_info = OpenFitActivity::getActivitySummaryFieldInfo();
+  $field_info['count']['title'] = 'Activities';
+  $field_info['distance']['title'] = 'Distance (' . 
+    OpenFitMeasurement::getLabel(0, $distance_units, OpenFitMeasurement::FORMAT_TYPE_SYMBOL) . ')';
+  $field_info['distance']['format'] = OpenFitMeasurement::FORMAT_TYPE_DECIMALS;
+  $field_info['distance']['decimals'] = 0;
+  $field_info['duration']['title'] = 'Time (h:m)';
+  $field_info['duration']['second_digits'] = 0;
+  $summary_data = OpenFitDataTable::getTableRows($field_info, $form_fields, array($user_summary_data));
+  $form_data = $summary_data[0];
+  
+  $page = array();
+  $even = true;
+  foreach ($form_fields as $field_id) {
+    $even = !$even;
+    if (!isset($form_data[$field_id])) continue;
+    $field_data = $form_data[$field_id];
+    $classes = isset($field_data['class']) ?  $field_data['class'] : array();
+    $classes[] = 'field';
+    $value = $field_data['data'];
+    $even_class = $even ? 'even' : 'odd';
+    $item_classes = array('field-item', $even_class);
+    if (!isset($value) || strlen($value) == 0) $value = '&nbsp;';
+    $page += array(
+      $field_id => array(
+        '#type' => 'container',
+        '#attributes' => array('id' => strtr($field_id, '_', '-'), 'class' => $classes),
+        'value' => array('#markup' => '<div class="' . implode($item_classes, ' ') . '">' . $value . '</div>'),
+        'label' => array('#markup' => '<div class="field-label">' . t($field_info[$field_id]['title']) . '</div>'),
+      )
+    );
+  }
+  return $page;
+}
+
+function openfit_user_user_summary_get_summary_chart_data($account) {
+  /* For monthly chart */
+  
+  $now = new DateTime('now');
+  $now = new DateTime($now->format('Y-m') . '-01');
+  $label_format = 'M';
+  $statistics = OpenFitActivity::getMonthStatistics(11, $account->uid);
+  
+  /* For weekly chart */
+  /*
+  global $user;
+  $week_start = OpenFitUserSetting::get($user->uid, OpenFitUserSetting::TYPE_WEEK_START, variable_get('date_first_day', 1));
+  $now = new DateTime('now');
+  $now = OpenFitMeasurementDateTime::getFirstDayOfWeekDate($week_start, $now);
+  $label_format = 'n/j';
+  $statistics = OpenFitActivity::getWeekStatistics(51, $account->uid);
+  */
+  $data = array();
+  foreach ($statistics as $bar) {
+    $barData = array('value' => $bar['value']);
+    $barData['label'] = strtolower($bar['group']->format($label_format));
+    if ($bar['group'] == $now) $barData['color'] = '#3C83BC';
+    $data[] = (object)$barData;    
+  }
+  return $data;
+}

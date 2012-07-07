@@ -1,0 +1,10 @@
+name = OpenFit Activity
+description = "Provides activity tracking features."
+core = 7.x
+
+package = "OpenFit"
+dependencies[] = openfit_api
+dependencies[] = openfit_ui
+files[] = openfit_activity.module
+
+version = "7.x-1.1"

@@ -1,0 +1,293 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  openfit_api.Activity.inc: n/a
+#  openfit_api.ActivityDataTrack.inc: n/a
+#  openfit_api.DatafileImportHandler.inc: n/a
+#  openfit_api.FitFile.inc: n/a
+#  openfit_api.Measurement.inc: n/a
+#  openfit_api.admin.inc: n/a
+#  openfit_api.theme.inc: n/a
+#  openfit_api.module: n/a
+#  openfit_api.info: n/a
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: openfit_api\n"
+"POT-Creation-Date: 2012-03-17 07:55+1300\n"
+"PO-Revision-Date: 2012-03-16 15:36-0500\n"
+"Last-Translator: Aaron <aaron@openfitapi.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+"X-Poedit-Language: Spanish\n"
+
+#: openfit_api.Activity.inc:357
+msgid "Other"
+msgstr ""
+
+#: openfit_api.Activity.inc:592
+msgid "Activity !title has been deleted."
+msgstr ""
+
+#: openfit_api.Activity.inc:594
+msgid "Deleted !count activities."
+msgstr ""
+
+#: openfit_api.Activity.inc:871
+msgid "Name"
+msgstr "Nombre"
+
+#: openfit_api.Activity.inc:877;1048
+msgid "Start"
+msgstr "Comienzo"
+
+#: openfit_api.Activity.inc:884
+msgid "Start date"
+msgstr ""
+
+#: openfit_api.Activity.inc:892;1055
+msgid "Start time"
+msgstr "Hora de inicio"
+
+#: openfit_api.Activity.inc:900;906
+msgid "Sport"
+msgstr ""
+
+#: openfit_api.Activity.inc:912;1063
+msgid "Distance"
+msgstr "Distancia"
+
+#: openfit_api.Activity.inc:919;1070
+msgid "Time"
+msgstr "Tiempo"
+
+#: openfit_api.Activity.inc:926;1077;1194
+msgid "Avg speed"
+msgstr "Velocidad promedio"
+
+#: openfit_api.Activity.inc:933;1084;1202
+msgid "Avg pace"
+msgstr "Paso promedio"
+
+#: openfit_api.Activity.inc:941;1092
+msgid "Max speed"
+msgstr ""
+
+#: openfit_api.Activity.inc:948;1099
+msgid "Max pace"
+msgstr ""
+
+#: openfit_api.Activity.inc:956;1107
+msgid "Elev gain"
+msgstr ""
+
+#: openfit_api.Activity.inc:963;1114
+msgid "Elev loss"
+msgstr ""
+
+#: openfit_api.Activity.inc:977
+msgid "Notes"
+msgstr "Notas"
+
+#: openfit_api.Activity.inc:981;1128
+msgid "Avg heartrate"
+msgstr "RC promedio"
+
+#: openfit_api.Activity.inc:989;1136
+msgid "Max heartrate"
+msgstr "RC máximo"
+
+#: openfit_api.Activity.inc:997;1144
+msgid "Avg cadence"
+msgstr "Cadencia promedio"
+
+#: openfit_api.Activity.inc:1005;1152
+msgid "Max cadence"
+msgstr "Cadencia máx."
+
+#: openfit_api.Activity.inc:1013;1160
+msgid "Avg power"
+msgstr "Poder promedio"
+
+#: openfit_api.Activity.inc:1021;1168
+msgid "Max power"
+msgstr "Poder máx."
+
+#: openfit_api.Activity.inc:1043
+msgid "Type"
+msgstr "Tipo"
+
+#: openfit_api.Activity.inc:1182
+msgid "Total distance"
+msgstr "Distancia total"
+
+#: openfit_api.Activity.inc:1188
+msgid "Total time"
+msgstr "Tiempo total"
+
+#: openfit_api.ActivityDataTrack.inc:88
+msgid "Data"
+msgstr "Datos"
+
+#: openfit_api.DatafileImportHandler.inc:66
+msgid "No activities found in import file"
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:70
+msgid "Activity imported."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:73
+msgid "%count% activities imported."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:101
+msgid "Select a file to import."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:108
+msgid "The file %file could not be imported, because it exceeds %maxsize, the maximum allowed size for uploads."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:114
+msgid "The file %file could not be imported, because the upload did not complete."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:126
+msgid "The file %file could not be imported. An unknown error has occurred."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:151
+msgid "The file %file could not be imported because the file type was not recognized."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:183
+msgid "Could not load import function '%function%'."
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:186
+msgid "Problem importing file: "
+msgstr ""
+
+#: openfit_api.DatafileImportHandler.inc:191
+msgid "Problem importing file: No import results"
+msgstr ""
+
+#: openfit_api.FitFile.inc:45;46
+msgid "Unknown"
+msgstr ""
+
+#: openfit_api.Measurement.inc:286
+msgid "Energy (@units)"
+msgstr "Energía (@units)"
+
+#: openfit_api.Measurement.inc:288
+msgid "Calories"
+msgstr "Calorías"
+
+#: openfit_api.admin.inc:24
+msgid "General"
+msgstr ""
+
+#: openfit_api.admin.inc:39
+msgid "- None -"
+msgstr "- Nada -"
+
+#: openfit_api.admin.inc:43
+msgid "Default Language"
+msgstr ""
+
+#: openfit_api.admin.inc:52
+msgid "Default country"
+msgstr ""
+
+#: openfit_api.admin.inc:61
+msgid "Default time zone"
+msgstr ""
+
+#: openfit_api.admin.inc:68
+msgid "Default first day of week"
+msgstr ""
+
+#: openfit_api.admin.inc:70
+msgid "Sunday"
+msgstr "domingo"
+
+#: openfit_api.admin.inc:70
+msgid "Monday"
+msgstr "lunes"
+
+#: openfit_api.admin.inc:70
+msgid "Tuesday"
+msgstr "martes"
+
+#: openfit_api.admin.inc:70
+msgid "Wednesday"
+msgstr "miércoles"
+
+#: openfit_api.admin.inc:70
+msgid "Thursday"
+msgstr "jueves"
+
+#: openfit_api.admin.inc:70
+msgid "Friday"
+msgstr "viernes"
+
+#: openfit_api.admin.inc:70
+msgid "Saturday"
+msgstr "sábado"
+
+#: openfit_api.admin.inc:75
+msgid "Default unit system"
+msgstr ""
+
+#: openfit_api.admin.inc:89
+msgid "Save"
+msgstr "Guardar"
+
+#: openfit_api.theme.inc:47
+msgid "!range of !total"
+msgstr ""
+
+#: openfit_api.theme.inc:61
+msgid "Previous page"
+msgstr ""
+
+#: openfit_api.theme.inc:70
+msgid "Next page"
+msgstr ""
+
+#: openfit_api.module:166
+msgid "The value input for field !field is invalid:<br>The value @value does not match the expected format."
+msgstr ""
+
+#: openfit_api.module:245
+#: openfit_api.info:0
+msgid "OpenFit"
+msgstr "OpenFit"
+
+#: openfit_api.module:246
+msgid "Configure OpenFit settings."
+msgstr ""
+
+#: openfit_api.module:253
+msgid "General Settings"
+msgstr ""
+
+#: openfit_api.module:254
+msgid "Non-specific settings."
+msgstr ""
+
+#: openfit_api.info:0
+msgid "OpenFit API"
+msgstr "OpenFit API"
+
+#: openfit_api.info:0
+msgid "Provides data access and analysis methods."
+msgstr ""
+

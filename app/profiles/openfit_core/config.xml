@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<node_insert>
+		<page>
+			<variable>openfit_core_page_terms</variable>
+			<path>terms</path>
+			<title>Terms of Use</title>
+			<format>full_html</format>
+			<body_file>profiles/openfit_core/default.terms-of-use.html</body_file>
+		</page>
+		<page>
+		    <variable>openfit_core_page_legal</variable>
+			<path>legal</path>
+			<title>Legal</title>
+      <format>full_html</format>
+			<body_file>profiles/openfit_core/default.legal.html</body_file>
+		</page>
+		<page>
+       <home>true</home>
+		  <path>welcome</path>
+		  <title>Welcome</title>
+		  <format>full_html</format>
+		  <body_file>profiles/openfit_core/default.welcome.html</body_file>
+		</page>
+     <page>
+       <path>developers</path>
+       <title>Developers</title>
+       <format>php_code</format>
+       <body_file>profiles/openfit_core/default.developers.php</body_file>
+     </page>
+	</node_insert>
+  <block_insert>
+    <block>
+      <theme>openfit_base</theme>
+      <region>footer</region>
+      <title>Main footer</title>
+      <description>Main footer links</description>
+		  <format>full_html</format>
+		  <body_file>profiles/openfit_core/default.block-footer.html</body_file>
+    </block>
+  </block_insert>
+</config>

@@ -1,0 +1,67 @@
+<?php 
+
+function openfit_api_schema() {
+    $schema = array();
+    OpenFitMeasurement::getSchema($schema);
+    OpenFitUserSetting::getSchema($schema);
+    OpenFitActivity::getSchema($schema);
+    return $schema;
+}
+
+function openfit_api_install() {
+  // Default measurement units
+  $defaults = array(
+    array('centimeter','length','centimeter','centimeters','cm',0,0.1,0),
+    array('meter','length','meter','meters','m',0,1,0),
+    array('kilometer','length','kilometer','kilometers','km',1,1000,0),
+    array('inch','length','inch','inches','in',0,0.0254,0),
+    array('foot','length','foot','feet','ft',0,0.3048,0),
+    array('yard','length','yard','yards','yd',0,0.9144,0),
+    array('mile','length','mile','miles','mi',2,1609.344,0),
+    array('meter-per-second','speed','meter per second','meters per second','m/s',0,1,0),
+    array('kilometer-per-hour','speed','kilometer per hour','kilometers per hour','km/h',1,0.2777777778,0),
+    array('mile-per-hour','speed','mile per hour','miles per hour','mph',1,0.44704,0),
+    array('gram','weight','gram','grams','g',1,0.001,0),
+    array('kilogram','weight','kilogram','kilograms','kg',1,1,0),
+    array('ounce','weight','ounce','ounces','oz',0,0.0283495231,0),
+    array('pound','weight','pound','pounds','lb',0,0.45359237,0),
+    array('celsius','temperature','celsius','celsius','&deg;C',1,1,0),
+    array('fahrenheit','temperature','fahrenheit','fahrenheit','&deg;F',0,(5/9), 32),
+    array('kilojoule','energy','kilojoule','kilojoules','kJ',0,1,0),
+    array('calorie','energy','calorie','calories','cal',0,4.184,0),
+    array('cupcake', 'energy', 'cupcake', 'cupcakes', 'cupcakes', 0, 669.44, 0),
+    array('fortnight', 'time', 'fortnight', 'fortnights', 'fortnights', 0, 1468800, 0),
+    array('furlong', 'length', 'furlong', 'furlongs', 'furlongs', 0, 201.168, 0),
+    array('tripmoon', 'length', 'trip to the moon', 'trips to the moon', 'trips to the moon', 0, 385000000, 0),
+    array('tripearth', 'length', 'time around the Earth', 'times around the Earth', 'times around the Earth', 0, 40075020, 0),
+    array('huskydogs', 'energy', 'day worth of calories consumed by an Alaskan sled dog', 'days worth of calories consumed by an Alaskan sled dog', 'days worth of calories consumed by an Alaskan sled dog', 0, 20920, 0),
+    array('gallonofgas', 'energy', 'gallon of gasoline', 'gallons of gasoline', 'gallons of gasoline', 0, 131078.029, 0),
+    array('dogyear', 'time', 'dog year', 'dog years', 'dog years', 0, 220898482, 0),
+    array('nauticalmile', 'length', 'nautical mile', 'nautical miles', 'NM', 0, 1852, 0),
+  );
+  $insert = db_insert(OpenFitMeasurement::TABLE_UNIT)
+    ->fields(array('unit_id', 'unit_type', 'unit_single', 'unit_plural', 'unit_symbol', 'unit_decimals', 'conversion_factor', 'conversion_offset'));
+  foreach ($defaults as $valueset) {
+    $insert->values($valueset);
+  }
+  $insert->execute();
+
+  // Default activity categories  
+  $defaults = array(
+    array('Running','run','sites/all/modules/openfit_api/images/category-running.png'),
+    array('Cycling','bike ride','sites/all/modules/openfit_api/images/category-cycling.png'),
+    array('Swimming','swim','sites/all/modules/openfit_api/images/category-swimming.png'),
+    array('Walking','walk','sites/all/modules/openfit_api/images/category-walking.png'),
+    array('Hiking','hike','sites/all/modules/openfit_api/images/category-hiking.png'),
+    array('Skiing','ski','sites/all/modules/openfit_api/images/category-skiing.png'),
+    array('Rowing','row','sites/all/modules/openfit_api/images/category-kayak.png'),
+    array('Skating','skate','sites/all/modules/openfit_api/images/category-skating.png'),
+    array('Other','workout','sites/all/modules/openfit_api/images/category-other.png'),
+  );
+  $insert = db_insert(OpenFitActivity::TABLE_ACTIVITY_CATEGORY)
+    ->fields(array('category_name', 'category_noun', 'category_image_url'));
+  foreach ($defaults as $valueset) {
+    $insert->values($valueset);
+  }
+  $insert->execute();
+}
