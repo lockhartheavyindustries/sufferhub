@@ -1,6 +1,6 @@
 # Use PHP5.3 as default
 AddHandler application/x-httpd-php53 .php
-DirectoryIndex index.html index.php
+DirectoryIndex index.html
 
 # disable directory browsing
 Options -Indexes
