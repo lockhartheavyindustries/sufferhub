@@ -322,7 +322,6 @@ footer {
     Header
 -------------------------------------------- */
 
-
 /* Logo */
 header hgroup {
     position: absolute;
@@ -369,22 +368,22 @@ header nav ul a:active {
 }
 
 /* -----------------------------------------
-    Main Section
+    Home
 ------------------------------------------ */
-section#main {
+section#home {
     width: 940px;
     background: none;
 }
-section#main h1 {
+section#home h1 {
     margin-top: 10px;
     margin-bottom: 15px;
 }
-section#main .intro-box {
+section#home .intro-box {
     float:left;
     width:460px;
     min-height: 300px;
 }
-section#main .row .col h2 {
+section#home .row .col h2 {
     margin-top: 15px;
     margin-bottom: 10px;
 }
@@ -477,26 +476,26 @@ section#main .row .col h2 {
 }
 
 /* -----------------------------------------
-   Services
+   Applications
 ------------------------------------------- */
-section#services h1 {
+section#applications h1 {
    margin: 0 0 25px 0;
 }
-section#services .row .col img.align-left {
+section#applications .row .col img.align-left {
     margin-top: 13px;
     margin-right: 12px;
 }
 
 /* ---------------------------------------
-    Portfolio
+    Games
 ----------------------------------------- */
-section#portfolio ul.folio-list {
+section#games ul.folio-list {
     margin: 25px 0;
     padding: 0;
     width: 970px;
     list-style: none;
 }
-section#portfolio ul.folio-list li {
+section#games ul.folio-list li {
     float: left;
     margin-right: 29px;
     margin-bottom: 10px;
@@ -505,25 +504,36 @@ section#portfolio ul.folio-list li {
     height: 230px;
     max-height: 250px;
 }
-section#portfolio ul.folio-list li .thumb {
+section#games ul.folio-list li .thumb {
     margin: 0 0 5px 0;
     padding: 0;
     background: url(../images/thumb-frame.png) no-repeat;
     width: 294px;
     height: 205px;
 }
-section#portfolio ul.folio-list li .thumb img {
+section#games ul.folio-list li .thumb img {
     margin-top: 18px;
     margin-left: 18px;
 }
-section#portfolio ul.folio-list li h3.entry-title {
+section#games ul.folio-list li h3.entry-title {
     font-size: 14px;
     line-height: 25px;
     margin-left: 16px;
 }
 
+/* -----------------------------------------
+   Insights
+------------------------------------------- */
+section#insights h1 {
+   margin: 0 0 25px 0;
+}
+section#insights .row .col img.align-left {
+    margin-top: 13px;
+    margin-right: 12px;
+}
+
 /* ------------------------------------------------
-    About
+    About-Us
 ------------------------------------------------ */
 section#about-us .primary .row .first {
     margin-right: 35px;
@@ -594,20 +604,20 @@ section#about-us aside .download-btn {
 }
 
 /* ---------------------------------------------------
-    Contact
+    Contact-Us
 ----------------------------------------------------- */
-section#contact .primary form {
+section#contact-us .primary form {
     width: 500px;
     background: url(../images/form-bg.png);
     margin: 35px 0 25px 0;
     padding: 50px 40px 50px 40px;
 }
-section#contact .primary form p {
+section#contact-us .primary form p {
 	font-family: "MerriweatherBold", Serif;
     font-size: 14.5px;
 	color: #046416;
 }
-section#contact .primary form label {
+section#contact-us .primary form label {
     display: block;
     font-family: "MerriweatherBold", Serif;
     font-size: 14px;
@@ -615,12 +625,12 @@ section#contact .primary form label {
     margin: 0 0 5px 0;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
 }
-section#contact .primary form label span {
+section#contact-us .primary form label span {
     color: #046416;
 }
-section#contact .primary form input,
-section#contact .primary form select,
-section#contact .primary form textarea {
+section#contact-us .primary form input,
+section#contact-us .primary form select,
+section#contact-us .primary form textarea {
     margin-bottom: 20px;
 	padding: 9px 10px;
     color: #6A6969;
@@ -634,16 +644,16 @@ section#contact .primary form textarea {
     -webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, .1);
     box-shadow:inset 0 1px 3px rgba(0, 0, 0, .1);
 }
-section#contact .primary form textarea {
+section#contact-us .primary form textarea {
     height: 325px;
     margin-bottom: 0;
 }
-section#contact .primary form input:focus,
-section#contact .primary form select:focus,
-section#contact .primary form textarea:focus {
+section#contact-us .primary form input:focus,
+section#contact-us .primary form select:focus,
+section#contact-us .primary form textarea:focus {
 	background: #F0F0F0;
 }
-section#contact .primary form input.button {
+section#contact-us .primary form input.button {
    	height: 38px;
 	margin: 5px 0;
 	background: #1F8532 url(../images/btn-bg.png);
@@ -658,35 +668,35 @@ section#contact .primary form input.button {
     -moz-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
     -webkit-box-shadow: 0px 1px 1px rgba(0,0,0,0.4), inset 0 1px 0 #28a441;
 }
-.ie7 section#contact .primary form input.button {
+.ie7 section#contact-us .primary form input.button {
     padding: 0 2px;
 }
 #name, #email, #message, #subject, #website {
 	width: 475px;
 }
 
-section#contact aside .social li a {
+section#contact-us aside .social li a {
     padding-left: 35px;
 }
-section#contact aside .social li.facebook a {
+section#contact-us aside .social li.facebook a {
     background: url(../images/social/facebook.png) no-repeat left 11px;
 }
-section#contact aside .social li.googleplus a {
+section#contact-us aside .social li.googleplus a {
     background: url(../images/social/googleplus.png) no-repeat left 11px;
 }
-section#contact aside .social li.twitter a {
+section#contact-us aside .social li.twitter a {
     background: url(../images/social/twitter.png) no-repeat left 11px;
 }
-section#contact aside .social li.dribble a {
+section#contact-us aside .social li.dribble a {
     background: url(../images/social/dribble.png) no-repeat left 11px;
 }
-section#contact aside .social li.linkedin a {
+section#contact-us aside .social li.linkedin a {
     background: url(../images/social/linkedin.png) no-repeat left 11px;
 }
-section#contact aside .social li.delicious a {
+section#contact-us aside .social li.delicious a {
     background: url(../images/social/delicious.png) no-repeat left 11px;
 }
-section#contact aside .social li.flickr a {
+section#contact-us aside .social li.flickr a {
     background: url(../images/social/flickr.png) no-repeat left 11px;
 }
 

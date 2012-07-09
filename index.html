@@ -30,6 +30,19 @@
     <script src="js/jquery.fancybox-1.3.4.pack.js"></script>
     <script src="js/init.js"></script>
 
+<!-- Google Analytics tracking code -->
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-19242775-8']);
+	  _gaq.push(['_trackPageview']);
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+<!-- end Google Analytics tracking -->
+
 </head>
 
 <body>
@@ -40,17 +53,17 @@
 
         <hgroup>
             <h1><a href="index.html">SufferHub</a></h1>
-            <h3>Suffer. Share. Play.</h3>
+            <h3>Suffer. Share. Score!</h3>
         </hgroup>
 
         <nav>
             <ul>
-                <li><a href="#main">Home</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#portfolio">Our Works</a></li>
-                <li><a href="#about-us">About Us</a></li>
-                <li><a href="#styles">Styles</a></li>
-                <li><a href="#contact">Contact Us</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#applications">Applications</a></li>
+                <li><a href="#games">Games</a></li>
+				<li><a href="#insights">Insights</a></li>
+                <li><a href="#about-us">About</a></li>
+                <li><a href="#contact-us">Contact</a></li>
             </ul>
         </nav>
 
@@ -60,16 +73,17 @@
 <!-- content-wrap -->
 <div class="content-wrap">
 
-    <!-- main -->
-    <section id="main">
+
+    <section id="home">
 
         <div class="intro-box">
            <h1>The SufferHub Project</h1>
 
-           <p class="intro">Hello, and welcome to the SufferHub Project!</p>
+           <p class="intro">We're here to help you hit your fitness goals by making exercise more fun, more social, and more rewarding.  We help you use your workout data to have fun, stay motivated, and gain new insights by using that data in new ways.  SufferHub occupies the convergence zone of fitness, online gaming, and Big Data.  We believe exercise should be about more than just suffering!</p>
 
-           <p class="intro">Learn more <a href="#about-us">about us</a>  or <a href="#contact">get in touch</a> if you want to hire us on your next project.</p>
-
+		<!-- sports icons -->
+		<p><img alt="" src="app/sites/all/modules/openfit_api/images/category-cycling.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-running.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-hiking.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-walking.png"/>
+		
         </div>
 
         <div class="slider-wrapper">
@@ -77,213 +91,141 @@
             <div id="slider" class="nivoSlider">
                 <img src="images/slides/slide1.png" width="383" height="198" alt="" />
                 <img src="images/slides/slide2.png" width="383" height="198" alt="" />
-                <img src="images/slides/slide3.png" width="383" height="198" alt="" title="#htmlcaption"/>
-            </div>
-            <div id="htmlcaption" class="nivo-html-caption">
-                <strong>This</strong> is an example of a <em>HTML</em> caption with <a href="#">a link</a>.
+                <img src="images/slides/slide3.png" width="383" height="198" alt="" />
             </div>
         </div>
 
         <div class="row no-bottom-margin">
-<script type="text/javascript" src="sites/all/modules/openfit_api/js/view.welcome.js"></script>
             <section class="col">
-                <h2>Creative Ideas</h2>
+                <h2>Suffer</h2>
 
-                <p>Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                acus duis in dictumst non integer! Elit, sed scelerisque odio tortor, sed platea dis? Quis
-                cursus parturient ac amet odio in? Nunc Amet urna scelerisque eu lectus placerat.</p>
+                <p>Do your workout of choice. We currently support the following GPS motion-tracked activities: cycling, running, hiking, walking.  Capture your data automatically using our mobile app, or upload the .FIT files you're already capturing from your Garmin fitness device!</p>
             </section>
             <section class="col mid">
-                <h2>Innovation</h2>
+                <h2>Share</h2>
 
-                <p>Pellentesque magna mi, iaculis pharetra eu, fermentum ullamcorper nisi.
-                Integer fringilla magna ut quam vulputate erat. Pulvinar cum, ac eu augue ut sit amet
-                gravida lacinia, eros massa condimentum sem, a fermentum ligula lorem non.
-                Phasellus vulputate.</p>
+                <p>Share your progress with your fitness-minded friends and socialize with fellow SufferHub members.  We are a community of fitness minded individuals that want to help each other improve their athletic performance, and have fun doing it!</p>
             </section>
 
             <section class="col">
-                <h2>Design and Development</h2>
+                <h2>Score!</h2>
 
-                <p>In hac habitasse platea risus dictumst. Suspendisse sit amet enim arcu. Aliquam erat volutpat.
-                Phasellus a dui nisi. Nunc nec quam vitae nisl vehicula euismod. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Sed commodo ligula blandit risus.</p>
+                <p>Your workout data is worth more at SufferHub - participate in online competitions that add a new level of fun to your regular workout routine.  And by continuing to upload data to SufferHub you help everyone score through the new <a href="#insights">insights we get from that data</a>.</p>
             </section>
         </div>
 
-        <a class="back-to-top" href="#main">Back to Top</a>
+	<h3>Let's get started!</h3>
+	<p class="intro">	
+			<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
+       		<li><strong><a href="#contact-us">Sign up</a></strong> to be notified when our Beta begins</li>
+			<li><strong>Follow us</strong> on Twitter 
+			
+			<a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
+			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+			</li>
+        <a class="back-to-top" href="#home">Back to Top</a>
 
       </section>
 
-      <!-- services -->
-      <section id="services" >
 
-             <h1>Our services.</h1>
+      <section id="applications" >
+
+             <h1>Applications (coming soon)</h1>
 
              <div class="row no-bottom-margin">
                 <section class="col">
-                    <h2>Web Design</h2>
-
-                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Pellentesque magna mi, iaculis pharetra eu, fermentum ullamcorper nisi.
-                    Integer fringilla magna ut quam vulputate erat. Pulvinar cum, ac eu augue ut sit amet
-                    gravida lacinia, eros massa condimentum sem, a fermentum ligula lorem non.
-                    Phasellus vulputate.</p>
+                    <h2>SufferHub Multi-Loader</h2>
+                    <p><img class="align-left" alt="" src="images/services/webdevelopment.png" />If you're like us, you upload your workout files to more than one service.  Let us help out!  Use our online multi-loader to upload your workouts to Strava, Garmin Connect, and (of course) SufferHub - all in one swoop!</p>
                 </section>
                 <section class="col mid">
-                    <h2>Web Development</h2>
+                    <h2>SufferHub Web</h2>
 
-                    <p><img class="align-left" alt="" src="images/services/webdevelopment.png" />In hac habitasse platea risus dictumst. Suspendisse sit amet enim arcu. Aliquam erat volutpat.
-                    Phasellus a dui nisi. Nunc nec quam vitae nisl vehicula euismod. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Sed commodo ligula blandit risus</p>
+                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Our core online service.  Upload your workouts, share them with friends, analyze your performance, and join in virtual competitions!</p>
                 </section>
 
                 <section class="col">
-                    <h2>SEO Services</h2>
+                    <h2>SufferHub Mobile</h2>
 
-                    <p><img class="align-left" alt="" src="images/services/seo-services.png" />Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                    acus duis in dictumst non integer! Elit, sed scelerisque odio tortor, sed platea dis? Quis
-                    cursus parturient ac amet odio in? Nunc Amet urna scelerisque eu lectus placerat.</p>
+                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" />No Garmin device?  No problem!  Get the SufferHub mobile app and log your workouts directly to your phone, then upload them to SufferHub when you're finished! Works with SufferHub Web to bring you our complete social fitness experience wherever you are.</p>
 
                 </section>
             </div>
 
-            <div class="row">
-                <section class="col">
-                    <h2>Print Design</h2>
+            <a class="back-to-top" href="#home">Back to Top</a>
 
-                    <p><img class="align-left" alt="" src="images/services/print-design.png" />In hac habitasse platea risus dictumst. Suspendisse sit amet enim arcu. Aliquam erat volutpat.
-                    Phasellus a dui nisi. Nunc nec quam vitae nisl vehicula euismod. Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Sed commodo ligula blandit risus</p>
+      </section>
+
+ 
+      <section id="games">
+          
+            <h1>Games (coming soon)</h1>
+
+            <div class="row no-bottom-margin">
+                <section class="col">
+                    <h2>Put Up or...</h2>
+                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Studies show you're more likely to follow through on a commitment if you publicly sign up to do it.  This game lets you set a challenge for yourself that your friends see also, then rewards you when you follow though and complete (or exceed) it!</p>
                 </section>
                 <section class="col mid">
-                    <h2>Logo Design &amp; Branding</h2>
+                    <h2>Handicap Races</h2>
 
-                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" />Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                    acus duis in dictumst non integer! Elit, sed scelerisque odio tortor, sed platea dis? Quis
-                    cursus parturient ac amet odio in? Nunc Amet urna scelerisque eu lectus placerat.</p>
+                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Sure, that 110lb, 20 year old college kid can beat you in a real world race, but how would she do against you if things were adjusted for each competitor's % of maximum ability?  We'll set up fun virtual competitions that measure progress based on more variables than just time...</p>
                 </section>
 
                 <section class="col">
-                    <h2>Newsletter</h2>
+                    <h2>Trainer / Treadmill Races</h2>
 
-                    <p><img class="align-left" alt="" src="images/services/newsletter.png" />Pellentesque magna mi, iaculis pharetra eu, fermentum ullamcorper nisi.
-                    Integer fringilla magna ut quam vulputate erat. Pulvinar cum, ac eu augue ut sit amet
-                    gravida lacinia, eros massa condimentum sem, a fermentum ligula lorem non.
-                    Phasellus vulputate.</p>
+                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Compete head to head against your friends over the internet, or download your friend's best workout as a virtual rabbit to chase!</p>
+
+                </section>
+            </div>
+            <a class="back-to-top" href="#home">Back to Top</a>
+
+      </section>
+
+     <section id="insights" >
+
+             <h1>Insights (coming soon...)</h1>
+
+             <div class="row no-bottom-margin">
+                <section class="col">
+                    <h2>Traffic Analysis</h2>
+                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />What if your ride or run data could be used by city planners in your hometown to make better decisions about creating bike lanes, making sidewalk repairs, etc?  By working with local and regional advocacy groups we can share SufferHub's anonymous usage data of roads and trails with government agencies and make your fitness data work on your behalf to make your hometown a better place to exercise!</p>
+                </section>
+                <section class="col mid">
+                    <h2>Workout Partner Finder</h2>
+
+                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Odds are, you typically use a handful of routes on a regular basis, at similar times of day.  What if we could use that data to suggest potential workout partners based on where you both go, and how fast you travel?  You might be able to find your next riding, running, hiking, or walking buddy!</p>
+                </section>
+
+                <section class="col">
+                    <h2>Geotagged Media</h2>
+
+                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Your GPS-tagged workout data can be overlaid against other data sets with similar GPS and timestamp data.  Imagine being able to search for a route by location, then being presented with a selection of photos and videos taken at that location!  And what if you could upload and share your own photos and video along with your workout data to share with others?</p>
 
                 </section>
             </div>
 
-            <a class="back-to-top" href="#main">Back to Top</a>
+            <a class="back-to-top" href="#home">Back to Top</a>
 
       </section>
 
-      <!-- portfolio -->
-      <section id="portfolio">
-
-            <h1>Featured works.</h1>
-
-            <ul class="folio-list clearfix">
-
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/milk.jpg" title="Milk Splashes" ><img src="images/thumbs/milk.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Milk Splashes</h3>
-                </li>
-
-                <li class="folio-thumb last">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/hexagon.jpg" title="Hexagon Bokeh"><img src="images/thumbs/hexagon.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Hexagon Bokeh</h3>
-                </li>
-
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox-video" href="http://www.youtube.com/watch?v=EPXwP8D5C5c&feature=player_embedded"><img src="images/thumbs/hillsong-united-aftermath.jpg" alt="" /></a>
-                    </div>
-                    <h3 class="entry-title">Aftermath (Sample Video)</h3>
-                </li>
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/dandelion.jpg" title="Dandelion" ><img src="images/thumbs/dandelion.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Dandelion</h3>
-                </li>
-
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/eiffel.jpg" title="Eiffel Tower"><img src="images/thumbs/eiffel.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Eiffel Tower</h3>
-                </li>
-
-                 <li class="folio-thumb last">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/clouds-and-rainbow.jpg" title="Clouds &amp; Rainbow"><img src="images/thumbs/clouds-and-rainbow.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Clouds &amp; Rainbow</h3>
-                </li>
-
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/landscape.jpg" title="Rural Landscape"><img src="images/thumbs/landscape.jpg" alt=""  /> </a>
-                    </div>
-                    <h3 class="entry-title">Rural Landscape</h3>
-                </li>
-
-                <li class="folio-thumb">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/sneakers.jpg" title="Cosmic Sneakers"><img src="images/thumbs/sneakers.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Cosmic Sneakers</h3>
-                </li>
-
-                 <li class="folio-thumb last">
-                    <div class="thumb">
-                        <a class="lightbox" href="images/thumbs/big/vector-flower-fullscreen.jpg" title="Abstract Vectors"><img src="images/thumbs/vector-flower-fullscreen.jpg" alt="" /> </a>
-                    </div>
-                    <h3 class="entry-title">Abstract Vector</h3>
-                </li>
-
-            </ul>
-
-            <a class="back-to-top" href="#main">Back to Top</a>
-
-      </section>
-
-      <!-- about us -->
       <section id="about-us" class="clearfix">
 
-            <h1>About us.</h1>
+            <h1>About The SufferHub Project</h1>
 
             <div class="primary">
 
-                <p class="intro">Maecenas eu neque erat, auctor feugiat enim. Sed libero risus, pretium vel
-                elementum id, lacinia vel purus. Mauris semper, orci vitae aliquam vestibul,
-                lorem nulla auctor nulla, gravida fermentum urna libero eget sapien. Quisque
-                cursus, urna quis vestibulum egestas, nibh sem semper erat, a feugiat justo
-                dolor eget libero. Quisque cursus, urna quis vestibulum egestas, nibh sem
-                semper erat, a feugiat justo dolor eget libero
+                <p class="intro">SufferHub was born out of the idea that we're not getting as much value as we could be out of the massive amount of fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  Currently, fitness data lives locked away in numerous private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights. It's time to start finding new ways to make this data benefit the people who created it.
                 </p>
 
-                <h2>Template License</h2>
-
-                <p>This work is released and licensed under the <a href="http://creativecommons.org/licenses/by/2.5/" rel="license">
-                Creative Commons Attribution 3.0 License</a>, which means that you are free to use and modify it for any
-                personal or commercial purpose. All I ask is that you give me credit by including a link back to my
-                <a href="http://www.styleshout.com">website</a></p>
-
+                
                 <div class="row no-bottom-margin">
 
                     <section class="col first">
 
-                        <h2>Our Process</h2>
+                        <h2>Our Vision</h2>
 
-                        <p>Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                        acus duis in dictumst non integer! Elit, sed scelerisque odio tortor, sed platea dis? Quis
-                        cursus parturient ac amet odio in? Nunc Amet urna scelerisque eu lectus placerat.</p>
+                        <p>We live in a "Big Data" era where seemingly every event is tracked and stored somewhere.  Measuring and storing is the easy part; the hard part is making sense of the data, especially when combining it with potentially related data from other sources.  We at SufferHub are passionate about fitness, technology, and entertainment - and we want to combine these passions to help others in the fitness community in ways that weren't possible until now.</p>
 
                     </section>
 
@@ -291,10 +233,7 @@
 
                         <h2>Our Approach</h2>
 
-                        <p>Pellentesque magna mi, iaculis pharetra eu, fermentum ullamcorper nisi.
-                        Integer fringilla magna ut quam vulputate erat. Pulvinar cum, ac eu augue ut sit amet
-                        gravida lacinia, eros massa condimentum sem, a fermentum ligula lorem non.
-                        Phasellus vulputate.</p>
+                        <p>This is a big task, so we're going to form an army!  We'll gather fitness data from our community of users via the SufferHub online service.  By providing compelling and entertaining new ways to play with workout data, we hope to attract people to our cause.  As we identify more and more potential <a href ="#insights">insights</a> to go after, we'll reach out and partner with other organizations in the interest of sharing our fitness data on a larger scale through an open, published data API.  And we'll publish our findings here on SufferHub for everyone!</p>
 
                     </section>
 
@@ -307,53 +246,64 @@
                         <div class="thumbnail">
                             <a href="#"><img alt="thumbnail" src="images/thumb-pic.png" width="83" height="78"></a>
                         </div>
-                        <p class="mname"><a href="#">Erwin Aligam</a></p>
-                        <p>Co-founder &amp; Creative Director</p>
+                        <p class="mname"><a href="#">Brian Lockhart</a></p>
+                        <p>Founder &amp; Chief SufferHubster</p>
                     </li>
                     <li>
                         <div class="thumbnail">
                             <a href="#"><img alt="thumbnail" src="images/thumb-pic.png" width="83" height="78"></a>
                         </div>
-                        <p class="mname"><a href="#">Uzumaki Naruto</a></p>
-                        <p>Senior Webdesigner</p>
+                        <p class="mname"><a href="#">Keyser Soze</a></p>
+                        <p>Data Scientist in Residence</p>
                     </li>
                     <li class="odd">
                         <div class="thumbnail">
                             <a href="#"><img alt="thumbnail" src="images/thumb-pic.png" width="83" height="78"></a>
                         </div>
-                        <p class="mname"><a href="#">Haruno Sakura</a></p>
-                        <p>Graphic Designer</p>
+                        <p class="mname"><a href="#">Heywood Jablome</a></p>
+                        <p>Director of Game Design</p>
                     </li>
                     <li>
                         <div class="thumbnail">
                             <a href="#"><img alt="thumbnail" src="images/thumb-pic.png" width="83" height="78"></a>
                         </div>
                         <p class="mname"><a href="#">Uchiha Sasuke</a></p>
-                        <p>Web Developer</p>
+                        <p>Director of Development</p>
                     </li>
                 </ul>
 
             </div>
 
             <aside>
+	<h2>Funding</h2>
+	We're currently bootstrapping our operations and running lean, but as we bring on more users and start to tackle our more ambitious feature development tasks, costs will ramp up.  We anticipate an angel investor / friends & family round, followed later by Series A.  Interested investors please contact us at <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>.  
+	</p>
+	For now, if you'd like to donate to the project directly, we'd greatly appreciate your contribution!
+	</p></p>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="H6WJT45LTTKZQ">
+	<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
 
-                    <h2>More about us</h2>
-
-                    <p>Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                    acus duis in dictumst non integer! Elit, sed scelerisque odio.</p>
-
+	</p>
+<!-- Begin Official PayPal Seal -->
+<a href="https://www.paypal.com/us/verified/pal=info%40lockhartheavyindustries%2ecom" target="_blank"><img src="https://www.paypal.com/en_US/i/icon/verification_seal.gif" border="0" alt="Official PayPal Seal"></A>
+<!-- End Official PayPal Seal -->
+                    	
+<!--
                     <a href="#" class="download-btn">Download PDF</a>
 
 
-                    <h2>Links</h2>
-
+                    <h2>Partner Links</h2>
 
                     <ul class="link-list">
-                        <li><a href="http://themeforest.net?ref=ealigam" title="Site Templates">Themeforest</a></li>
-                        <li><a href="http://www.4templates.com/?go=228858961" title="Website Templates">4Templates</a></li>
-                        <li><a href="http://www.dreamhost.com/r.cgi?287326|sshout" title="Webhosting">Dreamhost</a></li>
-                        <li><a href="http://store.templatemonster.com?aff=ealigam" title="Web Templates">Templatemonster</a></li>
-                    </ul>
+						<li><a href="http://sufferhub.com" title="SufferHub">SufferHub</a></li>
+						<li><a href="http://sufferhub.com" title="SufferHub">SufferHub</a></li>
+						<li><a href="http://sufferhub.com" title="SufferHub">SufferHub</a></li>
+						<li><a href="http://sufferhub.com" title="SufferHub">SufferHub</a></li>
+					</ul>
 
 
                     <h2>Testimonials</h2>
@@ -372,208 +322,96 @@
                             <cite>&mdash; Jane Roe, ABC Corp</cite>
                         </blockquote>
                     </div>
-
+-->
             </aside>
 
 
 
-            <a class="back-to-top" href="#main">Back to Top</a>
+            <a class="back-to-top" href="#home">Back to Top</a>
 
       </section>
 
-      <!-- Styles -->
-      <section id="styles" class="clearfix">
 
-            <h1>Styles.</h1>
+      
+      <section id="contact-us" class="clearfix">
 
-            <div class="primary">
-
-                <p class="intro">Maecenas eu neque erat, auctor feugiat enim. Sed libero risus, pretium vel
-                elementum id, lacinia vel purus. Mauris semper, orci vitae aliquam vestibul,
-                lorem nulla auctor nulla, gravida fermentum urna libero eget sapien. Quisque
-                cursus, urna quis vestibulum egestas, nibh sem semper erat, a feugiat justo
-                dolor eget libero.
-                </p>
-
-                <h2>A paragraph</h2>
-
-                <p>Maecenas eu neque erat, auctor feugiat enim. Sed libero risus, pretium vel
-                elementum id, lacinia vel purus. Mauris semper, orci vitae aliquam vestibul,
-                lorem nulla auctor nulla, gravida fermentum urna libero eget sapien. Quisque
-                cursus, urna quis vestibulum egestas, nibh sem semper erat, a feugiat justo
-                dolor eget libero. Urna quis vestibulum egestas, nibh sem
-                semper erat, a feugiat justo dolor eget libero
-                </p>
-
-                <p>A <a href="#">link</a>,
-				<abbr title="this really isn't a very good description">abbrebation</abbr>,
-				<strong>strong text</strong>,
-				<del>deleted text</del>, and
-                <mark>this is a mark text.</mark>
-        		</p>
-
-                <h2>Example Lists</h2>
-
-				<ol>
-					<li>Here is an example</li>
-					<li>of an ordered list</li>
-				</ol>
-
-				<ul>
-					<li>Here is an example</li>
-					<li>of an unordered list</li>
-				</ul>
-
-				<dl>
-            	    <dt>Definition title</dt>
-            	    <dd>Definition description</dd>
-            	    <dt>Definition title</dt>
-            	    <dd>Definition description</dd>
-         	    </dl>
-
-                <h2>Blockquote</h2>
-
-				<blockquote>
-				    <p>Every child is an artist. The challenge is to remain an artist after you grow up.</p>
-				</blockquote>
-
-                <h2>Headers</h2>
-
-				<h1>H1 Heading</h1>
-				<h2>H2 Heading</h2>
-				<h3>H3 Heading</h3>
-
-            </div>
-
-            <aside>
-
-                    <h2>Sidebar Heading</h2>
-
-                    <p>Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                    acus duis in dictumst non integer! Elit, sed scelerisque odio.</p>
-
-                    <h2>Link List</h2>
-
-                    <ul class="link-list">
-                        <li><a href="#">Maecenas eu neque</a></li>
-                        <li><a href="#">Dolor eget libero</a></li>
-                        <li><a href="#">Lorem Ipsum</a></li>
-                        <li><a href="#">Gravida fermentum urna</a></li>
-                    </ul>
-
-                    <h2>Testimonials</h2>
-
-                    <div class="testimonials">
-                        <blockquote>
-                            <p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue.
-                            Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
-
-                            <cite>&mdash; John Doe, XYZ Company</cite>
-                        </blockquote>
-                        <blockquote>
-                            <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis
-                            consectetur purus sit amet fermentum.</p>
-
-                            <cite>&mdash; Jane Roe, ABC Corp</cite>
-                        </blockquote>
-                    </div>
-
-            </aside>
-
-            <a class="back-to-top" href="#main">Back to Top</a>
-
-      </section>
-
-      <!-- contact -->
-      <section id="contact" class="clearfix">
-
-            <h1>Get in touch.</h1>
+            <h1>Contact the SufferHub team</h1>
 
             <div class="primary">
 
                 <p class="intro">
-                In hac habitasse platea risus dictumst. Suspendisse enim arcu. Aliquam erat volutpat.
-                Phasellus a dui nisi. Nunc nec quam vitae nisl vehicula euismod. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Sed commodo ligula blandit risus. Pellentesque magna mi,
-                iaculis pharetra eu, fermentum ullamcorper nisi. Integer fringilla magna ut quam vulputate erat.
+                We'd love to have you join the SufferHub community!  We're cranking away behind the scenes getting things lined up to release to the world, sign up below to be notified when we're ready - Beta invites will be trickled out soon.  We promise not to sell your information to anyone, or spam you with nonsense.
                 </p>
 
-                <form method="post" action="contact.php" id="contactform">
+                
+				<!-- Begin MailChimp Signup Form -->
+				<div id="mc_embed_signup">
+				<form action="http://sufferhub.us5.list-manage1.com/subscribe/post?u=937bd3c7ddf2827546233f1ec&amp;id=bf8374dc23" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+					<h2>Subscribe to the SufferHub mailing list</h2>
+				<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+				<div class="mc-field-group">
+					<label for="mce-EMAIL">Email Address  <span class="asterisk">*</span>
+				</label>
+					<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+				</div>
+				<div class="mc-field-group">
+					<label for="mce-FNAME">First Name  <span class="asterisk">*</span>
+				</label>
+					<input type="text" value="" name="FNAME" class="required" id="mce-FNAME">
+				</div>
+				<div class="mc-field-group">
+					<label for="mce-LNAME">Last Name  <span class="asterisk">*</span>
+				</label>
+					<input type="text" value="" name="LNAME" class="required" id="mce-LNAME">
+				</div>
+					<div id="mce-responses" class="clear">
+						<div class="response" id="mce-error-response" style="display:none"></div>
+						<div class="response" id="mce-success-response" style="display:none"></div>
+					</div>	<div class="clear"><input type="submit" value="Add me!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+				</form>
+				</div>
 
-                    <div>
-                    <p>Send me a message</p>
-                    </div>
-
-                    <div>
-                    <label>Name <span class="required">*</span></label>
-                    <input name="name" type="text" id="name" value="" />
-                    </div>
-
-                    <div>
-                    <label>Email <span class="required">*</span></label>
-                    <input name="email" type="text" id="email" value="" />
-                    </div>
-
-                    <div>
-                    <label>Website</label>
-                    <input name="website" type="text" id="website" value="" />
-                    </div>
-
-                    <div>
-                    <label>Subject</label>
-                    <input name="subject" type="text" id="subject"  value="" />
-                    </div>
-
-                    <div>
-                    <label>Message <span class="required">*</span></label>
-                    <textarea name="message" rows="20" cols="50"  id="message" ></textarea><br /><br />
-                    </div>
-
-                    <div>
-					<input type="submit"  value="Submit" class="button">
-         			<input type="reset" value="Reset" class="button">
-					</div>
-
-
-                </form>
-
+				<!--End mc_embed_signup-->
             </div>
 
             <aside>
+					<h2>Join our community!</h2>
+
+					<li>Check out the <strong><a href="/blog" target="_blank">SufferHub blog</a></strong></li>
+					<li>Join the <strong><a href="/forums"target="_blank">SufferHub forums</a></strong></li>
+					</p>
+					<h2>Follow SufferHub!</h2>
+
+                    <ul class="link-list social">
+                        <li class="facebook"><a href="#">Facebook</a>(coming soon)</li>
+						<li class="twitter"><a href="https://twitter.com/SufferHub" target="_blank">Twitter</a><a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>                        
+						<li class="googleplus"><a href="#">Google+</a>(coming soon)</li>
+                        <li class="linkedin"><a href="#">Linkedin</a>(coming soon)</li>
+                    </ul>
 
                     <h2>Contact Information</h2>
 
+                    
+					Email: <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>
 
-                    <p>Nascetur augue hac platea enim, egestas pulvinar vut. Pulvinar cum, ac eu, tristie
-                    acus duis in dictumst non integer! Elit, sed scelerisque odio tortor, sed platea dis.</p>
-
-                    <p>
-                    PageOne Studio <br />
-                    Anystreet Avenue 012 <br />
-                    State, Anytown
+                    <p></p>
+	
+                    SufferHub<br />
+					c/o Lockhart Heavy Industries<br />
+                    11410 NE 124th St. #512<br />
+                    Kirkland, WA 98034
+					USA
                     </p>
 
                     <p>
-                    Phone: 0 123 456 789 0 <br />
-                    Email: info [@] pageone.com
+                    Phone: 1.800.750.0987<br />
                     </p>
 
-
-                    <h2>Follow Us</h2>
-
-                    <ul class="link-list social">
-                        <li class="facebook"><a href="#">Facebook</a></li>
-                        <li class="googleplus"><a href="#">Google+</a></li>
-                        <li class="twitter"><a href="#">Twitter</a></li>
-                        <li class="dribble"><a href="#">Dribble</a></li>
-                        <li class="linkedin"><a href="#">Linkedin</a></li>
-                        <li class="delicious"><a href="#">Delicious</a></li>
-                        <li class="flickr"><a href="#">Flickr</a></li>
-                    </ul>
-
+                    
             </aside>
 
-            <a class="back-to-top" href="#main">Back to Top</a>
+            <a class="back-to-top" href="#home">Back to Top</a>
 
      </section>
 
@@ -583,15 +421,15 @@
 <footer>
     <div class="footer-content">
         <ul class="footer-menu">
-            <li><a href="#main">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#applications">Applications</a></li>
+            <li><a href="#games">Games</a></li>
+			<li><a href="#insights">Insights</a></li>
             <li><a href="#about-us">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <!-- <li class="rss-feed"><a href="#">RSS Feed</a></li> -->
+            <li><a href="#contact-us">Contact</a></li>
         </ul>
 
-        <p class="footer-text">Copyright 2012 SufferHub, a division of Lockhart Heavy Industries. &nbsp;&nbsp;&nbsp; Designed by <a href="http://www.styleshout.com/">Styleshout</a></p>
+        <p class="footer-text">&copy;2012 SufferHub LLC, a division of Lockhart Heavy Industries, Inc.</p>
     </div>
 
 </footer>
