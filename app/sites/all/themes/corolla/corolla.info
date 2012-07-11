@@ -184,9 +184,9 @@
   ; Menu bullets
   settings[menu_bullets] = 'mb-dd'
 
-; Information added by drupal.org packaging script on 2011-11-10
-version = "7.x-2.x-dev"
+; Information added by drupal.org packaging script on 2011-10-05
+version = "7.x-2.2"
 core = "7.x"
 project = "corolla"
-datestamp = "1320883972"
+datestamp = "1317816703"
 

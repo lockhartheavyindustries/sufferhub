@@ -1,41 +1,52 @@
 
--- INFO --
+Some tips:
 
-The base theme provides many resources to all subthemes including
-templates, layout CSS, base CSS helper, template overrides, function
-overrides and theme settings. You should not edit this theme - its only
-job is to provide resources to subthemes.
+* There are additional README files in both the subtheme and base theme directories,
+  please refer to both of these before starting work on your subtheme.
 
--- TEMPLATES --
+* For help setting up your subtheme refer to the README in the adaptivetheme_subtheme
+  directory, and/or the online docs: http://adaptivethemes.com/documentation/adaptivetheme-7x-2x
 
-All the HTML5 templates are in the /templates/ directory - if you need
-to modify a template for your subtheme copy and paste the template into your
-subtheme and clear your sites cache.
+* The theme is built with HTML5 and large chunks of CSS3 and CSS2.1 - it has very
+  little deliberate support for IE6 (I have not tested in IE6 and have no intention
+  of supporting IE6). It has been tested in IE9 and performs very well (given
+  that IE9 is beta at time of writing).
+ 
+* Due to the ongoing specification changes for RDFa in HTML5 the doctype and version
+  information may change in a point release, or not, depending. Right now things are
+  working (afaict - I am no RDFa expert).
 
--- GPANELS --
+* Validation - to validate this theme you must disable the RDF module - because the W3C
+  validator cannot handle the doctype and will freak out. When you disable the RDF module
+  the doctype will automatically change and you will be able to validate it against HTML5 as
+  per usual. I would suggest using a lint tool instead in any case, validation is only so useful
+  and for HTML5 I think lint + outline tools are more realistic tools for building in HTML5.
 
-Gpanels are multi-column layout helpers for displaying blocks in vertical columns 
-that you can drop into your subtheme. For example you may want a 4 column footer, 
-or a 3 column panel above your main content. Gpanels makes this as easy as copy 
-and paste. See the README in the gpanels directory for instructions.
+* For dark style themes there's a dark.css file, just uncomment it in the info file,
+  however understand at the moment the dark stylesheet needs major work and is not
+  really ready for production, at all, as in don't even think about it unless you
+  want some major headache or want to submit a patch for the theme (yay!).
 
--- THEME SETTINGS --
-
-The base theme provides the core layout settings that provide support for 
-mobile devices and standard desktop and laptop layouts. You do not need to
-add these to your subtheme - it will inherit them automatically from the
-base theme. There are other settings included for breadcrumb, search, comment
-title, CSS classes and extra markup.
-
--- CSS CLASSES --
-
-Adaptivetheme removes many standard CSS classes from the Drupals output - we do 
-this to clean up the markup because most times these classes are never used. You
-can add these back (and additional useful classes) using the theme settings for 
-CSS classes.
-
-Any problems please post an issue in the Adaptivethemes issue queue on Drupal.org:
-http://drupal.org/project/issues/adaptivetheme
-
-Maintainer:
-* Jeff Burnz http://drupal.org/user/61393
+* If you have some problem with the theme settings, clear the cache and/or the
+  theme registry. D7 lost the wonderful "Reset to defaults" setting (why oh why),
+  so be aware that adding/removing/editing theme settings from the info file can be a
+  huge pita and browses like IE7 can actually freak out if when you do this (due to caching).
+  If you do alter the info file theme setting defaults you may have to disable the theme, then
+  re-enable it to get everything to kick in  - I had many issues with this during development
+  of the theme for D7.
+ 
+* If you don't use Firebug then get it now, this theme has many pre written CSS
+  selectors. The subtheme was designed for porting right from the get go and makes it
+  really easy as long as you don't fight the work-flow, embrace it:)
+ 
+ 
+ So I hope you enjoy the theme and it somehow eases the development of your sites theme, after all
+ that's all it was ever designed for - to build a nice theme without breaking your back to learn
+ all the stuff that goes into building a complex Drupal theme.
+ 
+ Cheers,
+ 
+ Jeff Burnz
+ Adaptivethemes.com
+ 
+ 

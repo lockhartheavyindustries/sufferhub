@@ -182,7 +182,7 @@ $databases = array (
   array (
     'default' => 
     array (
-      'database' => 'localhost_sufferhub',
+      'database' => 'lockhar2_sufferhub',
       'username' => 'lockhar2_shuser',
       'password' => 'SHsql666!',
       'host' => 'localhost',
@@ -223,7 +223,7 @@ $update_free_access = FALSE;
  *   $drupal_hash_salt = file_get_contents('/home/example/salt.txt');
  *
  */
-$drupal_hash_salt = 'jnMXK-QUfZ-EgaBJU4eQBuhIjxZvEEPFbxcanKcPep8';
+$drupal_hash_salt = 'xR_xHhXmByUGj_1OzELWKyTEVQcgxfIHWWSStlCIBWw';
 
 /**
  * Base URL (optional).
@@ -246,7 +246,7 @@ $drupal_hash_salt = 'jnMXK-QUfZ-EgaBJU4eQBuhIjxZvEEPFbxcanKcPep8';
  * for you.
  */
 # $base_url = 'http://www.example.com';  // NO trailing slash!
-$base_url = 'http://sufferhub.local/app';  // NO trailing slash!
+# $base_url = 'http://sufferhub.local/app';  // NO trailing slash!
 
 /**
  * PHP settings:

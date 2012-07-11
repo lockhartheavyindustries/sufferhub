@@ -1,5 +1,6 @@
 .DS_Store
 app/openfit/data_tracks/*
+.htaccess
 
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
