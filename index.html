@@ -46,7 +46,18 @@
 </head>
 
 <body>
-
+	
+<!-- Facebook -->	
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=418202894893170";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+<!-- end Facebook -->	
+	
 <!-- header-wrap -->
 <div id="header-wrap">
     <header>
@@ -118,7 +129,10 @@
 	<p class="intro">	
 			<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
        		<li><strong><a href="#contact-us">Sign up</a></strong> to be notified when our Beta begins</li>
-			<li><strong>Follow us</strong> on Twitter 
+			<li><strong>Like us</strong> on <a href="https://www.facebook.com/SufferHub" target = "_blank">Facebook</a> 
+			<div class="fb-like" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div>
+			</li>
+			<li><strong>Follow us</strong> on <a href="https://twitter.com/SufferHub" target = "_blank">Twitter</a> 
 			
 			<a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
@@ -383,7 +397,7 @@
 					<h2>Follow SufferHub!</h2>
 
                     <ul class="link-list social">
-                        <li class="facebook"><a href="#">Facebook</a>(coming soon)</li>
+                        <li class="facebook"><a href="https://www.facebook.com/SufferHub">Facebook</a><div class="fb-like" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div></li>
 						<li class="twitter"><a href="https://twitter.com/SufferHub" target="_blank">Twitter</a><a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>                        
 						<li class="googleplus"><a href="#">Google+</a>(coming soon)</li>
