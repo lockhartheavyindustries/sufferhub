@@ -1,4 +1,4 @@
-<?php
+		<?php
 
 $base_url = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
 $base_url .= $_SERVER['SERVER_NAME'];

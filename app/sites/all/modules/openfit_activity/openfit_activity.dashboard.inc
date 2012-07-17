@@ -52,7 +52,7 @@ function openfit_activity_dashboard_form_get_month_chart_data() {
 function openfit_activity_dashboard_form($form, &$form_state) {
   drupal_page_is_cacheable(FALSE);
   global $user;
-  $activities = OpenFitActivity::getActivities($user->uid, null, null, 10);  
+  $activities = OpenFitActivity::getActivities($user->uid, null, null, 5);  
   $nodes = array();
   if (count($activities) > 0) {
     foreach ($activities as $activity) {

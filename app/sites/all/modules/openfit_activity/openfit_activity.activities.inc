@@ -8,7 +8,7 @@ function openfit_activity_activities_form($form, &$form_state) {
   global $user;
   
   // TODO: Read from user preference
-  $rows_per_page = 25;
+  $rows_per_page = 10;
   
   // TODO: Read from user preference
   $columns = array('name', 'start', 'sport', 'distance', 'time', 'avg-speed', 'avg-pace', 'calories');

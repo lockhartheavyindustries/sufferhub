@@ -300,7 +300,7 @@
 
             <aside>
 	<h2>Funding</h2>
-	We're currently bootstrapping our operations and running lean, but as we bring on more users and start to tackle our more ambitious feature development tasks, costs will ramp up.  We anticipate an angel investor / friends & family round, with a Series A round as needed.  Interested investors please contact us at <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>.
+	We're currently bootstrapping our operations and running lean, but as we bring on more users and start to tackle our more ambitious feature development tasks, costs will ramp up.  Interested investors please contact us at <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>.
 	</p>
 	For now, if you'd like to donate to the project directly, we'd greatly appreciate your contribution.  Clouds in the sky are free, but cloud services run on dollars!
 	</p></p>
@@ -403,7 +403,7 @@ End Official PayPal Seal -->
 					<h2>Join our community!</h2>
 
 					<li>Check out the <strong><a href="/blog" target="_blank">SufferHub blog</a></strong></li>
-					<li>Join the <strong><a href="/forums"target="_blank">SufferHub forums</a></strong></li>
+					<li>Join the <strong><a href="/app/forum"target="_blank">SufferHub forums</a></strong></li>
 					</p>
 					<h2>Follow SufferHub!</h2>
 
@@ -415,22 +415,10 @@ End Official PayPal Seal -->
                         <li class="linkedin"><a href="#">Linkedin</a>(coming soon)</li>
                     </ul>
 
-                    <h2>Contact Information</h2>
-
-                    
-					Email: <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>
-
-                    <p></p>
-	
-                    The SufferHub Project<br />
-					c/o Lockhart Heavy Industries<br />
-                    11410 NE 124th St. #512<br />
-                    Kirkland, WA 98034
-					USA
-                    </p>
-
+                    <h2>Contact</h2>                    
+					<a href="mailto:info@sufferhub.com">info@sufferhub.com</a>
                     <p>
-                    Phone: 1.800.750.0987<br />
+                   	800.750.0987<br />
                     </p>
 
                     

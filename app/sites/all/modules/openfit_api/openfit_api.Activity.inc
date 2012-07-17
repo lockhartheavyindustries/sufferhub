@@ -503,7 +503,7 @@ class OpenFitActivity {
   }
   
   /**
-   * Return the summarized totals and averages of activities occuring in the week.
+   * Return the summarized totals and averages of activities occurring in the week.
    *
    * @param $uid
    *   The user id, or null for all users.

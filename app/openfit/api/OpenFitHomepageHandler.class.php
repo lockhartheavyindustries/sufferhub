@@ -1,3 +1,4 @@
+
 <?php
 
 class OpenFitHomepageHandler {
@@ -30,7 +31,7 @@ class OpenFitHomepageHandler {
       '%users' => number_format($user_count), 
       '%countries' => number_format($country_count) 
     );
-    
+
     $text = t('Total '.$unit->unit_plural.' by %users users in %countries countries.', $vars);
     
     $equivalency = self::equivalencyInfo();

@@ -4,6 +4,11 @@ define('OPENFIT_DASHBOARD_URL','dashboard');
 define('OPENFIT_ACTIVITIES_URL','activities');
 
 /**
+ * trying to create friendfeed
+ */
+define('OPENFIT_FRIENDFEED_URL','friendfeed');
+
+/**
  * Redirect the homepage to the dashboard when the user is logged in.
  */
 function openfit_activity_init() {
