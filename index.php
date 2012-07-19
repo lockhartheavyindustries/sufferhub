@@ -377,8 +377,8 @@
 		            <aside>
 							<h2>Join our community!</h2>
 
-							<li>Check out the <strong><a href="/blog" target="_blank">SufferHub blog</a></strong></li>
-							<li>Join the <strong><a href="/app/forum"target="_blank">SufferHub forums</a></strong></li>
+							<li>Check out the <strong><a href="/blog">SufferHub blog</a></strong></li>
+							<li>Join the <strong><a href="/app/forum">SufferHub forums</a></strong></li>
 							</p>
 							<h2>Follow SufferHub!</h2>
 
