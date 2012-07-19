@@ -114,6 +114,7 @@ function openfit_user_preprocess_user_picture(&$variables) {
 
 /**
  * Customize the user registration form.
+ * 07/19/2012 SH set default-sharing to 1 for all new users by default
  */
 function openfit_user_form_user_register_form_alter(&$form, &$form_state) {
   $form['#attached']['css'][] = drupal_get_path('module', 'openfit_user').'/openfit_user.css'; 
@@ -123,7 +124,11 @@ function openfit_user_form_user_register_form_alter(&$form, &$form_state) {
   $form['actions']['submit']['#value'] = t('Sign up');
   $form['account']['fullname'] = array(
     '#type' => 'hidden',
-    '#value' => '',
+    '#value' => '',  );
+  $form['account']['default-sharing'] = array(
+    '#type' => 'hidden',
+    '#value' => '1',
+
   );
   
   // Simplify the password prompt if visitor registration is turned on
@@ -194,12 +199,16 @@ function openfit_user_user_login(&$edit, $account) {
 
 /**
  * Save the user's full name to the settings table.
+ * 07/19/2012 SH edit - also save hard-coded default sharing setting of 1 to settings table
  */
 function openfit_user_user_insert(&$edit, $account, $category) {
   if (isset($account->uid) && $account->uid > 0) {
     if (!isset($edit['fullname'])) $edit['fullname'] = $account->name;
     OpenFitUserSetting::set($account->uid, OpenFitUserSetting::TYPE_FULLNAME, $edit['fullname']);
+    OpenFitUserSetting::set($account->uid, OpenFitUserSetting::TYPE_DEFAULT_SHARING, $edit['default-sharing']);
     unset($edit['fullname']);
+    unset($edit['default-sharing']);
+
   }
 }
 

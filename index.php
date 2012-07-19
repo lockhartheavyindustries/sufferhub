@@ -212,7 +212,7 @@
 
 		            <div class="primary">
 
-		                <p class="intro">SufferHub was born out of the idea that we're not getting as much value as we could be out of the massive amount of fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  Currently, fitness data lives locked away in numerous private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights. It's time to start finding new ways to make this data benefit the people who created it.
+		                <p class="intro">While making workouts into games was the original motivator, SufferHub was inspired by the notion that we're not getting as much value as we could be out of the massive amount of location + fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  Currently, fitness data lives locked away in numerous private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights. It's time to start having more fun while working out, and to start finding new ways to make this data benefit the people who created it in the first place!
 		                </p>
 
 
@@ -222,7 +222,7 @@
 
 		                        <h2>Our Vision</h2>
 
-		                        <p>We live in a "Big Data" era where seemingly every event is tracked and stored somewhere.  Measuring and storing is the easy part; the hard part is making sense of the data, especially when combining it with potentially related data from other sources.  We at SufferHub are passionate about fitness, technology, and entertainment - and we want to combine these passions to help others in the fitness community in ways that weren't possible until now.</p>
+		                        <p>We live in a "Big Data" era where seemingly every event is tracked and stored somewhere.  Measuring and storing is the easy part; the hard part is making sense of the data, especially when combining it with potentially related data from other sources.  We at SufferHub are passionate about fitness, technology, and games - and we want to combine these passions to help others in the fitness community in ways that weren't possible until now.</p>
 
 		                    </section>
 
@@ -230,7 +230,7 @@
 
 		                        <h2>Our Approach</h2>
 
-		                        <p>This is a big task, so we're going to form an army!  We'll gather fitness data from our community of users via the SufferHub online service.  By providing compelling and entertaining new ways to play with workout data, we hope to attract people to our cause.  As we identify more and more potential <a href ="#insights">insights</a> to go after, we'll reach out and partner with other organizations in the interest of sharing our fitness data on a larger scale through an open, published data API.  And we'll publish our findings here on SufferHub for everyone!</p>
+		                        <p>This is a big task, so we're going to form an army!  We'll gather fitness data from our community of users via the SufferHub online service.  By providing compelling and entertaining new ways to play games using workout data, we hope to attract people to our cause.  As we identify more and more potential <a href ="#insights">insights</a> to go after, we'll reach out and partner with other organizations in the interest of sharing our fitness data on a larger scale through an open, published data API.  And we'll publish our findings here on SufferHub for everyone!</p>
 
 		                    </section>
 
@@ -243,7 +243,7 @@
 		                        <div class="thumbnail">
 		                            <a href="/app/users/brianlockhart"><img alt="thumbnail" src="images/brian_headshot.jpg" width="83" height="78"></a>
 		                        </div>
-		                        <p class="mname"><a href="http://brianlockhart.com" target="_blank">Brian Lockhart</a></p>
+		                        <p class="mname"><a href="/app/users/brianlockhart">Brian Lockhart</a></p>
 		                        <p>Founder, CSO</p>
 								<p>(Chief SufferHub Officer)</p>
 
@@ -252,7 +252,7 @@
 		                        <div class="thumbnail">
 		                            <a href="/app/users/stephenpearce"><img alt="thumbnail" src="images/stephen_headshot.jpg" width="83" height="78"></a>
 		                        </div>
-		                        <p class="mname"><a href="#">Stephen Pearce</a></p>
+		                        <p class="mname"><a href="/app/users/stephenpearce">Stephen Pearce</a></p>
 		                        <p>Data Scientist in Residence</p>
 		                    </li>
 		                    <li class="odd">
