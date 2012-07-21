@@ -65,14 +65,11 @@
 <div id="wrapper">
 	<?php include('includes/variables.php'); ?>
 	<?php include('includes/header.php'); ?>
-
-
+	
 	<div id="content" class="content-wrap">
 		    <section id="home">
-
 		        <div class="intro-box">
 		           <h1>The SufferHub Project</h1>
-
 		           <p class="intro">We're here to help you hit your fitness goals by making exercise more fun, more social, and more rewarding.  We help you use your workout data to have fun, stay motivated, and gain new insights by using that data in new ways.  SufferHub occupies the convergence zone of fitness, online gaming, and Big Data.  We believe exercise should be about more than just suffering!</p>
 
 				<!-- sports icons -->
@@ -120,7 +117,7 @@
 					<a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</li>
-		        <a class="back-to-top" href="#home">Back to Top</a>
+		        <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
 
@@ -148,7 +145,7 @@
 		                </section>
 		            </div>
 
-		            <a class="back-to-top" href="#home">Back to Top</a>
+		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
 
@@ -175,7 +172,7 @@
 
 		                </section>
 		            </div>
-		            <a class="back-to-top" href="#home">Back to Top</a>
+		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
 
@@ -202,7 +199,7 @@
 		                </section>
 		            </div>
 
-		            <a class="back-to-top" href="#home">Back to Top</a>
+		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
 
@@ -327,7 +324,7 @@
 
 
 
-		            <a class="back-to-top" href="#home">Back to Top</a>
+		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
 
@@ -399,7 +396,7 @@
 
 		            </aside>
 
-		            <a class="back-to-top" href="#home">Back to Top</a>
+		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		     </section>
 
