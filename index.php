@@ -70,7 +70,7 @@
 		    <section id="home">
 		        <div class="intro-box">
 		           <h1>The SufferHub Project</h1>
-		           <p class="intro">We're here to help you hit your fitness goals by making exercise more fun, more social, and more rewarding.  We help you use your workout data to have fun, stay motivated, and gain new insights by using that data in new ways.  SufferHub occupies the convergence zone of fitness, online gaming, and Big Data.  We believe exercise should be about more than just suffering!</p>
+		           <p class="intro">We're here to help you hit your fitness goals by making exercise more fun, more social, and more rewarding.  We help you use your workout data to have fun, stay motivated, earn prizes, and gain new insights by using that data in new ways.  We believe exercise should be about more than just suffering!</p>
 
 				<!-- sports icons -->
 				<p><img alt="" src="app/sites/all/modules/openfit_api/images/category-cycling.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-running.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-hiking.png"/>&nbsp&nbsp<img alt="" src="app/sites/all/modules/openfit_api/images/category-walking.png"/>
@@ -85,23 +85,23 @@
 		                <img src="images/slides/slide3.png" width="383" height="198" alt="" />
 		            </div>
 		        </div>
-
 		        <div class="row no-bottom-margin">
+					<H1>How SufferHub Works:</H1>
 		            <section class="col">
 		                <h2>Suffer</h2>
 
-		                <p>Do your workout of choice. We currently support the following GPS motion-tracked activities: cycling, running, hiking, walking.  Capture your data automatically using our mobile app, or upload the .FIT files you're already capturing from your Garmin fitness device!</p>
+		                <p>Do your workout of choice. We currently support the following GPS motion-tracked activities: cycling, running, hiking, and walking.  Capture your data automatically using our <a href="#mobile">mobile app</a>, or use the .FIT files you're already capturing from your <a href="http://www.garmin.com/us/products/intosports">Garmin fitness device!</a></p>
 		            </section>
 		            <section class="col mid">
 		                <h2>Share</h2>
 
-		                <p>Share your progress with your fitness-minded friends and socialize with fellow SufferHub members.  We are a community of fitness minded individuals that want to help each other improve their athletic performance, and have fun doing it!</p>
+		                <p>Share your progress with your fitness-minded friends and socialize with fellow SufferHub members.  Participate in online competitions with friends and fellow SufferHub members worldwide!</p>
 		            </section>
 
 		            <section class="col">
 		                <h2>Score!</h2>
 
-		                <p>Your workout data is worth more at SufferHub - participate in online competitions that add a new level of fun to your regular workout routine.  And by continuing to upload data to SufferHub you help everyone score through the new <a href="#insights">insights we get from that data</a>.</p>
+		                <p>Your workout data is worth more at SufferHub! You earn <a href="#sufferbucks">SufferBucks</a> points with every workout, which power our online competitions AND earn you discounts on fitness equipment from our <a href="#partners">affiliate partners</a>!  And by continuing to upload data to SufferHub you help everyone score through the new <a href="#insights">insights we get from that data</a>.</p>
 		            </section>
 		        </div>
 
@@ -124,23 +124,20 @@
 
 		      <section id="applications" >
 
-		             <h1>Applications (coming soon)</h1>
-
+		             <h1>Applications</h1>
 		             <div class="row no-bottom-margin">
 		                <section class="col">
-		                    <h2>SufferHub Multi-Loader</h2>
-		                    <p><img class="align-left" alt="" src="images/services/webdevelopment.png" />If you're like us, you upload your workout files to more than one service.  Let us help out!  Use our online multi-loader to upload your workouts to Strava, Garmin Connect, and (of course) SufferHub - all in one swoop!</p>
+							<h2><a href = "/app">SufferHub Web</a></h2>
+		                    <p><img class="align-left" alt="" src="images/services/webdesign.png" /><a href="/app">Our core online service</a>.  Upload your workouts, analyze your performance, share with friends, and join in virtual competitions.  All while earning <a href="#sufferbucks">SufferBucks</a> points!  You get more value out of your suffering at SufferHub.</p>                    
 		                </section>
 		                <section class="col mid">
-		                    <h2>SufferHub Web</h2>
-
-		                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Our core online service.  Upload your workouts, share them with friends, analyze your performance, and join in virtual competitions!</p>
+							<h2><a href="#multiloader">SufferHub Multi-Loader</a></h2>
+		                    <p><img class="align-left" alt="" src="images/services/webdevelopment.png" />If you're like us, you upload your workout files to more 		than one service.  Let us help out!  Use our <a href="#multiloader">online multi-loader</a> to upload your workouts to sites like Strava, Garmin Connect, and (of course) <a href="/app">SufferHub</a> - all in one click!</p>
 		                </section>
-
 		                <section class="col">
-		                    <h2>SufferHub Mobile</h2>
+		                    <h2><a href="#mobile">SufferHub Mobile</a></h2>
 
-		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" />No Garmin device?  No problem!  Get the SufferHub mobile app and log your workouts directly to your phone, then upload them to SufferHub when you're finished! Works with SufferHub Web to bring you our complete social fitness experience wherever you are.</p>
+		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" />No Garmin device?  No problem!  Get the <a href="#mobile">SufferHub mobile app</a> and log your workouts automatically with your iPhone, then upload them to <a href="/app">SufferHub</a> when you're finished!</p>
 
 		                </section>
 		            </div>
@@ -152,23 +149,23 @@
 
 		      <section id="games">
 
-		            <h1>Games (coming soon)</h1>
+		            <h1>Games</h1>
 
 		            <div class="row no-bottom-margin">
 		                <section class="col">
-		                    <h2>Put Up or...</h2>
-		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Studies show you're more likely to follow through on a commitment if you publicly sign up to do it.  This game lets you set a challenge for yourself that your friends see also, then rewards you when you follow though and complete (or exceed) it!</p>
+		                    <h2><a href="#sufferchallenge">Put Up or...</a></h2>
+		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Studies show you're more likely to follow through on a commitment if you publicly sign up to do it.  This game lets you set a challenge for yourself that your friends see also, then rewards you in <a href="#sufferbucks">SufferBucks</a> when you complete (or exceed) it!</p>
 		                </section>
 		                <section class="col mid">
-		                    <h2>Handicap Races</h2>
+		                    <h2><a href="#sufferscratchrace">Handicap Races</a></h2>
 
 		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Sure, that 110lb, 20 year old college kid can beat you in a real world race, but how would she do against you if things were adjusted for each competitor's % of maximum ability?  We'll set up fun virtual competitions that measure progress based on more variables than just time...</p>
 		                </section>
 
 		                <section class="col">
-		                    <h2>Trainer / Treadmill Races</h2>
+		                    <h2><a href="#sufferindoor">Indoor Races</a></h2>
 
-		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" /> Compete head to head against your friends over the internet, or download your friend's best workout as a virtual rabbit to chase!</p>
+		                    <p><img class="align-left" alt="" src="images/services/logo-design-and-branding.png" />Even when your workouts are indoors on a trainer, treadmill, or stairmaster you can still play at <a href="/app">SufferHub</a>! Compete head to head against your friends over the internet, or download your friend's best workout as a virtual rabbit to chase!</p>
 
 		                </section>
 		            </div>
@@ -178,21 +175,21 @@
 
 		     <section id="insights" >
 
-		             <h1>Insights (coming soon...)</h1>
+		             <h1>Insights</h1>
 
 		             <div class="row no-bottom-margin">
 		                <section class="col">
-		                    <h2>Traffic Analysis</h2>
+		                    <h2><a href="#traffictracker">Traffic Analysis</a></h2>
 		                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />What if your ride or run data could be used by city planners in your hometown to make better decisions about creating bike lanes, making sidewalk repairs, etc?  By working with local and regional advocacy groups we can share SufferHub's anonymous usage data of roads and trails with government agencies and make your fitness data work on your behalf to make your hometown a better place to exercise!</p>
 		                </section>
 		                <section class="col mid">
-		                    <h2>Workout Partner Finder</h2>
+		                    <h2><a href="#suffermatch">Workout Partner Finder</a></h2>
 
 		                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Odds are, you typically use a handful of routes on a regular basis, at similar times of day.  What if we could use that data to suggest potential workout partners based on where you both go, and how fast you travel?  You might be able to find your next riding, running, hiking, or walking buddy!</p>
 		                </section>
 
 		                <section class="col">
-		                    <h2>Geotagged Media</h2>
+		                    <h2><a href="#suffergrid">Geotagged Data Mashups</a></h2>
 
 		                    <p><img class="align-left" alt="" src="images/services/webdesign.png" />Your GPS-tagged workout data can be overlaid against other data sets with similar GPS and timestamp data.  Imagine being able to search for a route by location, then being presented with a selection of photos and videos taken at that location!  And what if you could upload and share your own photos and video along with your workout data to share with others?</p>
 
@@ -209,10 +206,10 @@
 
 		            <div class="primary">
 
-		                <p class="intro">While making workouts into games was the original motivator, SufferHub was inspired by the notion that we're not getting as much value as we could be out of the massive amount of location + fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  Currently, fitness data lives locked away in numerous private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights. It's time to start having more fun while working out, and to start finding new ways to make this data benefit the people who created it in the first place!
+		                <p class="intro">SufferHub occupies the convergence zone of fitness, online gaming, and big data.  Our primary motivation is to encourage people to be more healthy and active, by rewarding healthy behavior.  By making workouts into games with rewards, we hope to help people set and maintain a healthy and active lifestyle.  But SufferHub was also inspired by the notion that we're not getting as much value as we could be out of the massive amount of location + fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  Currently, most of that fitness data lives locked away in private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights.  It's time to start having more fun while working out, and to start finding new ways to make this data benefit the people who created it in the first place!
 		                </p>
 
-
+<!--
 		                <div class="row no-bottom-margin">
 
 		                    <section class="col first">
@@ -232,7 +229,7 @@
 		                    </section>
 
 		                </div>
-
+-->
 		                <h2>Our Team</h2>
 
 		                <ul class="the-team">
@@ -271,23 +268,25 @@
 		            </div>
 
 		            <aside>
-			<h2>Funding</h2>
-			We're currently bootstrapping our operations and running lean, but as we bring on more users and start to tackle our more ambitious feature development tasks, costs will ramp up.  Interested investors please contact us at <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>.
-			</p>
-			For now, if you'd like to donate to the project directly, we'd greatly appreciate your contribution.  Clouds in the sky are free, but cloud services run on dollars!
-			</p></p>
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_s-xclick">
-			<input type="hidden" name="hosted_button_id" value="H6WJT45LTTKZQ">
-			<p align="center"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" align="center" width="1" height="1">
-			</p>
-			</form>
+		<!--		
+						<h2>Funding</h2>
+						We're currently bootstrapping our operations and running lean, but as we bring on more users and start to tackle our more ambitious feature development tasks, costs will ramp up.  Interested investors please contact us at <a href="mailto:info@sufferhub.com">info@sufferhub.com</a>.
+						</p>
+						For now, if you'd like to donate to the project directly, we'd greatly appreciate your contribution.  Clouds in the sky are free, but cloud services run on dollars!
+						</p></p>
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="H6WJT45LTTKZQ">
+						<p align="center"><input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" align="center" width="1" height="1">
+						</p>
+						</form>
 
-			</p>
-		<!-- Begin Official PayPal Seal
-		<a href="https://www.paypal.com/us/verified/pal=info%40lockhartheavyindustries%2ecom" target="_blank"><img src="https://www.paypal.com/en_US/i/icon/verification_seal.gif" border="0" alt="Official PayPal Seal"></A>
-		End Official PayPal Seal -->
+						</p>
+					-->	
+					<!-- Begin Official PayPal Seal
+					<a href="https://www.paypal.com/us/verified/pal=info%40lockhartheavyindustries%2ecom" target="_blank"><img src="https://www.paypal.com/en_US/i/icon/verification_seal.gif" border="0" alt="Official PayPal Seal"></A>
+					End Official PayPal Seal -->
 
 		<!--
 		                    <a href="#" class="download-btn">Download PDF</a>
@@ -382,18 +381,21 @@
 		                    <ul class="link-list social">
 		                        <li class="facebook"><a href="https://www.facebook.com/SufferHub">Facebook</a><div class="fb-like" ref="homepage_bottom" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div></li>
 								<li class="twitter"><a href="https://twitter.com/SufferHub" target="_blank">Twitter</a><a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
-								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>                        
+								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li> 
+								<!--                       
 								<li class="googleplus"><a href="#">Google+</a>(coming soon)</li>
 		                        <li class="linkedin"><a href="#">Linkedin</a>(coming soon)</li>
+								-->
 		                    </ul>
 
 		                    <h2>Contact</h2>                    
 							<a href="mailto:info@sufferhub.com">info@sufferhub.com</a>
-		                    <p>
-		                   	800.750.0987<br />
 		                    </p>
-
-
+		                   	
+							11410 NE 124th St. #512<br>
+							Kirkland, WA 98034
+							</p>
+							800.750.0987
 		            </aside>
 
 		            <a class="back-to-top" href="#top">Back to Top</a>
