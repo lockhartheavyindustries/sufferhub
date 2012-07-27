@@ -1,0 +1,13 @@
+FAFFFF = background color of landing page
+
+e1e1e1 = very light grey
+f5f4f3 = light grey
+c4c4c4 = medium grey (borders?)
+086782 = purple-ish dark grey
+2e2e2d = dark dark grey / medium black
+f8f8f8 = off white
+fbfbfb = very light white
+779125 = green
+e25400 = orange
+e25402 = orange
+fff = white
