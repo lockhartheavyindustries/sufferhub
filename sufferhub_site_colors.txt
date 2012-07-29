@@ -8,6 +8,7 @@ c4c4c4 = medium grey (borders?)
 f8f8f8 = off white
 fbfbfb = very light white
 779125 = green
+9BC642 = light green in vertical bar charts
 e25400 = orange
 e25402 = orange
 fff = white

@@ -114,6 +114,8 @@ class OpenFitDataTable {
     OpenFitDataField::DATA_TYPE_SPEED => array('field-type-number', 'field-type-speed'),
     OpenFitDataField::DATA_TYPE_PACE => array('field-type-number', 'field-type-pace'),
     OpenFitDataField::DATA_TYPE_DATE => array('field-type-date'),
+    OpenFitDataField::DATA_TYPE_SUFFERBUCKS => array('field-type-number'),
+
   );
   
 }

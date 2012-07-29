@@ -7,6 +7,8 @@ class OpenFitDataField {
   const DATA_TYPE_SPEED = 'speed';
   const DATA_TYPE_PACE = 'pace';
   const DATA_TYPE_DATE = 'date';
+  const DATA_TYPE_SUFFERBUCKS = 'numeric';
+
 
   /**
    * Get a render array for the form fields.
@@ -120,7 +122,7 @@ class OpenFitDataField {
   }
   
   /**
-   * Format a distance database column value (stored as meters) for output.
+   * Format an elevation database column value (stored as x) for output.
    *
    * The $field_info parameter may contain the following options.
    *   - blank: Text to return if the database value is null. Default to ''.
@@ -223,6 +225,36 @@ class OpenFitDataField {
     $decimals = isset($field_info['decimals']) ? $field_info['decimals'] : null;
     return OpenFitMeasurement::convert($value, 'kilojoules', $units, $format, $decimals);
   }
+
+  /**
+   * Format a sufferbucks database column value (stored as numeric) for output.
+   *
+   * The $field_info parameter may contain the following options.
+   *   - blank: Text to return if the database value is null. Default to ''.
+   *   - units: A type of unit ('calorie', 'kilojoule', etc). If not present, the current logged in user setting is used.
+   *   - format: A OpenFitMeasurement::FORMAT_TYPE_* constant indicating how to format the value. Defaults to FORMAT_TYPE_DECIMALS.
+   *   - decimals: The number of decimals to show or null if the default decimals for the unit should be used. Default to null.
+   *
+   * @param $row
+   *   An datatabase stdClass row keyed by field id.
+   * @param $field_id
+   *   The field id.
+   * @param $field_info
+   *   A stdClass of the data field info.
+   * @param $value
+   *   The column value from the data row.
+   * @return
+   *   A string cell value.
+   */
+  public static function formatSufferbucks($row, $field_id, $field_info, $value) {
+    if (!isset($value) || (is_string($value) && $value == '')) return isset($field_info['blank']) ? $field_info['blank'] : '';
+    
+    $format = isset($field_info['format']) ? $field_info['format'] : OpenFitMeasurement::FORMAT_TYPE_DECIMALS;
+    $decimals = isset($field_info['decimals']) ? $field_info['decimals'] : null;
+    return OpenFitMeasurement::convert($value, 'sufferbucks', $units, $format, $decimals);
+  }
+
+
   
   /**
    * Format a speed database column value (stored as meters per second) for output.

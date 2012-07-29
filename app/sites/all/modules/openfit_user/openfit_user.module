@@ -820,7 +820,7 @@ function openfit_user_user_summary_totals($account) {
   $preferences = OpenFitUserSetting::get($user->uid);
   $distance_units = $preferences[OpenFitUserSetting::TYPE_DISTANCE_UNITS];
   $user_summary_data = OpenFitActivity::getSummaryInfo($account->uid, null, null);
-  $form_fields = array('count', 'distance', 'duration', 'calories');
+  $form_fields = array('count', 'distance', 'duration', 'calories','sufferbucks');
   $field_info = OpenFitActivity::getActivitySummaryFieldInfo();
   $field_info['count']['title'] = 'Activities';
   $field_info['distance']['title'] = 'Distance (' . 
@@ -829,6 +829,8 @@ function openfit_user_user_summary_totals($account) {
   $field_info['distance']['decimals'] = 0;
   $field_info['duration']['title'] = 'Time (h:m)';
   $field_info['duration']['second_digits'] = 0;
+  $field_info['sufferbucks']['title'] = 'SufferBucks';
+
   $summary_data = OpenFitDataTable::getTableRows($field_info, $form_fields, array($user_summary_data));
   $form_data = $summary_data[0];
   
