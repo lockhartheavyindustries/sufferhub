@@ -71,7 +71,7 @@ function openfit_activity_dashboard_form($form, &$form_state) {
   
   $week_summary_data = OpenFitActivity::getWeekSummaryInfo($user->uid);
   $month_summary_data = OpenFitActivity::getMonthSummaryInfo($user->uid);
-  $summary_fields = array('distance', 'duration', 'calories', 'avg-speed', 'avg-pace');
+  $summary_fields = array('distance', 'duration', 'calories', 'sufferbucks', 'avg-speed', 'avg-pace');
   $summary_field_info = OpenFitActivity::getActivitySummaryFieldInfo();
   $summary_data = OpenFitDataTable::getTableRows($summary_field_info, $summary_fields,
     array($week_summary_data, $month_summary_data));

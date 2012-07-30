@@ -49,6 +49,7 @@ function openfit_api_resource_activity_retrieve($nid) {
     'type' => $row->category_name,
     'name' => $row->title,
     'calories' => floatval($row->activity_calories),
+	'sufferbucks' => floatval($row->activity_sufferbucks),
     'user_id' => intval($row->uid),
     'uri' => $uri,
   );
@@ -95,6 +96,8 @@ function openfit_api_resource_activity_retrieve($nid) {
       'duration' => floatval($lap->lap_duration),
       'clock_duration' => floatval($lap->lap_clock_duration),
       'calories' => floatval($lap->lap_calories),
+      'sufferbucks' => floatval($lap->lap_sufferbucks),
+
     );
     if (isset($lap->lap_elevation_gain)) $lap_item['elevation_gain'] = floatval($lap->lap_elevation_gain);
     if (isset($lap->lap_elevation_loss)) $lap_item['elevation_loss'] = floatval($lap->lap_elevation_loss);
@@ -262,6 +265,7 @@ function openfit_api_resource_activity_create($data) {
       'duration' => 'duration',
       'clock_duration' => 'clock_duration',
       'calories' => 'calories',
+      'sufferbucks' => 'sufferbucks',
       'elevation_gain' => 'elevation_gain',
       'elevation_loss' => 'elevation_loss',
     ),
@@ -275,6 +279,7 @@ function openfit_api_resource_activity_create($data) {
       'duration' => 'duration',
       'clock_duration' => 'clock_duration',
       'calories' => 'calories',
+      'sufferbucks' => 'sufferbucks',
       'elevation_gain' => 'elevation_gain',
       'elevation_loss' => 'elevation_loss',
     ),

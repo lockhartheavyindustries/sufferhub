@@ -248,7 +248,14 @@ class OpenFitDataField {
    */
   public static function formatSufferbucks($row, $field_id, $field_info, $value) {
     if (!isset($value) || (is_string($value) && $value == '')) return isset($field_info['blank']) ? $field_info['blank'] : '';
-    
+
+    if (isset($field_info['units'])) {
+      $units = $field_info['units'];
+    } else {
+      global $user;
+      $preferences = OpenFitUserSetting::get($user->uid);
+      $units = $preferences[OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS];
+    }
     $format = isset($field_info['format']) ? $field_info['format'] : OpenFitMeasurement::FORMAT_TYPE_DECIMALS;
     $decimals = isset($field_info['decimals']) ? $field_info['decimals'] : null;
     return OpenFitMeasurement::convert($value, 'sufferbucks', $units, $format, $decimals);

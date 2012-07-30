@@ -18,6 +18,8 @@ class OpenFitUserSetting {
   const TYPE_WEIGHT_UNITS = 'units-weight';
   const TYPE_TEMPERATURE_UNITS = 'units-temperature';
   const TYPE_CALORIE_UNITS = 'units-calorie';
+  const TYPE_SUFFERBUCK_UNITS = 'units-sufferbuck';
+
   const TYPE_WEEK_START = 'week-start';
   const TYPE_DEFAULT_SHARING = 'default-sharing';
   
@@ -115,6 +117,7 @@ class OpenFitUserSetting {
           self::TYPE_WEIGHT_UNITS => OpenFitMeasurement::MEASUREMENT_WEIGHT,
           self::TYPE_TEMPERATURE_UNITS => OpenFitMeasurement::MEASUREMENT_TEMPERATURE,
           self::TYPE_CALORIE_UNITS => OpenFitMeasurement::MEASUREMENT_CALORIE,
+		  self::TYPE_SUFFERBUCK_UNITS => OpenFitMeasurement::MEASUREMENT_SUFFERBUCK,
         );
         foreach ($mapping as $key => $value) {
           if (!isset($settings[$key])) $settings[$key] = $system->units[$value];

@@ -11,7 +11,7 @@ function openfit_activity_activities_form($form, &$form_state) {
   $rows_per_page = 10;
   
   // TODO: Read from user preference
-  $columns = array('name', 'start', 'sport', 'distance', 'time', 'avg-speed', 'avg-pace', 'calories');
+  $columns = array('name', 'start', 'sport', 'distance', 'time', 'avg-speed', 'avg-pace', 'calories', 'sufferbucks');
   $sort_column = 'start';
   $sort_direction = 'desc';
   

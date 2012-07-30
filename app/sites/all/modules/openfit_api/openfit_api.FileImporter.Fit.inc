@@ -345,6 +345,7 @@ class FitFileImporter {
         'calories' => 'total_calories',
         'elevation_gain' => 'total_ascent',
         'elevation_loss' => 'total_descent',
+		'sufferbucks' => 'total_sufferbucks',
       ),
       'avgmax' => array(
         'speed' => 'speed',
@@ -390,6 +391,8 @@ class FitFileImporter {
       $session_info['clock_duration'] /= 1000;
       $session_info['duration'] /= 1000;
       $session_info['calories'] *= self::KILOJOULE_PER_KCAL;
+      $session_info['sufferbucks'] = 666;
+
       if (isset($session_info['speed']) && isset($session_info['speed']['avg'])) $session_info['speed']['avg'] /= 1000;
       if (isset($session_info['speed']) && isset($session_info['speed']['max'])) $session_info['speed']['max'] /= 1000;
       

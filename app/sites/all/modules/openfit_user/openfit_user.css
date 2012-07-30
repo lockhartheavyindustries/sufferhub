@@ -260,7 +260,7 @@
 }
 .page-user .activity-totals #sufferbucks {
 	padding-right: 0;
-	float: left;
+	float: right;
 }
 .page-user .activity-totals .field-item {
   font-size: 30px;

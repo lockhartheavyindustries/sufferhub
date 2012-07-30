@@ -210,6 +210,14 @@ class OpenFitActivity {
           'type' => 'float',
           'default' => null,
         ),
+        'activity_sufferbucks' => array(
+          'description' => 'Activity SufferBucks earned',
+          'type' => 'numeric',
+          'precision' => 9,
+          'scale' => 1,
+          'default' => 0,
+        ),
+
       ),
       'primary key' => array('activity_id'),
       'unique keys' => array('activity_id' => array('activity_id')),
@@ -323,6 +331,14 @@ class OpenFitActivity {
           'description' => 'Serialized PHP Array of pool length info.',
           'type' => 'blob',
         ),
+        'lap_sufferbucks' => array(
+          'description' => 'Lap SufferBucks earned.',
+          'type' => 'numeric',
+          'precision' => 9,
+          'scale' => 1,
+          'default' => 0,
+        ),
+
       ),
       'primary key' => array('lap_id'),
       'unique keys' => array('lap_id' => array('lap_id')),
@@ -378,6 +394,7 @@ class OpenFitActivity {
     $values['activity_elevation_loss'] = null;
     $values['activity_notes'] = '';
     $values['activity_calories'] = 0;
+	$values['activity_sufferbucks'] = 0;
     $values['laps'] = array();
     $values['data_tracks'] = array();
     $values['timer_pauses'] = array();
@@ -432,7 +449,7 @@ class OpenFitActivity {
         'activity_elevation_gain', 'activity_elevation_loss', 'activity_notes', 'activity_calories',
         'activity_max_speed', 'activity_avg_heartrate', 'activity_max_heartrate',
         'activity_avg_cadence', 'activity_max_cadence', 'activity_avg_power', 'activity_max_power',
-        'activity_timer_stops',
+        'activity_timer_stops','activity_sufferbucks',
       ))
       ->fields('c', array('category_id', 'category_name', 'category_noun', 'category_image_url'))
       ->addExpression('activity_distance/activity_duration','speed');
@@ -479,7 +496,7 @@ class OpenFitActivity {
       ->fields('a', array('activity_start', 'activity_timezone'))
       ->fields('l', array(
         'lap_id', 'lap_start', 'lap_distance', 'lap_duration', 'lap_clock_duration', 'lap_elevation_gain', 'lap_elevation_loss', 'lap_calories', 'lap_type',
-        'lap_max_speed', 'lap_avg_heartrate', 'lap_max_heartrate', 'lap_avg_cadence', 'lap_max_cadence', 'lap_avg_power', 'lap_max_power', 'lap_pool_lengths',
+        'lap_max_speed', 'lap_avg_heartrate', 'lap_max_heartrate', 'lap_avg_cadence', 'lap_max_cadence', 'lap_avg_power', 'lap_max_power', 'lap_pool_lengths','lap_sufferbucks',
       ))
       ->addExpression('lap_distance/lap_duration','speed');
     $query->orderBy('lap_start', 'ASC');
@@ -579,7 +596,7 @@ class OpenFitActivity {
   }
   
   /**
-   * Return the summarized totals and averages of activities occuring in the month.
+   * Return the summarized totals and averages of activities occurring in the month.
    *
    * @param $uid
    *   The user id, or null for all users.
@@ -659,7 +676,7 @@ class OpenFitActivity {
    */
   public static function getSummaryInfo($uid, $from, $to) {
     $activity_start_sql = 'a.activity_start + INTERVAL 60*a.activity_timezone MINUTE';
-    $sql = 'SELECT COUNT(*) as count, SUM(activity_distance) AS distance, SUM(activity_duration) AS duration, SUM(activity_calories) AS calories ' .
+    $sql = 'SELECT COUNT(*) as count, SUM(activity_distance) AS distance, SUM(activity_duration) AS duration, SUM(activity_calories) AS calories, SUM(activity_sufferbucks) AS sufferbucks ' .
       'FROM ' . self::TABLE_ACTIVITY . ' a ' .
       'INNER JOIN ' . self::TABLE_NODE_ACTIVITY_ASSOC . ' na ON a.activity_id=na.activity_id ';
     if (isset($from) || isset($to) || isset($uid)) {
@@ -686,7 +703,7 @@ class OpenFitActivity {
     $sql .= $where;
     $results = db_query($sql, $params);
     $results = $results ? $results->fetchAssoc() : array();
-    $results = array_filter($results) + array('distance' => 0, 'duration' => 0, 'calories' => 0);
+    $results = array_filter($results) + array('distance' => 0, 'duration' => 0, 'calories' => 0, 'sufferbucks' => 0);
     if ($results['duration'] > 0) $results['speed'] = $results['distance'] / $results['duration'];
     return (object)$results;
   }
@@ -757,6 +774,7 @@ class OpenFitActivity {
       if (isset($activity_data['elevation_gain'])) $node->openfit_info['activity']->activity_elevation_gain = $activity_data['elevation_gain'];
       if (isset($activity_data['elevation_loss'])) $node->openfit_info['activity']->activity_elevation_loss = $activity_data['elevation_loss'];
       if (isset($activity_data['calories'])) $node->openfit_info['activity']->activity_calories = $activity_data['calories'];
+      if (isset($activity_data['sufferbucks'])) $node->openfit_info['activity']->activity_sufferbucks = $activity_data['sufferbucks'];
       $node->openfit_info['activity']->activity_notes = isset($activity_data['notes']) ? $activity_data['notes'] : '';
       if (isset($activity_data['speed'])) {
         if (isset($activity_data['speed']['max'])) $node->openfit_info['activity']->activity_max_speed = $activity_data['speed']['max'];
@@ -787,6 +805,8 @@ class OpenFitActivity {
             'lap_elevation_gain' => isset($lap_data['elevation_gain']) ? $lap_data['elevation_gain'] : 0,
             'lap_elevation_loss' => isset($lap_data['elevation_loss']) ? $lap_data['elevation_loss'] : 0,
             'lap_calories' => isset($lap_data['calories']) ? $lap_data['calories'] : 0,
+            'lap_sufferbucks' => isset($lap_data['sufferbucks']) ? $lap_data['sufferbucks'] : 0,
+
             'lap_type' => $lap_type,
             'lap_max_speed' => isset($lap_data['speed']) && isset($lap_data['speed']['max']) ? $lap_data['speed']['max'] : null,
             'lap_avg_heartrate' => isset($lap_data['heartrate']) && isset($lap_data['heartrate']['avg']) ? $lap_data['heartrate']['avg'] : null,
@@ -919,6 +939,7 @@ class OpenFitActivity {
         'activity_elevation_gain' => $activity->activity_elevation_gain,
         'activity_elevation_loss' => $activity->activity_elevation_loss,
         'activity_calories' =>  $activity->activity_calories,
+        'activity_sufferbucks' =>  $activity->activity_sufferbucks,
         'activity_notes' => $activity->activity_notes,
         'activity_category_id' => $activity->category_id,
         'activity_timer_stops' => $activity->timer_stops,
@@ -950,6 +971,7 @@ class OpenFitActivity {
               'lap_elevation_gain' => $lap->lap_elevation_gain,
               'lap_elevation_loss' => $lap->lap_elevation_loss,
               'lap_calories' =>  $lap->lap_calories,
+              'lap_sufferbucks' =>  $lap->lap_sufferbucks,
               'lap_type' => $lap->lap_type,
               'lap_max_speed' => $lap->lap_max_speed,
               'lap_avg_heartrate' => $lap->lap_avg_heartrate,
@@ -1017,7 +1039,7 @@ class OpenFitActivity {
       self::createDistanceTrackFromGps($activity);
     }
     
-    $total_fields = array('distance', 'duration', 'elevation_gain', 'elevation_loss', 'calories');
+    $total_fields = array('distance', 'duration', 'elevation_gain', 'elevation_loss', 'calories', 'sufferbucks');
     $avgmax_fields = array('speed','heartrate','cadence','power');
     $totals = array();
     $avgmax = array();
@@ -1347,6 +1369,15 @@ class OpenFitActivity {
         'format_class' => 'OpenFitDataField',
         'format_function' => 'formatCalories',
       ),
+
+      'sufferbucks' => array(
+        'title' => OpenFitMeasurement::getSufferbuckTitle(OpenFitUserSetting::get($user->uid, OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS)),
+        'data_field' => 'activity_sufferbucks',
+        'data_type' => OpenFitDataField::DATA_TYPE_NUMERIC,
+        'format_class' => 'OpenFitDataField',
+        'format_function' => 'formatSufferbucks',
+      ),
+
       'notes' => array(
         'title' => t('Notes'),
         'data_field' => 'activity_notes',
@@ -1497,7 +1528,16 @@ class OpenFitActivity {
         'data_type' => OpenFitDataField::DATA_TYPE_NUMERIC,
         'format_class' => 'OpenFitDataField',
         'format_function' => 'formatCalories',
-      ),
+	  ),
+      
+	  'sufferbucks' => array(
+        'title' => OpenFitMeasurement::getSufferbuckTitle(OpenFitUserSetting::get($user->uid, OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS)),
+        'data_field' => 'lap_sufferbucks',
+        'data_type' => OpenFitDataField::DATA_TYPE_NUMERIC,
+        'format_class' => 'OpenFitDataField',
+        'format_function' => 'formatSufferbucks',
+	  ),
+	
       'avg-heartrate' => array(
         'title' => t('Avg heartrate'),
         'data_field' => 'lap_avg_heartrate',
@@ -1593,6 +1633,15 @@ class OpenFitActivity {
         'format_class' => 'OpenFitDataField',
         'format_function' => 'formatCalories',
       ),
+
+      'sufferbucks' => array(
+        'title' => OpenFitMeasurement::getSufferbuckTitle(OpenFitUserSetting::get($user->uid, OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS)),
+        'data_type' => OpenFitDataField::DATA_TYPE_NUMERIC,
+        'format_class' => 'OpenFitDataField',
+        'format_function' => 'formatSufferbucks',
+      ),
+
+
     );
   }
   

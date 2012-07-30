@@ -257,7 +257,7 @@ function openfit_activity_entity_view_full($node, $view_mode, $language) {
   
   $fields = array(
     'name', 'start', 'time', 'sport-noun', 'distance', 'avg-speed', 'max-speed', 'avg-pace', 'max-pace', 'calories', 'elev-gain', 'elev-loss', 
-    'notes', 'avg-heartrate', 'max-heartrate', 'avg-cadence', 'max-cadence', 'avg-power', 'max-power',
+    'notes', 'avg-heartrate', 'max-heartrate', 'avg-cadence', 'max-cadence', 'avg-power', 'max-power','sufferbucks',
   );
 
   $field_info = OpenFitActivity::getTableFieldInfo();
@@ -321,7 +321,14 @@ function openfit_activity_entity_view_full($node, $view_mode, $language) {
       OpenFitDataField::getFormDataRenderArray($field_info, $activity_data, array($avg, $max))
     );
   }
+
+  $page_wrap['detail-area']['sufferbucks'] = array(
+    '#type' => 'container', 
+    '#attributes' => array('id' => 'sufferbucks'),
+    OpenFitDataField::getFormDataRenderArray($field_info, $activity_data, array('sufferbucks'))
+  );
   
+
   $page_wrap['detail-area']['notes'] = array(
     '#type' => 'container', 
     '#attributes' => array('id' => 'notes'),
@@ -422,7 +429,7 @@ function openfit_activity_entity_view_laps($node, $view_mode, $language) {
   $activity_data = OpenFitDataTable::getTableRows($field_info, $fields, array($node->openfit_info['activity']));
   $activity_data = $activity_data[$node->openfit_info['activity']->nid];
   
-  $table_columns = array('number', 'type', 'start-time', 'distance', 'time', 'avg-speed', 'avg-pace', 'elev-gain', 'calories');
+  $table_columns = array('number', 'type', 'start-time', 'distance', 'time', 'avg-speed', 'avg-pace', 'elev-gain', 'calories', 'sufferbucks',);
 
   $lap_field_info = OpenFitActivity::getLapTableFieldInfo();
   $header = OpenFitDataTable::getTableHeader($lap_field_info, $table_columns);
@@ -819,6 +826,15 @@ function openit_activity_activity_addedit_form($node, &$form_state, $mode) {
       '#value_format' => OpenFitMeasurement::FORMAT_TYPE_DECIMALS,
       '#value_units' => 'kilojoule',
     ),
+	'sufferbucks' => array(
+      '#type' => 'openfit_measurement',
+      '#title' => OpenFitMeasurement::getSufferbuckTitle($preferences[OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS]),
+      '#default_units' => $preferences[OpenFitUserSetting::TYPE_SUFFERBUCK_UNITS],
+      '#default_value' => $activity->activity_sufferbucks,
+      '#required' => TRUE,
+      '#value_format' => OpenFitMeasurement::FORMAT_TYPE_DECIMALS,
+      '#value_units' => 'sufferbuck',
+    ),
   );
   
   $week_start = $preferences[OpenFitUserSetting::TYPE_WEEK_START];
@@ -861,7 +877,8 @@ function openfit_activity_activity_addedit_submit($form, &$form_state, $mode) {
   $activity->activity_duration = $activity_info['time'];
   $activity->activity_distance = $activity_info['distance'];
   $activity->activity_calories = $activity_info['calories'];
-  
+  $activity->activity_sufferbucks = $activity_info['sufferbucks'];
+
   $node_title = $activity_info['name'];
   if (strlen($node_title) == 0) {
     $categories = OpenFitActivity::getActivityCategories();
@@ -909,8 +926,9 @@ function openfit_activity_update($node) {
       'activity_timezone' => $activity->activity_timezone,
       'activity_duration' => $activity->activity_duration,
       'activity_distance' => $activity->activity_distance,
-       'activity_calories' =>  $activity->activity_calories,
-      // 'activity_notes' => '',
+      'activity_calories' =>  $activity->activity_calories,
+      'activity_sufferbucks' =>  $activity->activity_sufferbucks,
+	// 'activity_notes' => '',
       'activity_category_id' => $activity->category_id,
     ))
     ->condition('activity_id', $activity->activity_id)

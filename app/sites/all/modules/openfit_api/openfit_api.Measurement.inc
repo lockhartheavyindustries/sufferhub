@@ -13,13 +13,16 @@ class OpenFitMeasurement{
   const MEASUREMENT_WEIGHT = 'weight';
   const MEASUREMENT_TEMPERATURE = 'temperature';
   const MEASUREMENT_CALORIE = 'calorie';
-  
+  const MEASUREMENT_SUFFERBUCK = 'sufferbuck';
+
   const DEFAULT_DISTANCE_UNITS = 'kilometer';
   const DEFAULT_SPEED_UNITS = 'kilometer-per-hour';
   const DEFAULT_ELEVATION_UNITS = 'meter';
   const DEFAULT_WEIGHT_UNITS = 'kilogram';
   const DEFAULT_TEMPERATURE_UNITS = 'celsius';
   const DEFAULT_CALORIE_UNITS = 'kilojoule';
+  const DEFAULT_SUFFERBUCK_UNITS = 'sufferbuck';
+
   
   const FORMAT_TYPE_NONE = 'none';
   const FORMAT_TYPE_DECIMALS = 'decimals';
@@ -28,6 +31,8 @@ class OpenFitMeasurement{
   const FORMAT_TYPE_SYMBOL = 'symbol';
   
   const UNITS_CALORIE = 'calorie';
+  const UNITS_SUFFERBUCK = 'sufferbuck';
+
   
   public static function getSchema(&$schema) {
     $schema[self::TABLE_UNIT] = array(
@@ -104,6 +109,7 @@ class OpenFitMeasurement{
           self::MEASUREMENT_WEIGHT => 'kilogram',
           self::MEASUREMENT_TEMPERATURE => 'celsius',
           self::MEASUREMENT_CALORIE => 'kilojoule',
+		  self::MEASUREMENT_SUFFERBUCK => 'sufferbuck',
         ),
       ),
       self::SYSTEM_US => (object)array(
@@ -115,6 +121,7 @@ class OpenFitMeasurement{
           self::MEASUREMENT_WEIGHT => 'pound',
           self::MEASUREMENT_TEMPERATURE => 'fahrenheit',
           self::MEASUREMENT_CALORIE => 'calorie',
+		  self::MEASUREMENT_SUFFERBUCK => 'sufferbuck',
         ),
       ),
     );
@@ -289,6 +296,17 @@ class OpenFitMeasurement{
     }
   }
   
+ public static function getSufferbuckTitle($sufferbuck_units) {
+    if ($sufferbuck_units != self::UNITS_SUFFERBUCK) {
+      $symbol = self::getLabel(1, $sufferbuck_units, self::FORMAT_TYPE_SYMBOL);
+      return t('Sufferbuck (@units)', array('@units' => $symbol));
+    } else {
+      return t('Sufferbucks');
+    }
+  }
+
+
+
   /**
    * Return an associative array of an attempt to parse the specified text into a measurement value.
    *
