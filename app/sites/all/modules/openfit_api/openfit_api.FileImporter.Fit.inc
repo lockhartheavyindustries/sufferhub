@@ -386,13 +386,13 @@ class FitFileImporter {
           if (isset($max)) $session_info[$to]['max'] = $max;
         }
       }
-      
+      $session_info['sufferbucks'] = (($session_info['distance'] / 2000) + ($session_info['elevation_gain'] * 2)) / 1000; 
+
       $session_info['distance'] /= 100;
       $session_info['clock_duration'] /= 1000;
       $session_info['duration'] /= 1000;
       $session_info['calories'] *= self::KILOJOULE_PER_KCAL;
-      $session_info['sufferbucks'] = 666;
-
+      
       if (isset($session_info['speed']) && isset($session_info['speed']['avg'])) $session_info['speed']['avg'] /= 1000;
       if (isset($session_info['speed']) && isset($session_info['speed']['max'])) $session_info['speed']['max'] /= 1000;
       
@@ -447,10 +447,14 @@ class FitFileImporter {
           if (isset($max)) $lap_info[$to]['max'] = $max;
         }
       }
-      $lap_info['distance'] /= 100;
+      
+	  $lap_info['sufferbucks'] = (($lap_info['distance'] / 2000) + ($lap_info['elevation_gain'] *2)) /1000;
+	
+	  $lap_info['distance'] /= 100;
       $lap_info['clock_duration'] /= 1000;
       $lap_info['duration'] /= 1000;
       $lap_info['calories'] *= self::KILOJOULE_PER_KCAL;
+	  
       if (isset($lap_info['speed']) && isset($lap_info['speed']['avg'])) $lap_info['speed']['avg'] /= 1000;
       if (isset($lap_info['speed']) && isset($lap_info['speed']['max'])) $lap_info['speed']['max'] /= 1000;
       
