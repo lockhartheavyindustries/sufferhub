@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * Hook to alter the dashboard page.
+ * <modulename>_form_<formid>_alter
+ * formid=openfit_activity_dashboard_form
+ */
+function sufferhub_mod_form_openfit_activity_dashboard_form_alter(&$form, &$form_state) {
+  $user_info = _sufferhub_mod_get_user_info();
+  array_unshift($form, $user_info);
+  // Attach a css file.
+  $form['#attached']['css'][] = drupal_get_path('module', 'sufferhub_mod') . '/css/page.dashboard.css';
+  
+  // Uncomment for form markup debugging
+  //die('<pre>'.print_r($form,true).'</pre>');
+}
+
+
+
+/**
+ * Add a theme hook for userpicture
+ */
+function sufferhub_mod_openfit_user_theme() {
+  return array(
+    'userpicture' => array(
+      'variables' => array('uid' => 0, 'filepath' => null),
+    ),
+  );
+}
+
+/**
+ * Default theme method for userpicture
+ */
+function sufferhub_mod_theme_userpicture($variables) {
+  $uid = $variables['uid'];
+  if ($uid == 0) return;
+  $filepath = $variables['filepath'];
+  
+  $user = user_load($uid);
+  if (!$user) return;
+  
+  if (!isset($filepath)) {
+    if (!empty($user->picture)) {
+      if (is_numeric($user->picture)) $user->picture = file_load($user->picture);
+      if (!empty($user->picture->uri)) $filepath = $user->picture->uri;
+    } else {
+      $default = variable_get('user_picture_default','');
+      if ($default) {
+        $filepath = $default;
+      } else {
+        $filepath = 'sites/all/modules/openfit_user/select-photo.png';
+      }
+    }
+  }
+  
+  $markup = '';
+  
+  if (isset($filepath)) {
+    $alt = t('@user\'s picture', array('@user' => format_username($user)));
+    // If the image does not have a valid Drupal scheme (for eg. HTTP), don't load image styles.
+    if (module_exists('image') && file_valid_uri($filepath) && $style = variable_get('user_picture_style', '')) {
+      $markup = theme('image_style', array('style_name' => $style, 'path' => $filepath, 'alt' => $alt, 'title' => $alt));
+    }
+    else {
+      $markup = theme('image', array('path' => $filepath, 'alt' => $alt, 'title' => $alt));
+    }
+  } else {
+    $markup = '<div class="photo-missing"></div>';
+  }
+  if (!empty($user->uid) && user_access('access user profiles')) {
+    $attributes = array(
+      'attributes' => array(),
+      'html' => TRUE,
+    );
+  }
+  
+  $markup = '<div class="user-photo">' . $markup . '</div>';
+    
+  return $markup;
+}
+
+
+
+/**
+ * Private method to return a markup block for user info in the dashboard page.
+ */
+function _sufferhub_mod_get_user_info() {
+  global $user;
+  // Construct a block showing workouts totals. Copied from:
+  // file: modules/openfit_user/openfit_user.module 
+  // function: openfit_user_user_summary_page()
+  // See that code for additional details
+  $form = array(
+    'activity-totals' => array_merge(array(
+        '#type' => 'container',
+        '#attributes' => array('class' => array('field-block', 'activity-totals')),
+      ),
+      openfit_user_user_summary_totals($user)
+    ),
+  );
+  return $form;
+}

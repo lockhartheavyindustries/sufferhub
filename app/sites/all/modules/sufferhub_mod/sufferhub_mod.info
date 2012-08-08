@@ -1,0 +1,10 @@
+name = Sufferhub mod
+description = "Starter mod for sufferhub"
+core = 7.x
+
+package = "Sufferhub"
+dependencies[] = openfit_api
+dependencies[] = openfit_activity
+dependencies[] = openfit_user
+
+version = "7.x-1.0"

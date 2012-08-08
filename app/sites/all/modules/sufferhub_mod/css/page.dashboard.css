@@ -1,0 +1,59 @@
+/* Copied from themes/openfit_base/css/openfit_base.css */
+.page-dashboard .activity-totals {
+  background-color: #F8F8F8;
+  border-bottom: 1px solid #F0F0F0;
+  border-right: 1px solid #F0F0F0;
+  border-radius: 10px 10px 10px 10px; 
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  padding: 2px 14px 10px 14px;
+}
+.page-dashboard .activity-totals .field {
+  float: left;
+  padding: 0 24px 0 0;
+}
+.page-dashboard .activity-totals .field-name-calories {
+  padding-right: 0;
+}
+.page-dashboard .activity-totals .field-label {
+  color: #6699DD;
+  font-size: 0.9em;
+  font-weight: normal;
+}
+.page-dashboard .activity-totals .field-item {
+  font-size: 30px;
+}
+
+
+.page-dashboard .user-topsection {
+  overflow: hidden;
+  height: 150px;
+}
+.page-dashboard .user-picture img {
+  border: 2px solid #EEE;
+  float: left;
+  padding: 2px;
+  margin: 6px 6px 0 0;
+  width: 116px;
+}
+.page-dashboard .user-info {
+  float: left;
+  height: 100%;
+  width: 264px;
+  margin-right: 6px;
+}
+.page-dashboard .user-name {
+  font-size: 2em;
+}
+.page-dashboard .user-location {
+  font-size: 1.4em;
+}
+.page-dashboard .user-country {
+  color: #999;
+  font-size: 0.9em;
+}
+.page-dashboard .user-since {
+  margin-top: 4px;
+}

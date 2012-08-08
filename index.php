@@ -95,28 +95,30 @@
 		            <section class="col mid">
 		                <h2>Share</h2>
 
-		                <p>Share your progress with your fitness-minded friends and socialize with fellow SufferHub members.  Participate in online competitions with friends and fellow SufferHub members worldwide!</p>
+		                <p><a href="/app">Upload your workout file</a>, share your progress with your fitness-minded friends and socialize with fellow SufferHub members.  Participate in online competitions with friends and fellow SufferHub members worldwide!</p>
 		            </section>
 
 		            <section class="col">
 		                <h2>Score!</h2>
 
-		                <p>Your workout data is worth more at SufferHub! You earn <a href="#sufferbucks">SufferBucks</a> points with every workout, which power our online competitions AND earn you discounts on fitness equipment from our <a href="#partners">affiliate partners</a>!  And by continuing to upload data to SufferHub you help everyone score through the new <a href="#insights">insights we get from that data</a>.</p>
+		                <p>Your workout data is worth more at SufferHub! You earn game achievements, leaderboard placement, and <a href="#sufferbucks">SufferBucks</a> points with every workout, which power our online competitions AND earn you discounts on fitness equipment from our <a href="#partners">affiliate partners</a>!</p>
 		            </section>
 		        </div>
 
 			<h3>Let's get started!</h3>
-			<p class="intro">	
+			<p class="intro">
+				<ol>	
+					<li><strong><a href="/app">Join our Beta</a></strong> and start uploading your workouts!<br><a href="/app"><img src="images/signup_button.png" width="150" height="50"></a></li>
 					<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
-		       		<li><strong><a href="#contact-us">Sign up</a></strong> to be notified when our Beta begins</li>
 					<li><strong>Like us</strong> on <a href="https://www.facebook.com/SufferHub" target = "_blank">Facebook</a> 
 					<div class="fb-like" ref="homepage_top" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div>
 					</li>
 					<li><strong>Follow us</strong> on <a href="https://twitter.com/SufferHub" target = "_blank">Twitter</a> 
-
 					<a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</li>
+				</ol>
+
 		        <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
@@ -336,11 +338,12 @@
 		            <div class="primary">
 
 		                <p class="intro">
-		                We'd love to have you join the SufferHub community!  We're cranking away behind the scenes getting things lined up to release to the world, sign up below to be notified when we're ready - Beta invites will be trickled out soon.  We promise not to sell your information to anyone, or spam you with nonsense.
+		                We'd love to have you join the SufferHub community, and hear your ideas for how we can make this a more fun and rewarding place for our members.  Check out the resources listed on the right, and choose your favorite methods of getting in touch with our team.  
 		                </p>
 
-
+<img alt="" src="images/SufferHub_Logo_square.png" width="560" height="400">
 						<!-- Begin MailChimp Signup Form -->
+<!--
 						<div id="mc_embed_signup">
 						<form action="http://sufferhub.us5.list-manage1.com/subscribe/post?u=937bd3c7ddf2827546233f1ec&amp;id=bf8374dc23" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
 							<h2>Subscribe to the SufferHub mailing list</h2>
@@ -366,8 +369,9 @@
 							</div>	<div class="clear"><input type="submit" value="Add me!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 						</form>
 						</div>
-
+-->
 						<!--End mc_embed_signup-->
+
 		            </div>
 
 		            <aside>
