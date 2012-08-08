@@ -63,17 +63,17 @@ function sh_achievements_achievements_info() {
   $achievements = array(
     'comment-count-20' => array(
       'title'       => t('Posted 20 comments!'),
-      'description' => t("We no longer think you're a spam bot. Maybe."),
+      'description' => t("Way to cheer on your fellow SufferHubsters!"),
       'storage'     => 'comment-count',
       'points'      => 20,
     ),
     'comment-count-100' => array(
       'title'       => t('Posted 100 comments!'),
-      'description' => t('But what about the children?!'),
+      'description' => t('Do we need to stage an intervention?'),
       'storage'     => 'comment-count',
       'points'      => 100,
       'images' => array(
-        'unlocked'  => '/sites/default/files/example1.png',
+        'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
         // 'secret' and 'locked' will use the defaults.
       ),
     ),
@@ -83,16 +83,16 @@ function sh_achievements_achievements_info() {
     // placed in an 'achievements' array. The ungrouped comment achievements
     // above will be automatically pushed into a "Miscellany" group.
     'article-creation' => array(
-      'title' => t('Article creation'),
+      'title' => t('Workouts'),
       'achievements' => array(
         'node-mondays' => array(
-          'title'       => t('Published some content on a Monday'),
-          'description' => t("Go back to bed: it's still the weekend!"),
+          'title'       => t('Looks like someone has a case of the Mondays!'),
+          'description' => t("Working out on a Monday?  Way to start the week off right - WITH SUFFERING!"),
           'points'      => 5,
           'images' => array(
-            'unlocked'  => '/sites/default/files/example1.png',
-            'locked'    => '/sites/default/files/example2.png',
-            'secret'    => '/sites/default/files/example3.png',
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
             // all default images have been replaced.
           ),
         ),
