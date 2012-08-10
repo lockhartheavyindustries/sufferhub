@@ -108,7 +108,7 @@
 			<h3>Let's get started!</h3>
 			<p class="intro">
 				<ol>	
-					<li><strong><a href="/app/signup">Join our Beta</a></strong> and start uploading your workouts!<br><a href="/app/signup"><img src="images/signup_button.png" width="150" height="50"></a></li>
+					<li><strong><a href="/app/signup">Join our Alpha program</a></strong> and start uploading your workouts!<br><a href="/app/signup"><img src="images/signup_button.png" width="150" height="50"></a></li>
 					<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
 					<li><strong>Like us</strong> on <a href="https://www.facebook.com/SufferHub" target = "_blank">Facebook</a> 
 					<div class="fb-like" ref="homepage_top" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div>
@@ -123,7 +123,7 @@
 
 		      </section>
 
-
+<!--
 		      <section id="applications" >
 
 		             <h1>Applications</h1>
@@ -201,7 +201,7 @@
 		            <a class="back-to-top" href="#top">Back to Top</a>
 
 		      </section>
-
+-->
 		      <section id="about-us" class="clearfix">
 
 		            <h1>About The SufferHub Project</h1>
