@@ -47,6 +47,8 @@ function openfit_activity_activities_form($form, &$form_state) {
   );
   
   $items = array(
+/* disable add button - route everything to menu bar ADD WORKOUT item instead */
+/*
     'add' => array(
       '#attributes' => array('id' => 'add-button'),
       '#left_image' => TRUE,
@@ -54,6 +56,7 @@ function openfit_activity_activities_form($form, &$form_state) {
       '#text' => t('Add'),
       '#url' => drupal_get_path_alias('node/add/activity'),    
     ),
+*/
   );
   if (count($table_rows) > 0) {
     $items['edit'] = array(

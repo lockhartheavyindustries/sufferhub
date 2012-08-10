@@ -789,6 +789,7 @@ function openit_activity_activity_addedit_form($node, &$form_state, $mode) {
       '#default_value' => $node->title,
       '#size' => 255,
     ),
+/*
     'start-date' => array(
       '#type' => 'date_popup',
       '#title' => t('Start'),
@@ -835,6 +836,7 @@ function openit_activity_activity_addedit_form($node, &$form_state, $mode) {
       '#value_format' => OpenFitMeasurement::FORMAT_TYPE_DECIMALS,
       '#value_units' => 'sufferbuck',
     ),
+*/
   );
   
   $week_start = $preferences[OpenFitUserSetting::TYPE_WEEK_START];
@@ -868,6 +870,8 @@ function openfit_activity_activity_addedit_submit($form, &$form_state, $mode) {
   
   $activity->category_id = $activity_info['sport'];
 
+/* not updating these fields during edit, don't pass them along */
+/*
   list($year, $month, $day) = explode('-', $activity_info['start-date']);
   $start = $activity_info['start-time'];
   $start->setDate($year, $month, $day);
@@ -878,7 +882,7 @@ function openfit_activity_activity_addedit_submit($form, &$form_state, $mode) {
   $activity->activity_distance = $activity_info['distance'];
   $activity->activity_calories = $activity_info['calories'];
   $activity->activity_sufferbucks = $activity_info['sufferbucks'];
-
+*/
   $node_title = $activity_info['name'];
   if (strlen($node_title) == 0) {
     $categories = OpenFitActivity::getActivityCategories();

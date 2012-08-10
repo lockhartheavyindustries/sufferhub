@@ -203,7 +203,7 @@ a.view-activity:hover {
   display: table-cell;
 }
 
-#add-button .img,
+/* #add-button .img, */
 #edit-button .img,
 #delete-button .img,
 #settings-button .img,

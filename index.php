@@ -108,7 +108,7 @@
 			<h3>Let's get started!</h3>
 			<p class="intro">
 				<ol>	
-					<li><strong><a href="/app">Join our Beta</a></strong> and start uploading your workouts!<br><a href="/app"><img src="images/signup_button.png" width="150" height="50"></a></li>
+					<li><strong><a href="/app/signup">Join our Beta</a></strong> and start uploading your workouts!<br><a href="/app/signup"><img src="images/signup_button.png" width="150" height="50"></a></li>
 					<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
 					<li><strong>Like us</strong> on <a href="https://www.facebook.com/SufferHub" target = "_blank">Facebook</a> 
 					<div class="fb-like" ref="homepage_top" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div>
@@ -308,10 +308,9 @@
 
 		                    <div class="testimonials">
 		                        <blockquote>
-		                            <p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue.
-		                            Nullam id dolor id nibh ultricies vehicula ut id elit. </p>
+		                            <p>"Joy lies in the fight, in the attempt, in the suffering involved, not in the victory itself."</p>
 
-		                            <cite>&mdash; John Doe, XYZ Company</cite>
+		                            <cite>&mdash; J--Mahatma Ghandi</cite>
 		                        </blockquote>
 		                        <blockquote>
 		                            <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis
@@ -321,6 +320,23 @@
 		                        </blockquote>
 		                    </div>
 		-->
+		
+		<div class="testimonials">
+            <blockquote>
+                <p>"Joy lies in the fight, in the attempt, in the suffering involved, not in the victory itself."</p>
+
+                <cite>&mdash; Mahatma Ghandi</cite>
+            </blockquote>
+			<blockquote>
+                <p>Man cannot remake himself without suffering, for he is both the marble and the sculptor.</p>
+                <cite>&mdash; Alexis Carrel</cite>
+            </blockquote><blockquote>
+                <p>Suffering is the sole origin of consciousness.</p>
+
+                <cite>&mdash; Dostoyefsky</cite>
+            </blockquote>
+        </div>
+
 		            </aside>
 
 

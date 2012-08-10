@@ -108,7 +108,8 @@ function openfit_activity_dashboard_form($form, &$form_state) {
   );
   
   $actions = array(
-    'add' => array(
+/* disabling add and import buttons on dashboard - route all activity to top menu ADD WORKOUT item instead */	
+/*    'add' => array(
       '#attributes' => array('id' => 'add-button'),
       '#left_image' => TRUE,
       '#disabled' => !user_access('create activity content'),
@@ -122,6 +123,8 @@ function openfit_activity_dashboard_form($form, &$form_state) {
       '#text' => t('Import'),
       '#url' => 'activity/import',
     ),
+*/
+
   );
 
   $form['header'] = array(

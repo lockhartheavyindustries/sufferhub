@@ -87,8 +87,19 @@ function sh_achievements_achievements_info() {
       'achievements' => array(
         'node-mondays' => array(
           'title'       => t('Looks like someone has a case of the Mondays!'),
-          'description' => t("Working out on a Monday?  Way to start the week off right - WITH SUFFERING!"),
+          'description' => t("Working out on a Monday?  Way to start the week off right!!!"),
           'points'      => 5,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+		'node-10k-day' => array(
+          'title'       => t('Sherpa, level 10'),
+          'description' => t("10,000 feet of climbing in 1 day"),
+          'points'      => 500,
           'images' => array(
             'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
             'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
