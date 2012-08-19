@@ -15,6 +15,8 @@
 	<meta property="og:image" content="http://sufferhub.com/images/sufferhub_fb_logo.png" />
 	<meta property="og:site_name" content="SufferHub" />
 	<meta property="fb:admins" content="759603155" />
+	<meta property="og:description"
+          content="Suffer, Share, Score!"/>
 	<!-- end Facebook OpenGraph -->
 
 
@@ -101,14 +103,14 @@
 		            <section class="col">
 		                <h2>Score!</h2>
 
-		                <p>Your workout data is worth more at SufferHub! You earn game achievements, leaderboard placement, and <a href="#sufferbucks">SufferBucks</a> points with every workout, which power our online competitions AND earn you discounts on fitness equipment from our <a href="#partners">affiliate partners</a>!</p>
+		                <p>Your workout data is worth more at SufferHub! You earn game achievements, leaderboard placement, and <a href="#sufferbucks">SufferBucks</a> points with every workout, which power our online competitions where you can win real-world prizes like fitness equipment, clothing, and more!</p>
 		            </section>
 		        </div>
 
 			<h3>Let's get started!</h3>
 			<p class="intro">
 				<ol>	
-					<li><strong><a href="/app/signup">Join our Alpha program</a></strong> and start uploading your workouts!<br><a href="/app/signup"><img src="images/signup_button.png" width="150" height="50"></a></li>
+					<li><strong><a href="/app/signup">Join our preview program (Alpha)</a></strong> and start uploading your workouts!<br><a href="/app/signup"><img src="images/signup_button.png" width="150" height="50"></a></li>
 					<li><strong><a href="#about-us">Read more</a></strong> about us and our vision</li>
 					<li><strong>Like us</strong> on <a href="https://www.facebook.com/SufferHub" target = "_blank">Facebook</a> 
 					<div class="fb-like" ref="homepage_top" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div>
@@ -208,7 +210,10 @@
 
 		            <div class="primary">
 
-		                <p class="intro">SufferHub occupies the convergence zone of fitness, online gaming, and big data.  Our primary motivation is to encourage people to be more healthy and active, by rewarding healthy behavior.  By making workouts into games with rewards, we hope to help people set and maintain a healthy and active lifestyle.  But SufferHub was also inspired by the notion that we're not getting as much value as we could be out of the massive amount of location + fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  Currently, most of that fitness data lives locked away in private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.  We believe that this data should be gathered, anonymized (scrubbed of all personal information), then shared with others in order to enable new insights.  It's time to start having more fun while working out, and to start finding new ways to make this data benefit the people who created it in the first place!
+		                <p class="intro">SufferHub occupies the convergence zone of fitness, online gaming, and big data.  Our primary motivation is to encourage people to be more healthy and active, by rewarding healthy behavior.  By making workouts into games with rewards, we hope to help people set and maintain a healthy and active lifestyle.  We're offering a carrot - a bit of extra positive incentive to stay on the path to a healthier life.
+			
+			</p><p class="intro">SufferHub was also inspired by the notion that we're not getting as much value as we could be out of the massive amount of location + fitness data being captured by individuals all over the world.  We've got increasingly widespread adoption of smartphones and workout-specific measurement devices that allow us to gather GPS coordinates, speed, distance, heartrate, and even power output.  Currently, most of that fitness data lives locked away in private databases with no ability for others to access it for wider trend analysis or correlation with other datasets.  We believe we can do more than simply examine our own data in isolation, or in direct comparison to other "pockets" of users.
+			</p><p class="intro">It's time to start having more fun while working out, and to start finding new ways to make this data benefit the people who created it in the first place!
 		                </p>
 
 <!--
@@ -402,9 +407,11 @@
 		                        <li class="facebook"><a href="https://www.facebook.com/SufferHub">Facebook</a><div class="fb-like" ref="homepage_bottom" data-href="http://sufferhub.com" data-send="false" data-width="450" data-show-faces="false"></div></li>
 								<li class="twitter"><a href="https://twitter.com/SufferHub" target="_blank">Twitter</a><a href="https://twitter.com/SufferHub" class="twitter-follow-button" data-show-count="false">Follow @SufferHub</a>
 								<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li> 
-								<!--                       
-								<li class="googleplus"><a href="#">Google+</a>(coming soon)</li>
-		                        <li class="linkedin"><a href="#">Linkedin</a>(coming soon)</li>
+								<li class="googleplus"><a href="https://plus.google.com/u/0/b/102444665872932973999/">Google+</a></li>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<g:plus href="https://plus.google.com/102444665872932973999/"></g:plus>								
+<!--
+								<li class="linkedin"><a href="#">Linkedin</a>(coming soon)</li>
 								-->
 		                    </ul>
 

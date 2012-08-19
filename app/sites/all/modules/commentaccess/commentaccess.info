@@ -1,0 +1,15 @@
+; $Id: commentaccess.info,v 1.1 2011/01/27 18:29:19 rschwab Exp $
+name = "Comment Access"
+description = "Provides additional permissions for comments."
+core = 7.x
+dependencies[] = comment
+files[] = commentaccess.install
+files[] = commentaccess.module
+files[] = commendaccess.admin.inc
+
+; Information added by drupal.org packaging script on 2011-02-23
+version = "7.x-1.0"
+core = "7.x"
+project = "commentaccess"
+datestamp = "1298431613"
+
