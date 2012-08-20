@@ -1190,7 +1190,7 @@ class OpenFitActivity {
 	// catchall for remaining categories that lack a defined Sufferbucks calculation method
 	else 
 	{
-		$activity->activity_sufferbucks = 666;
+		$activity->activity_sufferbucks = 1;
 	}
 	
 
