@@ -1,3 +1,4 @@
+
 <?php 
 
 class OpenFitActivity {
@@ -928,6 +929,271 @@ class OpenFitActivity {
       $activity->timer_stops = $timer_stops;
     }
     $activity->activity_clock_duration = max($activity->activity_duration, $activity->activity_clock_duration);
+
+	// TODO - determine multiplier before entering SufferBucks calculations
+	// DB call to check all valid multipliers
+	
+	// SufferBucks calculations
+	
+// drupal_set_message('<pre>'. print_r($activity->category_id, TRUE) .'</pre>');
+	
+	// SufferBucks base calculation - Running
+	// begin Running
+	if ($activity->category_id == 1) {
+		// begin Easy distance
+		if ($activity->activity_distance < 4828.032) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 15.24) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 15.24) && ($activity->activity_elevation_gain < 30.48)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 30.48) && ($activity->activity_elevation_gain < 152.40)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 152.40) && ($activity->activity_elevation_gain < 304.8)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 304.8) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Easy Distance
+		
+		// begin Medium distance
+		if (($activity->activity_distance >= 4828.032) && ($activity->activity_distance < 11265.408)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 15.24) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 15.24) && ($activity->activity_elevation_gain < 30.48)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 30.48) && ($activity->activity_elevation_gain < 152.40)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 152.40) && ($activity->activity_elevation_gain < 304.8)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 304.8) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Medium Distance
+	
+		// begin Hard distance
+		if (($activity->activity_distance >= 11265.408) && ($activity->activity_distance < 21097.5)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 15.24) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 15.24) && ($activity->activity_elevation_gain < 30.48)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 30.48) && ($activity->activity_elevation_gain < 152.40)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 152.40) && ($activity->activity_elevation_gain < 304.8)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 304.8) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Hard Distance
+
+		// begin Extreme distance
+		if (($activity->activity_distance >= 21097.5) && ($activity->activity_distance < 42195)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 15.24) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 15.24) && ($activity->activity_elevation_gain < 30.48)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 30.48) && ($activity->activity_elevation_gain < 152.40)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 152.40) && ($activity->activity_elevation_gain < 304.8)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 304.8) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Extreme Distance
+	
+		// begin Legendary distance
+		if ($activity->activity_distance >= 42195) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 15.24) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 15.24) && ($activity->activity_elevation_gain < 30.48)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 30.48) && ($activity->activity_elevation_gain < 152.40)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 152.40) && ($activity->activity_elevation_gain < 304.8)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 304.8) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Legendary Distance
+	
+	} // end Running
+
+	// SufferBucks base calculation - Cycling
+	// begin Cycling
+	elseif ($activity->category_id == 2) {
+		// begin Easy distance
+		if ($activity->activity_distance < 32186.88) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 60.96) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 60.96) && ($activity->activity_elevation_gain < 304.80)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 304.80) && ($activity->activity_elevation_gain < 1219.20)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 1219.20) && ($activity->activity_elevation_gain < 3048)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 3048) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.00007) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Easy Distance
+		
+		// begin Medium distance
+		if (($activity->activity_distance >= 32186.88) && ($activity->activity_distance < 64373.76)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 60.96) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 60.96) && ($activity->activity_elevation_gain < 304.80)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 304.80) && ($activity->activity_elevation_gain < 1219.20)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 1219.20) && ($activity->activity_elevation_gain < 3048)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 3048) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.000085) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Medium Distance
+	
+		// begin Hard distance
+		if (($activity->activity_distance >= 64373.76) && ($activity->activity_distance < 96560.64)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 60.96) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 60.96) && ($activity->activity_elevation_gain < 304.80)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 304.80) && ($activity->activity_elevation_gain < 1219.20)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 1219.20) && ($activity->activity_elevation_gain < 3048)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 3048) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0002) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Hard Distance
+
+		// begin Extreme distance
+		if (($activity->activity_distance >= 96560.64) && ($activity->activity_distance < 241401.6)) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 60.96) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 60.96) && ($activity->activity_elevation_gain < 304.80)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 304.80) && ($activity->activity_elevation_gain < 1219.20)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 1219.20) && ($activity->activity_elevation_gain < 3048)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 3048) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0005) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Extreme Distance
+	
+		// begin Legendary distance
+		if ($activity->activity_distance >= 241401.6) {
+			// Easy climb
+			if ($activity->activity_elevation_gain < 60.96) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.02);
+			}
+			// Medium climb
+			if (($activity->activity_elevation_gain >= 60.96) && ($activity->activity_elevation_gain < 304.80)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.04);
+			}
+			// Hard climb
+			if (($activity->activity_elevation_gain >= 304.80) && ($activity->activity_elevation_gain < 1219.20)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.045);
+			}
+			// Extreme climb
+			if (($activity->activity_elevation_gain >= 1219.20) && ($activity->activity_elevation_gain < 3048)) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.07);
+			}
+			// Legendary climb
+			if ($activity->activity_elevation_gain >= 3048) {
+				$activity->activity_sufferbucks = ($activity->activity_distance * 0.0007) + ($activity->activity_elevation_gain * 0.10);
+			}
+		} // end Legendary Distance
+		
+	} // end Cycling
+	
+	// catchall for remaining categories that lack a defined Sufferbucks calculation method
+	else 
+	{
+		$activity->activity_sufferbucks = 666;
+	}
+	
+
     // Insert the activity record.
     $activity_id = db_insert('openfit_activity')
       ->fields(array(

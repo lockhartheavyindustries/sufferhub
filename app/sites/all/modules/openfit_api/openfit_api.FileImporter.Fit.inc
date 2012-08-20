@@ -386,7 +386,8 @@ class FitFileImporter {
           if (isset($max)) $session_info[$to]['max'] = $max;
         }
       }
-      $session_info['sufferbucks'] = (($session_info['distance'] / 2000) + ($session_info['elevation_gain'] * 2)) / 1000; 
+
+//       $session_info['sufferbucks'] = (($session_info['distance'] / 2000) + ($session_info['elevation_gain'] * 2)) / 1000; 
 
       $session_info['distance'] /= 100;
       $session_info['clock_duration'] /= 1000;
@@ -448,7 +449,7 @@ class FitFileImporter {
         }
       }
       
-	  $lap_info['sufferbucks'] = (($lap_info['distance'] / 2000) + ($lap_info['elevation_gain'] *2)) /1000;
+	 // $lap_info['sufferbucks'] = (($lap_info['distance'] / 2000) + ($lap_info['elevation_gain'] *2)) /1000;
 	
 	  $lap_info['distance'] /= 100;
       $lap_info['clock_duration'] /= 1000;
