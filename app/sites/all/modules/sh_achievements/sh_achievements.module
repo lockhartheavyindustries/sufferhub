@@ -96,9 +96,20 @@ function sh_achievements_achievements_info() {
             // all default images have been replaced.
           ),
         ),
-		'node-10k-day' => array(
-          'title'       => t('Sherpa, level 10'),
-          'description' => t("10,000 feet of climbing in 1 day"),
+		'node-cycling-10k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels, level 10'),
+          'description' => t("Wow - 10,000 feet of climbing in 1 day!"),
+          'points'      => 500,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+		'node-cycling-320k-day' => array(
+          'title'       => t('Cycling - Iron Butt level 10'),
+          'description' => t("long day in the saddle - 200 miles / 321 KM ridden in 1 day!"),
           'points'      => 500,
           'images' => array(
             'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',

@@ -1193,7 +1193,18 @@ class OpenFitActivity {
 		$activity->activity_sufferbucks = 1;
 	}
 	
-
+	// grant Achievements based on Activity data
+	
+	// Cycling - Sherpa on Wheels, level 10
+	if ($activity->activity_elevation_gain >= 3048) {
+		achievements_unlocked('node-cycling-10k-day', $node->uid);
+		}
+	
+	// Cycling - Iron Butt level 10
+	if ($activity->activity_distance >= 321869) {
+		achievements_unlocked('node-cycling-320k-day', $node->uid);
+		}	
+	
     // Insert the activity record.
     $activity_id = db_insert('openfit_activity')
       ->fields(array(
