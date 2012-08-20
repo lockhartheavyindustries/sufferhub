@@ -937,9 +937,9 @@ class OpenFitActivity {
 	
 // drupal_set_message('<pre>'. print_r($activity->category_id, TRUE) .'</pre>');
 	
-	// SufferBucks base calculation - Running
+	// SufferBucks base calculation - Running, Walking, Hiking (Category 1, 4, 5)
 	// begin Running
-	if ($activity->category_id == 1) {
+	if (($activity->category_id == 1) || ($activity->category_id == 4) || ($activity->category_id == 5)) {
 		// begin Easy distance
 		if ($activity->activity_distance < 4828.032) {
 			// Easy climb
