@@ -313,7 +313,7 @@ function achievements_load($achievement_id = NULL, $grouped = FALSE, $reset = FA
       }
 
       if (isset($achievements['grouped']['-none-'])) {
-        $achievements['grouped']['-none-']['title'] = t('Miscellany');
+        $achievements['grouped']['-none-']['title'] = t('SufferHub');
       }
 
       cache_set('achievements_info', $achievements, 'cache', CACHE_TEMPORARY);

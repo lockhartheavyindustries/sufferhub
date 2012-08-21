@@ -1194,16 +1194,139 @@ class OpenFitActivity {
 	}
 	
 	// grant Achievements based on Activity data
-	
-	// Cycling - Sherpa on Wheels, level 10
-	if ($activity->activity_elevation_gain >= 3048) {
-		achievements_unlocked('node-cycling-10k-day', $node->uid);
+
+	// increment workout count by 1
+  	$current_count = achievements_storage_get('workout-count', $node->uid) + 1;
+  	achievements_storage_set('workout-count', $current_count, $node->uid);
+
+	// check for workout count based achievements, grant if earned
+  	foreach (array(1, 5, 10, 25, 50, 75, 100) as $count) {
+    	if ($current_count == $count) {
+      		achievements_unlocked('workout-count-' . $count, $node->uid);
+    	}
+  	}
+
+	// Check for Distance and Elevation based achievements per category, grant if earned
+	// Running - 3k distance
+	if (($activity->category_id == 1) && ($activity->activity_distance >= 3000)) {
+		achievements_unlocked('node-running-distance-3k-day', $node->uid);
 		}
-	
-	// Cycling - Iron Butt level 10
-	if ($activity->activity_distance >= 321869) {
-		achievements_unlocked('node-cycling-320k-day', $node->uid);
+
+	// Running - 5k distance
+	if (($activity->category_id == 1) && ($activity->activity_distance >= 5000)) {
+		achievements_unlocked('node-running-distance-5k-day', $node->uid);
+		}
+
+	// Running - 10k distance
+	if (($activity->category_id == 1) && ($activity->activity_distance >= 10000)) {
+		achievements_unlocked('node-running-distance-10k-day', $node->uid);
+		}
+
+
+	// Running - 21k distance
+	if (($activity->category_id == 1) && ($activity->activity_distance >= 21000)) {
+		achievements_unlocked('node-running-distance-21k-day', $node->uid);
+		}
+
+	// Running - 42k distance
+	if (($activity->category_id == 1) && ($activity->activity_distance >= 42000)) {
+		achievements_unlocked('node-running-distance-42k-day', $node->uid);
+		}
+
+
+	// Cycling - Iron Butt level 1
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 16093)) {
+		achievements_unlocked('node-cycling-distance-16k-day', $node->uid);
 		}	
+	// Cycling - Iron Butt level 2
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 40233)) {
+		achievements_unlocked('node-cycling-distance-40k-day', $node->uid);
+		}	
+	// Cycling - Iron Butt level 3
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 80467)) {
+		achievements_unlocked('node-cycling-distance-80k-day', $node->uid);
+		}	
+	// Cycling - Iron Butt level 4
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 120701)) {
+		achievements_unlocked('node-cycling-distance-120k-day', $node->uid);
+		}	
+	// Cycling - Iron Butt level 5
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 160934)) {
+		achievements_unlocked('node-cycling-distance-160k-day', $node->uid);
+		}	
+	// Cycling - Iron Butt level 6
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 201168)) {
+		achievements_unlocked('node-cycling-distance-200k-day', $node->uid);
+		}	
+	// Cycling - Iron Butt level 7
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 241402)) {
+		achievements_unlocked('node-cycling-distance-241k-day', $node->uid);
+		}		
+	// Cycling - Iron Butt level 8
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 281635)) {
+		achievements_unlocked('node-cycling-distance-281k-day', $node->uid);
+		}		
+	// Cycling - Iron Butt level 9
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 298000)) {
+		achievements_unlocked('node-cycling-distance-298k-day', $node->uid);
+		}		
+	// Cycling - Iron Butt level 10
+	if (($activity->category_id == 2) && ($activity->activity_distance >= 321869)) {
+		achievements_unlocked('node-cycling-distance-320k-day', $node->uid);
+		}	
+
+	// Cycling - Sherpa on Wheels, level 1
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 304.8)) {
+		achievements_unlocked('node-cycling-elevation-1k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 2
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 609.6)) {
+		achievements_unlocked('node-cycling-elevation-2k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 3
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 914.4)) {
+		achievements_unlocked('node-cycling-elevation-3k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 4
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 1219.2)) {
+		achievements_unlocked('node-cycling-elevation-4k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 5
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 1524)) {
+		achievements_unlocked('node-cycling-elevation-5k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 6
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 1828.8)) {
+		achievements_unlocked('node-cycling-elevation-6k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 7
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 2133.6)) {
+		achievements_unlocked('node-cycling-elevation-7k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 8
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 2438.4)) {
+		achievements_unlocked('node-cycling-elevation-8k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 9
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 2743.2)) {
+		achievements_unlocked('node-cycling-elevation-9k-day', $node->uid);
+		}
+
+	// Cycling - Sherpa on Wheels, level 10
+	if (($activity->category_id == 2) && ($activity->activity_elevation_gain >= 3048)) {
+		achievements_unlocked('node-cycling-elevation-10k-day', $node->uid);
+		}
+
+	// Finished checking and granting Achievements
+
 	
     // Insert the activity record.
     $activity_id = db_insert('openfit_activity')

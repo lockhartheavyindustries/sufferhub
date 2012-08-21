@@ -57,7 +57,7 @@
  *   the 'title' of the group as well as the array of 'achievements' that
  *   correspond to that group. If some achievements are within a group and
  *   some achievements are without a group, the groupless achievements will
- *   automatically be placed into a "Miscellany" category.
+ *   automatically be placed into a "Miscellany" category. (renamed category to "SufferHub")
  */
 function sh_achievements_achievements_info() {
   $achievements = array(
@@ -96,8 +96,218 @@ function sh_achievements_achievements_info() {
             // all default images have been replaced.
           ),
         ),
-		'node-cycling-10k-day' => array(
-          'title'       => t('Cycling - Sherpa on Wheels, level 10'),
+
+        'workout-count-1' => array(
+          'title'       => t('Uploaded your first workout'),
+          'description' => t("Your first SufferHub workout - away we go!"),
+	      'storage'     => 'workout-count',
+          'points'      => 1,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+		'workout-count-5' => array(
+          'title'       => t('Uploaded 5 workouts'),
+          'description' => t("Now we're talking!"),
+	      'storage'     => 'workout-count',
+          'points'      => 5,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+
+        'workout-count-10' => array(
+          'title'       => t('Uploaded 10 workouts'),
+          'description' => t("Your collection is growing!"),
+	      'storage'     => 'workout-count',
+          'points'      => 10,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+		'workout-count-25' => array(
+          'title'       => t('Uploaded 25 workouts'),
+          'description' => t("I think someone is forming a new habit here..."),
+	      'storage'     => 'workout-count',
+          'points'      => 25,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+		'workout-count-50' => array(
+          'title'       => t('Uploaded 50 workouts'),
+          'description' => t("50 is the new 40 - except here where it's still 50"),
+	      'storage'     => 'workout-count',
+          'points'      => 50,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+		'workout-count-75' => array(
+          'title'       => t('Uploaded 75 workouts'),
+          'description' => t("Think about how far you've come since workout #1..."),
+	      'storage'     => 'workout-count',
+          'points'      => 75,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+		'workout-count-100' => array(
+          'title'       => t('Uploaded 100 workouts'),
+          'description' => t("Welcome to Triple Digit country!"),
+	      'storage'     => 'workout-count',
+          'points'      => 100,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+
+   		), 
+	),
+
+// begin Cycling achievements	
+    'achievements-cycling' => array(
+      'title' => t('Cycling'),
+      'achievements' => array(
+
+        'node-cycling-elevation-1k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 1'),
+          'description' => t("1,000 feet of climbing in 1 day"),
+          'points'      => 10,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-2k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 2'),
+          'description' => t("2,000 feet of climbing in 1 day"),
+          'points'      => 25,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-3k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 3'),
+          'description' => t("3,000 feet of climbing in 1 day"),
+          'points'      => 50,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-4k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 4'),
+          'description' => t("4,000 feet of climbing in 1 day"),
+          'points'      => 100,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-5k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 5'),
+          'description' => t("5,000 feet of climbing in 1 day"),
+          'points'      => 150,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-6k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 6'),
+          'description' => t("6,000 feet of climbing in 1 day"),
+          'points'      => 200,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-7k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 7'),
+          'description' => t("7,000 feet of climbing in 1 day"),
+          'points'      => 250,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-8k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 8'),
+          'description' => t("8,000 feet of climbing in 1 day"),
+          'points'      => 300,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-9k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 9'),
+          'description' => t("9,000 feet of climbing in 1 day"),
+          'points'      => 400,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+            // all default images have been replaced.
+          ),
+        ),
+
+        'node-cycling-elevation-10k-day' => array(
+          'title'       => t('Cycling - Sherpa on Wheels: level 10'),
           'description' => t("Wow - 10,000 feet of climbing in 1 day!"),
           'points'      => 500,
           'images' => array(
@@ -107,10 +317,129 @@ function sh_achievements_achievements_info() {
             // all default images have been replaced.
           ),
         ),
-		'node-cycling-320k-day' => array(
-          'title'       => t('Cycling - Iron Butt level 10'),
-          'description' => t("long day in the saddle - 200 miles / 321 KM ridden in 1 day!"),
+
+		'node-cycling-distance-16k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 1'),
+          'description' => t("Aluminum butt? 10 miles / 16 KM ridden in 1 day"),
+          'points'      => 10,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-40k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 2'),
+          'description' => t("25 miles / 40 KM ridden in 1 day!"),
+          'points'      => 20,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-80k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 3'),
+          'description' => t("50 miles / 80 KM ridden in 1 day"),
+          'points'      => 50,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-120k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 4'),
+          'description' => t("75 miles / 120 KM ridden in 1 day!"),
+          'points'      => 75,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-160k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 5'),
+          'description' => t("Century complete!  100 miles / 160 KM ridden in 1 day"),
+          'points'      => 100,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-200k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 6'),
+          'description' => t("125 miles / 200 KM ridden in 1 day"),
+          'points'      => 150,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-241k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 7'),
+          'description' => t("150 miles / 241 KM ridden in 1 day"),
+          'points'      => 250,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-281k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 8'),
+          'description' => t("175 miles / 281 KM ridden in 1 day"),
+          'points'      => 350,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-298k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 9'),
+          'description' => t("Milan - San Remo! 185 miles / 298 KM ridden in 1 day"),
+          'points'      => 450,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-cycling-distance-320k-day' => array(
+          'title'       => t('Cycling - Iron Butt: level 10'),
+          'description' => t("That was a *long* day in the saddle - 200 miles / 321 KM ridden in 1 day!"),
           'points'      => 500,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+  
+      ),
+    ),
+// end Cycling achievements
+
+// begin Running achievements	
+    'achievements-running' => array(
+      'title' => t('Running'),
+      'achievements' => array(
+        'node-running-distance-3k-day' => array(
+          'title'       => t('Running - 3k'),
+          'description' => t("Did a 3 km run!"),
+          'points'      => 10,
           'images' => array(
             'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
             'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
@@ -118,8 +447,56 @@ function sh_achievements_achievements_info() {
             // all default images have been replaced.
           ),
         ),
+		'node-running-distance-5k-day' => array(
+          'title'       => t('Running - 5k'),
+          'description' => t("Did a 5 km run!"),
+          'points'      => 20,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+		'node-running-distance-10k-day' => array(
+          'title'       => t('Running - 10k'),
+          'description' => t("Did a 10 km run!"),
+          'points'      => 50,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),  
+
+		'node-running-distance-21k-day' => array(
+          'title'       => t('Running - Half Marathon'),
+          'description' => t("Did a 21 km / 13.1 mile run!"),
+          'points'      => 250,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),  
+
+		'node-running-distance-42k-day' => array(
+          'title'       => t('Running - Marathon'),
+          'description' => t("Did a 42 km / 26.2 mile run!"),
+          'points'      => 500,
+          'images' => array(
+            'unlocked'  => 'sites/all/modules/achievements/images/default-unlocked-70.jpg',
+            'locked'    => 'sites/all/modules/achievements/images/default-locked-70.jpg',
+            'secret'    => 'sites/all/modules/achievements/images/default-secret-70.jpg',
+             ),
+        ),
+
+
       ),
     ),
+// end Running achievements
+
+
   );
 
   return $achievements;
@@ -145,6 +522,8 @@ function sh_achievements_comment_insert($comment) {
   // serialized so can be as simple or as complex as you need it to be.
   $current_count = achievements_storage_get('comment-count', $comment->uid) + 1;
   achievements_storage_set('comment-count', $current_count, $comment->uid);
+
+
 
   // Note that we're not checking if the user has previously earned any of the
   // commenting achievements yet. There are two reasons: first, we might want
