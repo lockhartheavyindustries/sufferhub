@@ -914,6 +914,8 @@ class OpenFitActivity {
   
   public static function insertActivityRecords($node) {
     if ($node->type != OpenFitActivity::NODE_TYPE_ACTIVITY) return;
+
+
     $activity = $node->openfit_info['activity'];
 
     $utc = new DateTimeZone('UTC');
@@ -930,12 +932,29 @@ class OpenFitActivity {
     }
     $activity->activity_clock_duration = max($activity->activity_duration, $activity->activity_clock_duration);
 
+
+	// check for duplicates - only award SufferBucks and Achievements for unique entries
+	
+	$query = db_select('openfit_activity', 'a');
+	$query
+	  ->condition('a.activity_distance', $activity->activity_distance, '=')
+	  ->fields('a', array('activity_id', 'activity_distance'));
+	$result = $query->execute();
+	if ($result->rowCount() > 0) 
+	{
+		// duplicate exists, no SufferBucks or Achievements
+		drupal_set_message(t('Duplicate workout detected - workout has been added, but does not qualify for SufferBucks or Achievements.'));
+		// drupal_set_message('<pre>'. print_r($result->rowCount(), TRUE) .'</pre>');
+		// drupal_set_message('<pre>'. print_r($activity->activity_distance, TRUE) .'</pre>');
+	}
+	else
+		// uniqueness confirmed, go ahead and award SufferBucks and Achievements
+	{
 	// TODO - determine multiplier before entering SufferBucks calculations
-	// DB call to check all valid multipliers
 	
 	// SufferBucks calculations
 	
-// drupal_set_message('<pre>'. print_r($activity->category_id, TRUE) .'</pre>');
+	// drupal_set_message('<pre>'. print_r($activity->category_id, TRUE) .'</pre>');
 	
 	// SufferBucks base calculation - Running, Walking, Hiking (Category 1, 4, 5)
 	// begin Running
@@ -1327,6 +1346,8 @@ class OpenFitActivity {
 
 	// Finished checking and granting Achievements
 
+	} // end "else" from uniqueness check
+	
 	
     // Insert the activity record.
     $activity_id = db_insert('openfit_activity')
