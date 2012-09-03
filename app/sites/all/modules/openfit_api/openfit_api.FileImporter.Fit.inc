@@ -645,9 +645,9 @@ class FitFileImporter {
   }
 
   private function timestampToDateTime($timestamp) {
-    $time = new \DateTime('now', new \DateTimeZone('UTC'));
-    $time->setTimestamp($timestamp);
-    $time->add(new \DateInterval('P19Y11M29D'));
+    $epoc = '1989-12-31T00:00:00';
+    $time = new \DateTime($epoc, new \DateTimeZone('UTC'));
+    $time->add(new \DateInterval('PT' . $timestamp . 'S'));
     return $time->format('Y-m-d H:i:s');
   }
 
