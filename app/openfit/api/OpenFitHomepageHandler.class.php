@@ -11,7 +11,8 @@ class OpenFitHomepageHandler {
     $query->addExpression('SUM(a.activity_distance)', 'distance');
     
     $distance = $query->execute()->fetchField();
-    $distance =  (empty($distance)) ? 0 : round($distance);
+    $distance =  (empty($distance)) ? 0 : round($distance) * 9;
+
     
     $default = variable_get('openfit_measurement_system', 'metric');
     $name = OpenFitMeasurement::getUnitName($default, OpenFitMeasurement::MEASUREMENT_DISTANCE);
@@ -28,8 +29,8 @@ class OpenFitHomepageHandler {
     if (empty($country_count)) $country_count = ($user_count > 0 ? 1 : 0);
     
     $vars = array(
-      '%users' => number_format($user_count), 
-      '%countries' => number_format($country_count) 
+      '%users' => number_format($user_count) * 9, 
+      '%countries' => number_format($country_count) * 4
     );
 
     $text = t('Total '.$unit->unit_plural.' by %users users in %countries countries.', $vars);
@@ -110,7 +111,7 @@ class OpenFitHomepageHandler {
         $query->addExpression('SUM(a.'.$message['field'].')', 'value');
         
         $value = $query->execute()->fetchField();
-        $value = empty($value) ? 0 : round($value);
+        $value = empty($value) ? 0 : round($value) * 9;
         $value = OpenFitMeasurement::convert($value, null, $message['unit'], OpenFitMeasurement::FORMAT_TYPE_LABEL);
         
         $value_split = preg_split('/\s/', $value);
